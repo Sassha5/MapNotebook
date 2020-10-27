@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace MapNotepad.Views
 {
-    public partial class SignUpPage : ContentPage
+    public partial class SignUpPage : BaseContentPage
     {
         public SignUpPage()
         {

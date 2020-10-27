@@ -29,5 +29,6 @@
     <Folder Include="Services\RegistrationService\" />
     <Folder Include="Services\PinsManagerService\" />
     <Folder Include="Services\UsersManagerService\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

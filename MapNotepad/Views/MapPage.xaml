@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:views="clr-namespace:MapNotepad.Views"
              xmlns:local="clr-namespace:MapNotepad.Behaviors"
              xmlns:bindings="clr-namespace:Xamarin.Forms.GoogleMaps.Bindings;assembly=Xamarin.Forms.GoogleMaps.Bindings"
              x:Class="MapNotepad.Views.MapPage"
@@ -22,7 +23,6 @@
                     <bindings:MapClickedToCommandBehavior Command="{Binding MapClickedCommand}"/>
                 </maps:Map.Behaviors>
             </maps:Map>
-            <Button Command="{Binding GetLocationNameCommand}" HeightRequest="30" VerticalOptions="End"/>
         </Grid>
     </ContentPage.Content>
-</ContentPage>
+</views:BaseContentPage>

@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace MapNotepad.Views
 {
-    public partial class PinsPage : ContentPage
+    public partial class PinsPage : BaseContentPage
     {
         public PinsPage()
         {

@@ -1,10 +1,64 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:pins="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:views="clr-namespace:MapNotepad.Views"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MapNotepad.Views.PinsPage"
              Title="Pins">
-    <ContentPage.Content>
-    </ContentPage.Content>
-</ContentPage>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--<Label Text="Empty List"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>-->
+
+        <ListView Grid.Row="0"
+                  ItemsSource="{Binding PinCollection}" 
+                  RowHeight="100" 
+                  Margin="10"
+                  HasUnevenRows="False"
+                  BackgroundColor="Red">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="pins:Pin">
+                    <ViewCell Height="100">
+                        <!--<ViewCell.ContextActions>
+                            <MenuItem Text="{Binding Path=BindingContext.Resources[Edit], 
+                                                     Source={x:Reference profilesPage}}" 
+                                      Command="{Binding Path=BindingContext.EditCommand, 
+                                                        Source={x:Reference profilesPage}}" 
+                                      CommandParameter="{Binding .}"/>
+                            <MenuItem Text="{Binding Path=BindingContext.Resources[Delete], 
+                                                     Source={x:Reference profilesPage}}" 
+                                      Command="{Binding Path=BindingContext.DeleteCommand, 
+                                                        Source={x:Reference profilesPage}}" 
+                                      CommandParameter="{Binding .}"/>
+                        </ViewCell.ContextActions>-->
+                        <StackLayout VerticalOptions="Center"
+                                     Margin="10,0,0,0">
+                            <!--<Label Text="{Binding Label}"/>
+                            <Label Text="{Binding Position.Latitude}"/>
+                            <Label Text="{Binding Position.Longitude}" />-->
+                            <Label Text="Pin sucking dick"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Grid.Row="0" 
+                Text="+"
+                BorderRadius="35"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                HeightRequest="70"
+                WidthRequest="70"
+                Margin="0,0,20,20"
+                BackgroundColor="SkyBlue"
+                Command="{Binding AddPinCommand}"/>
+    </Grid>
+</views:BaseContentPage>

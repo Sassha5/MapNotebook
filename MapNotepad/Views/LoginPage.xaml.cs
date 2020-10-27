@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
 
 namespace MapNotepad.Views
 {
-    public partial class LoginPage : ContentPage
+    public partial class LoginPage : BaseContentPage
     {
         public LoginPage()
         {
