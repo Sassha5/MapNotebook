@@ -1,27 +1,17 @@
 ﻿using System;
-using Xamarin.Forms.GoogleMaps;
+using SQLite;
 
 namespace MapNotepad.Models
 {
+    [Table("Pins")]
     public class CustomPin : BaseModel
     {
-        private Pin _pin;
-
-        public CustomPin(Pin pin)
-        {
-            _pin = pin;
-        }
-
-        public string Adress
-        {
-            get => _pin.Address;
-            set
-            {
-                _pin.Address = value;
-            }
-        }
-
+        public string Label { get; set; }
+        public string Adress { get; set; }
         public int UserId { get; set; }
         public string Reminder { get; set; }
+        public bool IsFavorite { get; set; }
+        public double Latitude { get; set; }
+        public double Longtitude { get; set; }
     }
 }

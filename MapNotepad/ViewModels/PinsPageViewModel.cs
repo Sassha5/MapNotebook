@@ -7,6 +7,7 @@ namespace MapNotepad.ViewModels
     {
         public PinsPageViewModel(INavigationService navigationService) : base(navigationService)
         {
+
         }
     }
 }

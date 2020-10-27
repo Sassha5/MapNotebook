@@ -1,4 +1,6 @@
 ﻿using System;
+using MapNotepad.Services.PinsManagerService;
+using MapNotepad.Services.RepositoryService;
 using MapNotepad.ViewModels;
 using MapNotepad.Views;
 using Prism;
@@ -21,12 +23,15 @@ namespace MapNotepad
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterInstance<IRepositoryService>(Container.Resolve<RepositoryService>());
+            containerRegistry.RegisterInstance<IPinsManagerService>(Container.Resolve<PinsManagerService>());
+
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<MapPage, MapPageViewModel>();
             containerRegistry.RegisterForNavigation<PinsPage, PinsPageViewModel>();
-
+            containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
         }
     }
 }
