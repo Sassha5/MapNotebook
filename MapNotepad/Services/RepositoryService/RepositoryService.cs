@@ -6,7 +6,7 @@ using SQLite;
 
 namespace MapNotepad.Services.RepositoryService
 {
-    class RepositoryService : IRepositoryService// where T : BaseModel, new()
+    class RepositoryService : IRepositoryService
     {
         private readonly SQLiteConnection database;
 

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Prism.Mvvm;
 using Xamarin.Forms;
 
 namespace MapNotepad.Views
@@ -8,7 +8,6 @@ namespace MapNotepad.Views
     {
         public BaseContentPage()
         {
-            
         }
     }
 }

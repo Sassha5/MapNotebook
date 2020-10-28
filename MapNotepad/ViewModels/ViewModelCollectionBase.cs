@@ -30,10 +30,11 @@ namespace MapNotepad.ViewModels
 
         protected void UpdateCollection()
         {
-            var customPins = _pinsManagerService.GetUserPins(0);
-            foreach (CustomPin pin in customPins)           //TODO make map work with custom pins
+            var customPins = _pinsManagerService.GetCurrentUserPins();
+            foreach (CustomPin pin in customPins)
             {
-                var newPin = new Pin() { Label = pin.Label, Position = new Position(pin.Latitude, pin.Longtitude) };
+                var newPin = //ModelsExtension.ToPin(pin)
+                    new Pin() { Label = pin.Label, Position = new Position(pin.Latitude, pin.Longtitude) };
                 PinCollection.Add(newPin);
             }
         }

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Prism.Mvvm;
+
 using Xamarin.Forms;
 
 namespace MapNotepad.Views
 {
-    public partial class SignUpPage : BaseContentPage
+    public partial class RegisterPage : BaseContentPage
     {
-        public SignUpPage()
+        public RegisterPage()
         {
             InitializeComponent();
         }

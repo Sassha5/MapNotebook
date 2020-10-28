@@ -6,7 +6,7 @@ namespace MapNotepad.Services.PinsManagerService
 {
     public interface IPinsManagerService
     {
-        IEnumerable<CustomPin> GetUserPins(int UserId);
+        IEnumerable<CustomPin> GetCurrentUserPins();
         int AddPin(CustomPin pin);
     }
 }

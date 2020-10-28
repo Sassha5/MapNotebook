@@ -40,15 +40,6 @@ namespace MapNotepad.ViewModels
             UpdateCollection();
         }
 
-        //private void UpdateCollection()
-        //{
-        //    IEnumerable<CustomPin> customPins = _pinsManagerService.GetUserPins(0);
-        //    foreach (CustomPin pin in customPins)           //TODO make map work with custom pins
-        //    {
-        //        PinCollection.Add(new Pin() { Label = pin.Label, Position = new Position(pin.Latitude, pin.Longtitude) });
-        //    }
-        //}
-
         //public async Task GetLocationName(Position position)
         //{
         //    string PickupText;

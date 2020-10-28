@@ -2,9 +2,9 @@
 <views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MapNotepad.Views"
-             x:Class="MapNotepad.Views.SignUpPage">
-
-    <Grid>
+             x:Class="MapNotepad.Views.RegisterPage">
+    <Label Text="xui"/>
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -33,5 +33,5 @@
                     Text="SignUp" 
                     Grid.Row="7"
                     Command="{Binding RegisterCommand}"/>
-    </Grid>
+    </Grid>-->
 </views:BaseContentPage>

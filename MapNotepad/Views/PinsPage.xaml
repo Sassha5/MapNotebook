@@ -21,8 +21,7 @@
                   ItemsSource="{Binding PinCollection}" 
                   RowHeight="100" 
                   Margin="10"
-                  HasUnevenRows="False"
-                  BackgroundColor="Red">
+                  HasUnevenRows="False">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="pins:Pin">
                     <ViewCell Height="100">
@@ -40,10 +39,9 @@
                         </ViewCell.ContextActions>-->
                         <StackLayout VerticalOptions="Center"
                                      Margin="10,0,0,0">
-                            <!--<Label Text="{Binding Label}"/>
+                            <Label Text="{Binding Label}"/>
                             <Label Text="{Binding Position.Latitude}"/>
-                            <Label Text="{Binding Position.Longitude}" />-->
-                            <Label Text="Pin sucking dick"/>
+                            <Label Text="{Binding Position.Longitude}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
