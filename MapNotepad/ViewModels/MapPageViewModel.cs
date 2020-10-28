@@ -26,7 +26,7 @@ namespace MapNotepad.ViewModels
 
         //public ICommand GetLocationNameCommand { get; set; }
 
-
+        
         public ICommand MapClickedCommand => new Command<MapClickedEventArgs>(OnMapClickedCommand);
 
         private void OnMapClickedCommand(MapClickedEventArgs args)

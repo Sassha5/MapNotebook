@@ -9,6 +9,7 @@ namespace MapNotepad.Models
         public string Label { get; set; }
         public string Adress { get; set; }
         public int UserId { get; set; }
+        public string Description { get; set; }
         public string Reminder { get; set; }
         public bool IsFavorite { get; set; }
         public double Latitude { get; set; }

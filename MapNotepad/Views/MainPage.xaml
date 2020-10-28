@@ -5,10 +5,13 @@
              xmlns:views="clr-namespace:MapNotepad.Views"
             xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-            xmlns:local="clr-namespace:MapNotepad.Views"
+            xmlns:behaviors="clr-namespace:MapNotepad.Behaviors"
             x:Class="MapNotepad.Views.MainPage"
             Title="Main Page">
     <!--Pages can be added as references or inline-->
+    <TabbedPage.Behaviors>
+        <behaviors:TabbedPageNavigationBehavior />
+    </TabbedPage.Behaviors>
     <TabbedPage.ToolbarItems>
         <ToolbarItem Order="Primary"
                  Priority="1"
@@ -20,7 +23,7 @@
                  Text="Settings"/>
     </TabbedPage.ToolbarItems>
     <TabbedPage.Children>
-        <local:MapPage />
-        <local:PinsPage />
+        <views:MapPage />
+        <views:PinsPage />
     </TabbedPage.Children>
 </TabbedPage>

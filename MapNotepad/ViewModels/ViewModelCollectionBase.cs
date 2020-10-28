@@ -31,10 +31,10 @@ namespace MapNotepad.ViewModels
         protected void UpdateCollection()
         {
             var customPins = _pinsManagerService.GetCurrentUserPins();
+            //PinCollection = new ObservableCollection<Pin>(); //wtf
             foreach (CustomPin pin in customPins)
             {
-                var newPin = //ModelsExtension.ToPin(pin)
-                    new Pin() { Label = pin.Label, Position = new Position(pin.Latitude, pin.Longtitude) };
+                var newPin = ModelsExtension.ToPin(pin);
                 PinCollection.Add(newPin);
             }
         }

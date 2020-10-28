@@ -5,8 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              xmlns:views="clr-namespace:MapNotepad.Views"
-             xmlns:local="clr-namespace:MapNotepad.Behaviors"
              xmlns:bindings="clr-namespace:Xamarin.Forms.GoogleMaps.Bindings;assembly=Xamarin.Forms.GoogleMaps.Bindings"
+                       xmlns:clustering="clr-namespace:Xamarin.Forms.GoogleMaps.Clustering;assembly=Xamarin.Forms.GoogleMaps.Clustering"
              x:Class="MapNotepad.Views.MapPage"
              x:Name="mapPage"
              Title="Map">
@@ -16,13 +16,21 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <maps:Map x:Name="map"
+            <!--<maps:Map x:Name="map"
                       VerticalOptions="FillAndExpand">
                 <maps:Map.Behaviors>
                     <bindings:BindingPinsBehavior Value="{Binding PinCollection}"/>
                     <bindings:MapClickedToCommandBehavior Command="{Binding MapClickedCommand}"/>
                 </maps:Map.Behaviors>
-            </maps:Map>
+            </maps:Map>-->
+            <clustering:ClusteredMap x:Name="map"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="FillAndExpand" >
+                <clustering:ClusteredMap.Behaviors>
+                    <bindings:BindingPinsBehavior Value="{Binding PinCollection}"/>
+                    <bindings:MapClickedToCommandBehavior Command="{Binding MapClickedCommand}"/>
+                </clustering:ClusteredMap.Behaviors>
+            </clustering:ClusteredMap>
         </Grid>
     </ContentPage.Content>
 </views:BaseContentPage>

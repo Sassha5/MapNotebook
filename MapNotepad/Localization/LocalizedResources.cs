@@ -19,9 +19,9 @@ namespace MapNotepad.Localization
             }
         }
 
-        //public LocalizedResources(Type resource, string language = null)
-        //    : this(resource, new CultureInfo(language ?? Constants.DefaultLanguage))
-        //{ }
+        public LocalizedResources(Type resource, string language = null)
+            : this(resource, new CultureInfo(language ?? Constants.DefaultLanguage))
+        { }
 
         public LocalizedResources(Type resource, CultureInfo cultureInfo)
         {
