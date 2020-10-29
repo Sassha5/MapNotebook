@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,10 +25,24 @@ namespace MapNotepad.ViewModels
             //GetLocationNameCommand = new Command<Position>(async (param) => await GetLocationName(param));
         }
 
+        private void GovnoMethod(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            UpdateCollection();
+        }
+
         //public ICommand GetLocationNameCommand { get; set; }
 
-        
-        public ICommand MapClickedCommand => new Command<MapClickedEventArgs>(OnMapClickedCommand);
+        private ICommand _MapClickedCommand;
+        public ICommand MapClickedCommand => _MapClickedCommand ??= new Command<MapClickedEventArgs>(OnMapClickedCommand);
+
+        private ICommand _CollectionChangedCommand;
+        public ICommand CollectionChangedCommand => _CollectionChangedCommand ??= new Command(OnCollectionChangedCommand);
+
+
+        private void OnCollectionChangedCommand(object obj)
+        {
+            UpdateCollection();
+        }
 
         private void OnMapClickedCommand(MapClickedEventArgs args)
         {
@@ -35,10 +50,11 @@ namespace MapNotepad.ViewModels
             {
                 Label = $"Pin {PinCollection.Count}",
                 Latitude = args.Point.Latitude,
-                Longtitude = args.Point.Longitude
+                Longitude = args.Point.Longitude
             });
             UpdateCollection();
         }
+
 
         //public async Task GetLocationName(Position position)
         //{

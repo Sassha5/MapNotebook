@@ -9,6 +9,8 @@
             x:Class="MapNotepad.Views.MainPage"
             Title="Main Page">
     <!--Pages can be added as references or inline-->
+    <!--xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"-->
     <TabbedPage.Behaviors>
         <behaviors:TabbedPageNavigationBehavior />
     </TabbedPage.Behaviors>

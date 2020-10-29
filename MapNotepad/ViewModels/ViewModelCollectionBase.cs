@@ -14,7 +14,7 @@ namespace MapNotepad.ViewModels
     {
         private readonly IPinsManagerService _pinsManagerService;
 
-        private ObservableCollection<Pin> _PinCollection;
+        private ObservableCollection<Pin> _PinCollection = new ObservableCollection<Pin>();
         public ObservableCollection<Pin> PinCollection
         {
             get => _PinCollection;
@@ -30,8 +30,8 @@ namespace MapNotepad.ViewModels
 
         protected void UpdateCollection()
         {
-            var customPins = _pinsManagerService.GetCurrentUserPins();
-            //PinCollection = new ObservableCollection<Pin>(); //wtf
+            var customPins = _pinsManagerService.GetCurrentUserPins(); //maybe overload with search parameter
+            PinCollection.Clear();
             foreach (CustomPin pin in customPins)
             {
                 var newPin = ModelsExtension.ToPin(pin);
@@ -44,6 +44,11 @@ namespace MapNotepad.ViewModels
             _pinsManagerService.AddPin(pin);
         }
 
+        protected void DeletePin(CustomPin pin)
+        {
+            _pinsManagerService.DeletePin(pin);
+        }
+            
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             UpdateCollection();

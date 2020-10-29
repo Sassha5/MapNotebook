@@ -42,12 +42,19 @@
     <Folder Include="Localization\" />
     <Folder Include="Services\ValidationService\" />
     <Folder Include="Resources\" />
+    <Folder Include="Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\RegisterPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\AppResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\RegisterPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\AppResource.Designer.cs">

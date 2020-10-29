@@ -26,9 +26,19 @@ namespace MapNotepad.Services.PinsManagerService
             return _repositoryService.InsertItem(pin);
         }
 
+        public int DeletePin(CustomPin pin)
+        {
+            return _repositoryService.DeleteItem<CustomPin>(pin.Id);
+        }
+
         public IEnumerable<CustomPin> GetCurrentUserPins()
         {
             return _repositoryService.GetItems<CustomPin>().Where(x => x.UserId == _settingsManagerService.AuthorizedUserID);
+        }
+
+        public IEnumerable<CustomPin> GetCurrentUserPins(string searchValue)
+        {
+            return GetCurrentUserPins().Where(x => x.Label.Contains(searchValue));
         }
     }
 }
