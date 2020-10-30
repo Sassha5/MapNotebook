@@ -38,7 +38,8 @@ namespace MapNotepad.Services.PinsManagerService
 
         public IEnumerable<CustomPin> GetCurrentUserPins(string searchValue)
         {
-            return GetCurrentUserPins().Where(x => x.Label.Contains(searchValue));
+            return GetCurrentUserPins().Where(x => x.Label.ToLower().Contains(searchValue)
+                                          || x.Description.ToLower().Contains(searchValue));
         }
     }
 }

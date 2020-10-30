@@ -54,6 +54,7 @@ namespace MapNotepad.ViewModels
 
         private void OnMapClickedCommand(MapClickedEventArgs args)
         {
+            UpdateCollection();
             Latitude = args.Point.Latitude;
             Longitude = args.Point.Longitude;
             _customPin = new CustomPin()
@@ -62,7 +63,7 @@ namespace MapNotepad.ViewModels
                 Latitude = Latitude,
                 Longitude = Longitude
             };
-            PinCollection.Add(ModelsExtension.ToPin(_customPin));
+            IncomingPin = ModelsExtension.ToPin(_customPin);
         }
 
         private async void OnAddPinCommandAsync(object obj)

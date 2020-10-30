@@ -38,11 +38,29 @@ namespace MapNotepad.ViewModels
         private ICommand _SearchCommand;
         public ICommand SearchCommand => _SearchCommand ??= new Command<string>(OnSearchCommandAsync);
 
+        private ICommand _PinTappedCommand;
+        public ICommand PinTappedCommand => _PinTappedCommand ??= new Command<CustomPin>(OnPinTappedCommandAsync);
+
+        private async void OnPinTappedCommandAsync(CustomPin pin)
+        {
+            NavigationParameters navParams = new NavigationParameters
+            {
+                { nameof(CustomPin), pin }
+            };
+            await NavigationService.NavigateAsync($"{nameof(MainPage)}?selectedTab={nameof(MapPage)}", navParams);
+        }
+
         private void OnSearchCommandAsync(string searchValue)
         {
-            CustomPinCollection.Clear();
-            CustomPinCollection = new ObservableCollection<CustomPin>(_pinsManagerService.GetCurrentUserPins(searchValue));
-
+            CustomPinCollection.Clear(); //TODO fix this shit
+            if (searchValue != string.Empty)
+            {
+                CustomPinCollection = new ObservableCollection<CustomPin>(_pinsManagerService.GetCurrentUserPins(searchValue.ToLower()));
+            }
+            else
+            {
+                UpdateCollection();
+            }
         }
 
         private void UpdateCollection()
@@ -69,11 +87,8 @@ namespace MapNotepad.ViewModels
         {
             //bool result = await Confirm();
             //if (result)
-            //{
-            //                      TODO somehow delete pin, maybe create another collection with customPins,
-            //                                  or find customPin by label and delete with pin
             _pinsManagerService.DeletePin(pin);
-            //UpdateCollection();
+            UpdateCollection();
             //}
         }
     }

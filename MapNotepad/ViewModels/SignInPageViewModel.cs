@@ -37,7 +37,7 @@ namespace MapNotepad.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (parameters.TryGetValue($"{nameof(Email)}", out string email)) //true when navigated from sign up
+            if (parameters.TryGetValue($"{nameof(Email)}", out string email))
             {
                 Email = email;
             }

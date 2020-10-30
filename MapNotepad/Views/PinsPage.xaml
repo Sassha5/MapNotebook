@@ -27,6 +27,12 @@
                   RowHeight="100" 
                   Margin="10"
                   HasUnevenRows="False">
+                <ListView.Behaviors>
+                    <prism:EventToCommandBehavior                         
+                            EventName="ItemTapped"
+                            Command="{Binding PinTappedCommand}"
+                            EventArgsParameterPath="Item"/>
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="100">

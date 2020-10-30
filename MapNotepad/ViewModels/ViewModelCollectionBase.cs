@@ -14,11 +14,18 @@ namespace MapNotepad.ViewModels
     {
         private readonly IPinsManagerService _pinsManagerService;
 
-        private ObservableCollection<Pin> _PinCollection = new ObservableCollection<Pin>();
-        public ObservableCollection<Pin> PinCollection
+        private ObservableCollection<CustomPin> _pinCollection;
+        public ObservableCollection<CustomPin> PinCollection
         {
-            get => _PinCollection;
-            set => SetProperty(ref _PinCollection, value);
+            get => _pinCollection;
+            set => SetProperty(ref _pinCollection, value);
+        }
+
+        private Pin _incomingPin;
+        public Pin IncomingPin
+        {
+            get => _incomingPin;
+            set => SetProperty(ref _incomingPin, value);
         }
 
         public ViewModelCollectionBase(INavigationService navigationService,
@@ -30,23 +37,24 @@ namespace MapNotepad.ViewModels
 
         protected void UpdateCollection()
         {
-            var customPins = _pinsManagerService.GetCurrentUserPins(); //maybe overload with search parameter
-            PinCollection.Clear();
+            var customPins = _pinsManagerService.GetCurrentUserPins(); //maybe overload with search parameter, also .Where(x => x.Favorite)
+            PinCollection = new ObservableCollection<CustomPin>(customPins);
             foreach (CustomPin pin in customPins)
             {
-                var newPin = ModelsExtension.ToPin(pin);
-                PinCollection.Add(newPin);
+                IncomingPin = ModelsExtension.ToPin(pin);
             }
         }
 
         protected void AddPin(CustomPin pin)
         {
             _pinsManagerService.AddPin(pin);
+            UpdateCollection();
         }
 
         protected void DeletePin(CustomPin pin)
         {
             _pinsManagerService.DeletePin(pin);
+            UpdateCollection();
         }
             
         public override void OnNavigatedTo(INavigationParameters parameters)

@@ -37,7 +37,7 @@ namespace MapNotepad.ViewModels
 
         private async void OnRegisterCommandAsync()
         {
-            //switch (_validationService.ValidateNewUser(Email, Password, ConfirmPassword))
+            //switch (_validationService.ValidateNewUser(Email, Password, ConfirmPassword)) //TODO after localization
             //{
             //    case ValidationStatus.EmailIsTaken:
             //        await _userDialogs.AlertAsync(Resources["LoginIsTaken"], Resources["Oops"], Resources["Damn"]); break;

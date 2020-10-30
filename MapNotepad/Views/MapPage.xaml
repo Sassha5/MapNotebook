@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:views="clr-namespace:MapNotepad.Views"
-             xmlns:bindings="clr-namespace:Xamarin.Forms.GoogleMaps.Bindings;assembly=Xamarin.Forms.GoogleMaps.Bindings" xmlns:controls="clr-namespace:MapNotepad.Controls"
+             xmlns:bindings="clr-namespace:Xamarin.Forms.GoogleMaps.Bindings;assembly=Xamarin.Forms.GoogleMaps.Bindings"
+             xmlns:controls="clr-namespace:MapNotepad.Controls"
              x:Class="MapNotepad.Views.MapPage"
              x:Name="mapPage"
              Title="Map">
@@ -13,23 +14,19 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <!--<maps:Map x:Name="map"
-                      VerticalOptions="FillAndExpand">
-                <maps:Map.Behaviors>
-                    <bindings:BindingPinsBehavior Value="{Binding PinCollection}"/>
-                    <bindings:MapClickedToCommandBehavior Command="{Binding MapClickedCommand}"/>
-                </maps:Map.Behaviors>
-            </maps:Map>-->
+            <SearchBar Grid.Row="0" VerticalOptions="Start"/>
             <controls:CustomMap x:Name="map"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="FillAndExpand"
-                                MyLocationEnabled="True" >
+                                MyLocationEnabled="True"
+                                Grid.Row="0"
+                                SelectedPin="{Binding SelectedPin, Mode=TwoWay}"
+                                IncomingPin="{Binding IncomingPin}">
                 <controls:CustomMap.Behaviors>
                     <!--<prism:EventToCommandBehavior EventName="CollectionChanged"
                                                   Command="{Binding CollectionChangedCommand}">
                     </prism:EventToCommandBehavior>-->
-                    <bindings:BindingPinsBehavior Value="{Binding PinCollection}"/>
+                    <!--<bindings:BindingPinsBehavior Value="{Binding PinCollection}"/>-->
                     <!--<bindings:MapClickedToCommandBehavior Command="{Binding MapClickedCommand}"/>-->
                 </controls:CustomMap.Behaviors>
             </controls:CustomMap>

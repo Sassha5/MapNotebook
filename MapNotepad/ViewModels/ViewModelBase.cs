@@ -26,7 +26,7 @@ namespace MapNotepad.ViewModels
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
-            //Resources = new LocalizedResources(typeof(AppResource), SettingsManager.Language);
+            //Resources = new LocalizedResources(typeof(AppResource), SettingsManager.Language); //a better way to localize?
         }
 
         public virtual void Initialize(INavigationParameters parameters) { }

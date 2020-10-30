@@ -10,6 +10,7 @@ namespace MapNotepad.ViewModels
     {
         private readonly ISettingsManagerService _settingsManagerService;
 
+        
         private bool _darkThemeIsChecked;
         public bool DarkThemeIsChecked
         {
@@ -19,6 +20,7 @@ namespace MapNotepad.ViewModels
                 _darkThemeIsChecked = value;
                 if (value) { _settingsManagerService.Theme = (int)OSAppTheme.Dark; }
                 else { _settingsManagerService.Theme = (int)OSAppTheme.Light; }
+                RaisePropertyChanged($"{nameof(DarkThemeIsChecked)}");
             }
         }
 
@@ -46,7 +48,6 @@ namespace MapNotepad.ViewModels
             if (Application.Current.RequestedTheme == OSAppTheme.Dark)
             {
                 DarkThemeIsChecked = true;
-                RaisePropertyChanged($"{nameof(DarkThemeIsChecked)}");
             }
         }
     }
