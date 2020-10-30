@@ -10,7 +10,7 @@ namespace MapNotepad.ViewModels
     {
         private readonly ISettingsManagerService _settingsManagerService;
 
-        
+        #region Properties
         private bool _darkThemeIsChecked;
         public bool DarkThemeIsChecked
         {
@@ -35,6 +35,7 @@ namespace MapNotepad.ViewModels
             }
         }
         public List<string> Languages { get; set; }
+        #endregion
 
         public SettingsPageViewModel(INavigationService navigationService,
                                      ISettingsManagerService settingsManagerService)

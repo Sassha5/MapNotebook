@@ -1,32 +1,32 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             xmlns:views="clr-namespace:MapNotepad.Views"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="MapNotepad.Views.PinsPage"
-             Title="Pins"
-             x:Name="pinsPage">
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:prism="http://prismlibrary.com"
+                       xmlns:views="clr-namespace:MapNotepad.Views"
+                       prism:ViewModelLocator.AutowireViewModel="True"
+                       x:Class="MapNotepad.Views.PinsPage"
+                       Title="Pins"
+                       x:Name="pinsPage">
 
     <StackLayout>
         <SearchBar HorizontalOptions="CenterAndExpand"
+                   Text="{Binding SearchBarText}"
                    SearchCommand="{Binding SearchCommand}"
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
-                   x:Name="searchBar"/>
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                   x:Name="searchBar">
+            <SearchBar.Behaviors>
+                <prism:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}"/>
+            </SearchBar.Behaviors>
+        </SearchBar>
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <!--<Label Text="Empty List"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>-->
-
             <ListView Grid.Row="0"
-                  ItemsSource="{Binding CustomPinCollection}" 
-                  RowHeight="100" 
-                  Margin="10"
-                  HasUnevenRows="False">
+                      ItemsSource="{Binding PinCollection}" 
+                      RowHeight="100" 
+                      Margin="10"
+                      HasUnevenRows="False">
                 <ListView.Behaviors>
                     <prism:EventToCommandBehavior                         
                             EventName="ItemTapped"
@@ -43,15 +43,17 @@
                                                         Source={x:Reference profilesPage}}" 
                                       CommandParameter="{Binding .}"/>-->
                                 <MenuItem Text="Delete"
-                                      Command="{Binding Path=BindingContext.DeleteCommand, 
-                                                        Source={x:Reference pinsPage}}" 
-                                      CommandParameter="{Binding .}"/>
+                                          Command="{Binding Path=BindingContext.DeleteCommand, 
+                                                            Source={x:Reference pinsPage}}" 
+                                          CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
                             <StackLayout VerticalOptions="Center"
                                      Margin="10,0,0,0">
                                 <Label Text="{Binding Label}"/>
-                                <Label Text="{Binding Latitude}"/>
-                                <Label Text="{Binding Longitude}" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Position.Latitude}"/>
+                                    <Label Text="{Binding Position.Longitude}" />
+                                </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -59,15 +61,15 @@
             </ListView>
 
             <Button Grid.Row="0" 
-                Text="+"
-                BorderRadius="35"
-                VerticalOptions="End"
-                HorizontalOptions="End"
-                HeightRequest="70"
-                WidthRequest="70"
-                Margin="0,0,20,20"
-                BackgroundColor="SkyBlue"
-                Command="{Binding ToAddPinPageCommand}"/>
+                    Text="+"
+                    BorderRadius="35"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    HeightRequest="70"
+                    WidthRequest="70"
+                    Margin="0,0,20,20"
+                    BackgroundColor="SkyBlue"
+                    Command="{Binding ToAddPinPageCommand}"/>
         </Grid>
     </StackLayout>
 </views:BaseContentPage>

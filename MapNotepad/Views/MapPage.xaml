@@ -1,35 +1,32 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:views="clr-namespace:MapNotepad.Views"
-             xmlns:bindings="clr-namespace:Xamarin.Forms.GoogleMaps.Bindings;assembly=Xamarin.Forms.GoogleMaps.Bindings"
-             xmlns:controls="clr-namespace:MapNotepad.Controls"
-             x:Class="MapNotepad.Views.MapPage"
-             x:Name="mapPage"
-             Title="Map">
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:prism="http://prismlibrary.com"
+                       prism:ViewModelLocator.AutowireViewModel="True"
+                       xmlns:views="clr-namespace:MapNotepad.Views"
+                       xmlns:controls="clr-namespace:MapNotepad.Controls"
+                       x:Class="MapNotepad.Views.MapPage"
+                       x:Name="mapPage"
+                       Title="Map">
     <ContentPage.Content>
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <SearchBar Grid.Row="0" VerticalOptions="Start"/>
+        <StackLayout>
+            <SearchBar HorizontalOptions="CenterAndExpand"
+                       Text="{Binding SearchBarText}"
+                       SearchCommand="{Binding SearchCommand}"
+                       x:Name="searchBar">
+                <SearchBar.Behaviors>
+    		    		<prism:EventToCommandBehavior EventName="TextChanged"
+                                                      Command="{Binding SearchCommand}"/>
+				</SearchBar.Behaviors>
+            </SearchBar>
             <controls:CustomMap x:Name="map"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="FillAndExpand"
                                 MyLocationEnabled="True"
                                 Grid.Row="0"
                                 SelectedPin="{Binding SelectedPin, Mode=TwoWay}"
-                                IncomingPin="{Binding IncomingPin}">
-                <controls:CustomMap.Behaviors>
-                    <!--<prism:EventToCommandBehavior EventName="CollectionChanged"
-                                                  Command="{Binding CollectionChangedCommand}">
-                    </prism:EventToCommandBehavior>-->
-                    <!--<bindings:BindingPinsBehavior Value="{Binding PinCollection}"/>-->
-                    <!--<bindings:MapClickedToCommandBehavior Command="{Binding MapClickedCommand}"/>-->
-                </controls:CustomMap.Behaviors>
+                                PinsCollection="{Binding PinCollection}">
             </controls:CustomMap>
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </views:BaseContentPage>

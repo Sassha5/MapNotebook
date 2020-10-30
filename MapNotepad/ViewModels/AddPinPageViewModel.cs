@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using MapNotepad.Extensions;
 using MapNotepad.Models;
@@ -52,9 +53,9 @@ namespace MapNotepad.ViewModels
         private ICommand _MapClickedCommand;
         public ICommand MapClickedCommand => _MapClickedCommand ??= new Command<MapClickedEventArgs>(OnMapClickedCommand);
 
-        private void OnMapClickedCommand(MapClickedEventArgs args)
+        private void OnMapClickedCommand(MapClickedEventArgs args)//wtf it works
         {
-            UpdateCollection();
+            UpdateCollection();   //clear temporary pins
             Latitude = args.Point.Latitude;
             Longitude = args.Point.Longitude;
             _customPin = new CustomPin()
@@ -63,7 +64,8 @@ namespace MapNotepad.ViewModels
                 Latitude = Latitude,
                 Longitude = Longitude
             };
-            IncomingPin = ModelsExtension.ToPin(_customPin);
+            PinCollection.Add(ModelsExtension.ToPin(_customPin)); //add pin only in collection to show, not in repo
+            PinCollection = new ObservableCollection<Pin>(PinCollection); //trigger property changed to show new pin
         }
 
         private async void OnAddPinCommandAsync(object obj)
