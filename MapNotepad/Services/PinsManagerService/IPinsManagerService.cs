@@ -8,7 +8,7 @@ namespace MapNotepad.Services.PinsManagerService
     {
         IEnumerable<CustomPin> GetCurrentUserPins();
         IEnumerable<CustomPin> GetCurrentUserPins(string searchValue);
-        int AddPin(CustomPin pin);
+        int SavePin(CustomPin pin);
         int DeletePin(CustomPin pin);
     }
 }

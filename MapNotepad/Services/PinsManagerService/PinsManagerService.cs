@@ -20,7 +20,7 @@ namespace MapNotepad.Services.PinsManagerService
             _repositoryService.CreateTable<CustomPin>();
         }
 
-        public int AddPin(CustomPin pin)
+        public int SavePin(CustomPin pin)
         {
             pin.UserId = _settingsManagerService.AuthorizedUserID;
             int id;
