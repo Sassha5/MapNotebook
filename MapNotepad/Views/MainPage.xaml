@@ -7,7 +7,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
             xmlns:behaviors="clr-namespace:MapNotepad.Behaviors"
             x:Class="MapNotepad.Views.MainPage"
-            Title="Main Page">
+            Title="{Binding Resources[MainPage]}">
     <!--Pages can be added as references or inline-->
     <!--xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"-->
@@ -18,11 +18,11 @@
         <ToolbarItem Order="Primary"
                  Priority="1"
                  Command="{Binding LogoutCommand}"
-                 Text="Logout"/>
+                 Text="{Binding Resources[Logout]}"/>
         <ToolbarItem Order="Primary"
                  Priority="0"
                  Command="{Binding SettingsCommand}"
-                 Text="Settings"/>
+                 Text="{Binding Resources[Settings]}"/>
     </TabbedPage.ToolbarItems>
     <TabbedPage.Children>
         <views:MapPage />

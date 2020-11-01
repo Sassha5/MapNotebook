@@ -7,10 +7,11 @@
                        xmlns:controls="clr-namespace:MapNotepad.Controls"
                        x:Class="MapNotepad.Views.MapPage"
                        x:Name="mapPage"
-                       Title="Map">
+                       Title="{Binding Resources[Map]}">
     <ContentPage.Content>
         <StackLayout>
             <SearchBar HorizontalOptions="CenterAndExpand"
+                       Placeholder="{Binding Resources[Search]}"
                        Text="{Binding SearchBarText}"
                        SearchCommand="{Binding SearchCommand}"
                        x:Name="searchBar">

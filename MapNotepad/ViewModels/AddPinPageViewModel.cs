@@ -47,32 +47,51 @@ namespace MapNotepad.ViewModels
         {
         }
 
-        private ICommand _AddPinCommand;
-        public ICommand AddPinCommand => _AddPinCommand ??= new Command(OnAddPinCommandAsync);
+        private ICommand _SavePinCommand;
+        public ICommand SavePinCommand => _SavePinCommand ??= new Command(OnSavePinCommandAsync);
 
         private ICommand _MapClickedCommand;
         public ICommand MapClickedCommand => _MapClickedCommand ??= new Command<MapClickedEventArgs>(OnMapClickedCommand);
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            _customPin = new CustomPin()
+            {
+                Label = string.Empty,
+                IsFavorite = true
+            };
+            if (parameters.TryGetValue(nameof(CustomPin), out CustomPin customPin))
+            {
+                _customPin.Id = customPin.Id;
+                Label = customPin.Label;
+                Description = customPin.Description;
+                Latitude = customPin.Latitude;
+                Longitude = customPin.Longitude;
+            }
+        }
 
         private void OnMapClickedCommand(MapClickedEventArgs args)//wtf it works
         {
             UpdateCollection();   //clear temporary pins
             Latitude = args.Point.Latitude;
             Longitude = args.Point.Longitude;
-            _customPin = new CustomPin()
-            {
-                Label = string.Empty,
-                Latitude = Latitude,
-                Longitude = Longitude
-            };
+
+            _customPin.Latitude = Latitude;
+            _customPin.Longitude = Longitude;
+                
             PinCollection.Add(ModelsExtension.ToPin(_customPin)); //add pin only in collection to show, not in repo
             PinCollection = new ObservableCollection<Pin>(PinCollection); //trigger property changed to show new pin
         }
 
-        private async void OnAddPinCommandAsync(object obj)
+        private async void OnSavePinCommandAsync(object obj)
         {
             _customPin.Label = Label;
             _customPin.Description = Description;
-            AddPin(_customPin);
+            _customPin.Latitude = Latitude;
+            _customPin.Longitude = Longitude;
+
+            SavePin(_customPin);
             await NavigationService.GoBackAsync();
         }
     }

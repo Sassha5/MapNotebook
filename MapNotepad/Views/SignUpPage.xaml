@@ -2,7 +2,8 @@
 <views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MapNotepad.Views"
-             x:Class="MapNotepad.Views.SignUpPage">
+             x:Class="MapNotepad.Views.SignUpPage"
+             Title="{Binding Resources[SignUp]}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,22 +17,26 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Entry x:Name="emailInput"
-                   Grid.Row="0"
-                    Text="{Binding Email}"/>
+               Grid.Row="0"
+               Placeholder="{Binding Resources[Email]}"
+               Text="{Binding Email}"/>
         <Entry x:Name="nameInput"
-                   Grid.Row="1"
-                    Text="{Binding Name}"/>
+               Grid.Row="1"
+               Placeholder="{Binding Resources[Name]}"
+               Text="{Binding Name}"/>
         <Entry x:Name="passwordFirstInput"
-                   IsPassword="True" 
-                   Grid.Row="2"
-                    Text="{Binding Password}"/>
-        <Entry x:Name="passwordSecondInput" 
-                   IsPassword="True" 
-                   Grid.Row="3"
-                    Text="{Binding ConfirmPassword}"/>
+               Placeholder="{Binding Resources[Password]}"
+               IsPassword="True" 
+               Grid.Row="2"
+               Text="{Binding Password}"/>
+        <Entry x:Name="passwordSecondInput"
+               Placeholder="{Binding Resources[ConfirmPassword]}"
+               IsPassword="True" 
+               Grid.Row="3"
+               Text="{Binding ConfirmPassword}"/>
         <Button x:Name="signUpButton" 
-                    Text="SignUp" 
-                    Grid.Row="7"
-                    Command="{Binding RegisterCommand}"/>
+                Text="{Binding Resources[SignUp]}" 
+                Grid.Row="7"
+                Command="{Binding RegisterCommand}"/>
     </Grid>
 </views:BaseContentPage>

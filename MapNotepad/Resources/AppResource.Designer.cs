@@ -46,5 +46,293 @@ namespace MapNotepad.Resources {
                 resourceCulture = value;
             }
         }
+        
+        internal static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        internal static string CreateProfile {
+            get {
+                return ResourceManager.GetString("CreateProfile", resourceCulture);
+            }
+        }
+        
+        internal static string Damn {
+            get {
+                return ResourceManager.GetString("Damn", resourceCulture);
+            }
+        }
+        
+        internal static string DarkTheme {
+            get {
+                return ResourceManager.GetString("DarkTheme", resourceCulture);
+            }
+        }
+        
+        internal static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        internal static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        internal static string EmptyList {
+            get {
+                return ResourceManager.GetString("EmptyList", resourceCulture);
+            }
+        }
+        
+        internal static string Finally {
+            get {
+                return ResourceManager.GetString("Finally", resourceCulture);
+            }
+        }
+        
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        internal static string LoginIsTaken {
+            get {
+                return ResourceManager.GetString("LoginIsTaken", resourceCulture);
+            }
+        }
+        
+        internal static string LoginIsTooLong {
+            get {
+                return ResourceManager.GetString("LoginIsTooLong", resourceCulture);
+            }
+        }
+        
+        internal static string LoginIsTooShort {
+            get {
+                return ResourceManager.GetString("LoginIsTooShort", resourceCulture);
+            }
+        }
+        
+        internal static string LoginStartsWithNumber {
+            get {
+                return ResourceManager.GetString("LoginStartsWithNumber", resourceCulture);
+            }
+        }
+        
+        internal static string MainPage {
+            get {
+                return ResourceManager.GetString("MainPage", resourceCulture);
+            }
+        }
+        
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        internal static string Nickname {
+            get {
+                return ResourceManager.GetString("Nickname", resourceCulture);
+            }
+        }
+        
+        internal static string Nope {
+            get {
+                return ResourceManager.GetString("Nope", resourceCulture);
+            }
+        }
+        
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        internal static string Oops {
+            get {
+                return ResourceManager.GetString("Oops", resourceCulture);
+            }
+        }
+        
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        internal static string PasswordIsTooLong {
+            get {
+                return ResourceManager.GetString("PasswordIsTooLong", resourceCulture);
+            }
+        }
+        
+        internal static string PasswordIsTooShort {
+            get {
+                return ResourceManager.GetString("PasswordIsTooShort", resourceCulture);
+            }
+        }
+        
+        internal static string PasswordIsWeak {
+            get {
+                return ResourceManager.GetString("PasswordIsWeak", resourceCulture);
+            }
+        }
+        
+        internal static string PasswordsAreNotEqual {
+            get {
+                return ResourceManager.GetString("PasswordsAreNotEqual", resourceCulture);
+            }
+        }
+        
+        internal static string RedirectingToSignIn {
+            get {
+                return ResourceManager.GetString("RedirectingToSignIn", resourceCulture);
+            }
+        }
+        
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        internal static string SignIn {
+            get {
+                return ResourceManager.GetString("SignIn", resourceCulture);
+            }
+        }
+        
+        internal static string SignUp {
+            get {
+                return ResourceManager.GetString("SignUp", resourceCulture);
+            }
+        }
+        
+        internal static string Sorting {
+            get {
+                return ResourceManager.GetString("Sorting", resourceCulture);
+            }
+        }
+        
+        internal static string StartAdding {
+            get {
+                return ResourceManager.GetString("StartAdding", resourceCulture);
+            }
+        }
+        
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        internal static string Sure {
+            get {
+                return ResourceManager.GetString("Sure", resourceCulture);
+            }
+        }
+        
+        internal static string SureQuestion {
+            get {
+                return ResourceManager.GetString("SureQuestion", resourceCulture);
+            }
+        }
+        
+        internal static string Thanks {
+            get {
+                return ResourceManager.GetString("Thanks", resourceCulture);
+            }
+        }
+        
+        internal static string Unknown {
+            get {
+                return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+        
+        internal static string WrongCredentials {
+            get {
+                return ResourceManager.GetString("WrongCredentials", resourceCulture);
+            }
+        }
+        
+        internal static string Yup {
+            get {
+                return ResourceManager.GetString("Yup", resourceCulture);
+            }
+        }
+        
+        internal static string Label {
+            get {
+                return ResourceManager.GetString("Label", resourceCulture);
+            }
+        }
+        
+        internal static string Latitude {
+            get {
+                return ResourceManager.GetString("Latitude", resourceCulture);
+            }
+        }
+        
+        internal static string Longitude {
+            get {
+                return ResourceManager.GetString("Longitude", resourceCulture);
+            }
+        }
+        
+        internal static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        internal static string Pins {
+            get {
+                return ResourceManager.GetString("Pins", resourceCulture);
+            }
+        }
+        
+        internal static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        internal static string SavePin {
+            get {
+                return ResourceManager.GetString("SavePin", resourceCulture);
+            }
+        }
     }
 }

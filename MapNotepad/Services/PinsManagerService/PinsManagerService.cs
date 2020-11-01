@@ -23,7 +23,17 @@ namespace MapNotepad.Services.PinsManagerService
         public int AddPin(CustomPin pin)
         {
             pin.UserId = _settingsManagerService.AuthorizedUserID;
-            return _repositoryService.InsertItem(pin);
+            int id;
+            if (pin.Id != 0)
+            {
+                _repositoryService.UpdateItem(pin);
+                id = pin.Id;
+            }
+            else
+            {
+                id = _repositoryService.InsertItem(pin);
+            }
+            return id;
         }
 
         public int DeletePin(CustomPin pin)
@@ -38,8 +48,8 @@ namespace MapNotepad.Services.PinsManagerService
 
         public IEnumerable<CustomPin> GetCurrentUserPins(string searchValue)
         {
-            return GetCurrentUserPins().Where(x => x.Label.ToLower().Contains(searchValue)
-                                          || x.Description.ToLower().Contains(searchValue));
+            return GetCurrentUserPins().Where(x => x.Label.ToLower().Contains(searchValue.ToLower())
+                                          || x.Description.ToLower().Contains(searchValue.ToLower()));
         }
     }
 }

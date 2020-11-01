@@ -10,8 +10,8 @@
     <views:BaseContentPage.ToolbarItems>
         <ToolbarItem Order="Primary"
                  Priority="0"
-                 Command="{Binding AddPinCommand}"
-                 Text="Add Pin"/>
+                 Command="{Binding SavePinCommand}"
+                 Text="{Binding Resources[SavePin]}"/>
     </views:BaseContentPage.ToolbarItems>
     <Grid>
         <Grid.RowDefinitions>
@@ -25,14 +25,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Entry Grid.Row="0"
+               Placeholder="{Binding Resources[Label]}"
                Text="{Binding Label}"/>
         <Entry Grid.Row="1"
+               Placeholder="{Binding Resources[Description]}"
                Text="{Binding Description}"/>
         <StackLayout Orientation="Horizontal" Grid.Row="2">
-            <Label Text="Latitude" VerticalOptions="Center"/>
+            <Label Text="{Binding Resources[Latitude]}" VerticalOptions="Center"/>
             <Entry HorizontalOptions="FillAndExpand"
                     Text="{Binding Latitude}"/>
-            <Label Text="Longitude" VerticalOptions="Center"/>
+            <Label Text="{Binding Resources[Longitude]}" VerticalOptions="Center"/>
             <Entry HorizontalOptions="FillAndExpand"
                     Text="{Binding Longitude}"/>
         </StackLayout>

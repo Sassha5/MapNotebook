@@ -12,6 +12,151 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    
-    
+    <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+    <data name="CreateProfile" xml:space="preserve">
+    <value>Create Profile</value>
+  </data>
+    <data name="Damn" xml:space="preserve">
+    <value>Damn...</value>
+  </data>
+    <data name="DarkTheme" xml:space="preserve">
+    <value>Dark Theme</value>
+  </data>
+    <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+    <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+    <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+    <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+    <data name="EmptyList" xml:space="preserve">
+    <value>List is empty yet!</value>
+  </data>
+    <data name="Finally" xml:space="preserve">
+    <value>Finally...</value>
+  </data>
+    <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+    <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+    <data name="LoginIsTaken" xml:space="preserve">
+    <value>Looks like someone already took this login</value>
+  </data>
+    <data name="LoginIsTooLong" xml:space="preserve">
+    <value>Sorry, I can't take such a long login...</value>
+  </data>
+    <data name="LoginIsTooShort" xml:space="preserve">
+    <value>Add few more letters, login is too short</value>
+  </data>
+    <data name="LoginStartsWithNumber" xml:space="preserve">
+    <value>Do not start login with a number. I dont like it.</value>
+  </data>
+    <data name="MainPage" xml:space="preserve">
+    <value>Main Page</value>
+  </data>
+    <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+    <data name="Nickname" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+    <data name="Nope" xml:space="preserve">
+    <value>Nope</value>
+  </data>
+    <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+    <data name="Oops" xml:space="preserve">
+    <value>Oops...</value>
+  </data>
+    <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+    <data name="PasswordIsTooLong" xml:space="preserve">
+    <value>Why is there a limit on a pass length? Idk</value>
+  </data>
+    <data name="PasswordIsTooShort" xml:space="preserve">
+    <value>I know that size doesn't matter, but this is too short of a pass</value>
+  </data>
+    <data name="PasswordIsWeak" xml:space="preserve">
+    <value>Your pass is weak! Use numbers, upper and lower case.</value>
+  </data>
+    <data name="PasswordsAreNotEqual" xml:space="preserve">
+    <value>You are supposed to enter the same pass in both fields</value>
+  </data>
+    <data name="RedirectingToSignIn" xml:space="preserve">
+    <value>Redirecting to the sign in page...</value>
+  </data>
+    <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+    <data name="SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+    <data name="SignUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+    <data name="Sorting" xml:space="preserve">
+    <value>Sorting</value>
+  </data>
+    <data name="StartAdding" xml:space="preserve">
+    <value>Start adding --&gt;</value>
+  </data>
+    <data name="Success" xml:space="preserve">
+    <value>Congratulations!</value>
+  </data>
+    <data name="Sure" xml:space="preserve">
+    <value>Sure</value>
+  </data>
+    <data name="SureQuestion" xml:space="preserve">
+    <value>Sure?</value>
+  </data>
+    <data name="Thanks" xml:space="preserve">
+    <value>Thanks!</value>
+  </data>
+    <data name="Unknown" xml:space="preserve">
+    <value>Unknown status code</value>
+  </data>
+    <data name="WrongCredentials" xml:space="preserve">
+    <value>Wrong credentials</value>
+  </data>
+    <data name="Yup" xml:space="preserve">
+    <value>Yup</value>
+  </data>
+    <data name="Label" xml:space="preserve">
+    <value>Label</value>
+  </data>
+    <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+    <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+    <data name="Longitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+    <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
+    <data name="Pins" xml:space="preserve">
+    <value>Pins</value>
+  </data>
+    <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+    <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+    <data name="SavePin" xml:space="preserve">
+    <value>Save Pin</value>
+  </data>
 </root>

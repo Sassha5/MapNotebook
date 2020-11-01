@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using MapNotepad.Extensions;
 using MapNotepad.Models;
@@ -49,7 +50,7 @@ namespace MapNotepad.ViewModels
         {
             if (!string.IsNullOrEmpty(SearchBarText))
             {
-                PinCollection = new ObservableCollection<Pin>(IEnumerableExtension.ToObservableCollection(_pinsManagerService.GetCurrentUserPins(SearchBarText.ToLower())));
+                PinCollection = new ObservableCollection<Pin>(IEnumerableExtension.ToObservableCollection(_pinsManagerService.GetCurrentUserPins(SearchBarText)));
             }
             else
             {
@@ -57,15 +58,25 @@ namespace MapNotepad.ViewModels
             }
         }
 
-        protected void AddPin(CustomPin pin)
+        protected void SavePin(CustomPin pin)
         {
-            _pinsManagerService.AddPin(pin);
+            _pinsManagerService.SavePin(pin);
         }
 
         protected void DeletePin(CustomPin pin)
         {
             _pinsManagerService.DeletePin(pin);
             UpdateCollection();
+        }
+
+        protected void DeletePin(Pin pin)
+        {
+            DeletePin(GetCustomPin(pin));
+        }
+
+        protected CustomPin GetCustomPin(Pin pin) //TODO rework base vm for custom pins and delete this
+        {
+            return _pinsManagerService.GetCurrentUserPins(pin.Label).FirstOrDefault();
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

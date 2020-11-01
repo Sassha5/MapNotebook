@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Views;
 using Prism.Navigation;
@@ -23,6 +24,9 @@ namespace MapNotepad.ViewModels
         private ICommand _DeleteCommand;
         public ICommand DeleteCommand => _DeleteCommand ??= new Command<Pin>(OnDeleteCommandAsync);
 
+        private ICommand _EditCommand;
+        public ICommand EditCommand => _EditCommand ??= new Command<Pin>(OnEditCommandAsync);
+
         private ICommand _PinTappedCommand;
         public ICommand PinTappedCommand => _PinTappedCommand ??= new Command<Pin>(OnPinTappedCommandAsync);
 
@@ -44,8 +48,15 @@ namespace MapNotepad.ViewModels
         {
             //bool result = await Confirm();
             //if (result)
-            //DeletePin(pin);
+            DeletePin(pin);
             //}
+        }
+
+        private async void OnEditCommandAsync(Pin pin)
+        {
+            NavigationParameters navParams = new NavigationParameters(); //TODO fix map to not show old pin location
+            navParams.Add(nameof(CustomPin), GetCustomPin(pin));
+            await NavigationService.NavigateAsync(nameof(AddPinPage), navParams);
         }
     }
 }

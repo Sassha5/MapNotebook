@@ -4,7 +4,8 @@
                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                         xmlns:prism="http://prismlibrary.com"
                         prism:ViewModelLocator.AutowireViewModel="True"
-                        x:Class="MapNotepad.Views.SignInPage">
+                        x:Class="MapNotepad.Views.SignInPage"
+                        Title="{Binding Resources[SignIn]}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,21 +19,23 @@
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <Entry x:Name="emailInput"
-                   Grid.Row="0"
-                    Text="{Binding Email}"/>
+               Placeholder="{Binding Resources[Email]}"
+               Grid.Row="0"
+               Text="{Binding Email}"/>
         <Entry x:Name="passwordInput"
-                   IsPassword="True" 
-                   Grid.Row="1"
-                    Text="{Binding Password}"/>
+               Placeholder="{Binding Resources[Password]}"
+               IsPassword="True" 
+               Grid.Row="1"
+               Text="{Binding Password}"/>
         <Button x:Name="signInButton"
-                    Text="Sign In" 
-                    Grid.Row="6"
-                    Command="{Binding AuthorizeCommand}"/>
+                Text="{Binding Resources[SignIn]}" 
+                Grid.Row="6"
+                Command="{Binding AuthorizeCommand}"/>
         <Label HorizontalOptions="Center"
                 VerticalOptions="CenterAndExpand" Grid.Row="7">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="SignUp"
+                    <Span Text="{Binding Resources[SignUp]}"
                             TextDecorations="Underline">
                         <Span.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SignUpCommand}"/>

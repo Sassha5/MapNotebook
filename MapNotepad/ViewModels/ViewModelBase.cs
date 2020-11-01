@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using MapNotepad.Localization;
+using MapNotepad.Resources;
 using Prism.Mvvm;
 using Prism.Navigation;
 
@@ -26,7 +27,7 @@ namespace MapNotepad.ViewModels
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
-            //Resources = new LocalizedResources(typeof(AppResource), SettingsManager.Language); //a better way to localize?
+            Resources = new LocalizedResources(typeof(AppResource), "en"); //TODO take language from settings, not hardcoded "en"
         }
 
         public virtual void Initialize(INavigationParameters parameters) { }

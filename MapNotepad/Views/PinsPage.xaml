@@ -5,13 +5,14 @@
                        xmlns:views="clr-namespace:MapNotepad.Views"
                        prism:ViewModelLocator.AutowireViewModel="True"
                        x:Class="MapNotepad.Views.PinsPage"
-                       Title="Pins"
+                       Title="{Binding Resources[Pins]}"
                        x:Name="pinsPage">
 
     <StackLayout>
         <SearchBar HorizontalOptions="CenterAndExpand"
                    Text="{Binding SearchBarText}"
                    SearchCommand="{Binding SearchCommand}"
+                   Placeholder="{Binding Resources[Search]}"
                    x:Name="searchBar">
             <SearchBar.Behaviors>
                 <prism:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}"/>
@@ -37,19 +38,21 @@
                     <DataTemplate>
                         <ViewCell Height="100">
                             <ViewCell.ContextActions>
-                                <!--<MenuItem Text="{Binding Path=BindingContext.Resources[Edit], 
-                                                     Source={x:Reference profilesPage}}" 
-                                      Command="{Binding Path=BindingContext.EditCommand, 
-                                                        Source={x:Reference profilesPage}}" 
-                                      CommandParameter="{Binding .}"/>-->
-                                <MenuItem Text="Delete"
+                                <MenuItem Text="{Binding Resources[Edit]}"
+                                          Command="{Binding Path=BindingContext.EditCommand, 
+                                                        Source={x:Reference pinsPage}}" 
+                                      CommandParameter="{Binding .}"/>
+                                <MenuItem Text="{Binding Resources[Delete]}"
                                           Command="{Binding Path=BindingContext.DeleteCommand, 
                                                             Source={x:Reference pinsPage}}" 
                                           CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
                             <StackLayout VerticalOptions="Center"
                                      Margin="10,0,0,0">
-                                <Label Text="{Binding Label}"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Label}" VerticalOptions="Center"/>
+                                    <CheckBox IsChecked="{Binding IsFavorite, Mode=TwoWay}"/>
+                                </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Position.Latitude}"/>
                                     <Label Text="{Binding Position.Longitude}" />
