@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Input;
-using MapNotepad.Enums;
+﻿using System.Windows.Input;
 using MapNotepad.Services.RegistrationService;
 using MapNotepad.Services.ValidationService;
 using MapNotepad.Views;
@@ -64,8 +62,10 @@ namespace MapNotepad.ViewModels
         private async void RegistrationSuccess()
         {
             _registrationService.Register(Name, Email, Password);
-            NavigationParameters navParams = new NavigationParameters();
-            navParams.Add($"{nameof(Email)}", Email);
+            NavigationParameters navParams = new NavigationParameters
+            {
+                { $"{nameof(Email)}", Email }
+            };
             await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}", navParams);
         }
     }

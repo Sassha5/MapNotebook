@@ -26,17 +26,17 @@
         </Grid.RowDefinitions>
         <Entry Grid.Row="0"
                Placeholder="{Binding Resources[Label]}"
-               Text="{Binding Label}"/>
+               Text="{Binding CustomPin.Label}"/>
         <Entry Grid.Row="1"
                Placeholder="{Binding Resources[Description]}"
-               Text="{Binding Description}"/>
+               Text="{Binding CustomPin.Description}"/>
         <StackLayout Orientation="Horizontal" Grid.Row="2">
             <Label Text="{Binding Resources[Latitude]}" VerticalOptions="Center"/>
             <Entry HorizontalOptions="FillAndExpand"
-                    Text="{Binding Latitude}"/>
+                    Text="{Binding CustomPin.Latitude}"/>
             <Label Text="{Binding Resources[Longitude]}" VerticalOptions="Center"/>
             <Entry HorizontalOptions="FillAndExpand"
-                    Text="{Binding Longitude}"/>
+                    Text="{Binding CustomPin.Longitude}"/>
         </StackLayout>
         <controls:CustomMap x:Name="map"
                   VerticalOptions="FillAndExpand"

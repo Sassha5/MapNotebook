@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using MapNotepad.Extensions;
 using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
 using Prism.Navigation;
 using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.ViewModels
 {
@@ -22,19 +18,14 @@ namespace MapNotepad.ViewModels
             get => _searchBarText;
             set => SetProperty(ref _searchBarText, value);
         }
-        private Position _cameraPosition;
-        public Position CameraPosition
+        private ObservableCollection<CustomPin> _customPinCollection;
+        public ObservableCollection<CustomPin> CustomPinCollection
         {
-            get => _cameraPosition;
-            set => SetProperty(ref _cameraPosition, value);
-        }
-        private ObservableCollection<Pin> _pinCollection;
-        public ObservableCollection<Pin> PinCollection
-        {
-            get => _pinCollection;
-            set => SetProperty(ref _pinCollection, value);
+            get => _customPinCollection;
+            set => SetProperty(ref _customPinCollection, value);
         }
         #endregion
+
         public ViewModelCollectionBase(INavigationService navigationService,
                                        IPinsManagerService pinsManagerService)
                                        : base(navigationService)
@@ -42,12 +33,10 @@ namespace MapNotepad.ViewModels
             _pinsManagerService = pinsManagerService;
         }
 
-        protected void UpdateCollection()
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            //maybe overload with search parameter, also .Where(x => x.Favorite)
-            PinCollection = new ObservableCollection<Pin>(IEnumerableExtension.ToObservableCollection(_pinsManagerService.GetCurrentUserPins()));
+            UpdateCollection();
         }
-
 
         private ICommand _SearchCommand;
         public ICommand SearchCommand => _SearchCommand ??= new Command(OnSearchCommand);
@@ -56,12 +45,17 @@ namespace MapNotepad.ViewModels
         {
             if (!string.IsNullOrEmpty(SearchBarText))
             {
-                PinCollection = new ObservableCollection<Pin>(IEnumerableExtension.ToObservableCollection(_pinsManagerService.GetCurrentUserPins(SearchBarText)));
+                CustomPinCollection = new ObservableCollection<CustomPin>(_pinsManagerService.GetCurrentUserPins(SearchBarText));
             }
             else
             {
                 UpdateCollection();
             }
+        }
+
+        protected void UpdateCollection()
+        {
+            CustomPinCollection = new ObservableCollection<CustomPin>(_pinsManagerService.GetCurrentUserPins());
         }
 
         protected void SavePin(CustomPin pin)
@@ -72,21 +66,6 @@ namespace MapNotepad.ViewModels
         protected void DeletePin(CustomPin pin)
         {
             _pinsManagerService.DeletePin(pin);
-            UpdateCollection();
-        }
-
-        protected void DeletePin(Pin pin)
-        {
-            DeletePin(GetCustomPin(pin));
-        }
-
-        protected CustomPin GetCustomPin(Pin pin) //TODO rework base vm for custom pins and delete this
-        {
-            return _pinsManagerService.GetCurrentUserPins(pin.Label).FirstOrDefault();
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
             UpdateCollection();
         }
     }

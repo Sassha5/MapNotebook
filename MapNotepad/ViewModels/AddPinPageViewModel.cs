@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using MapNotepad.Extensions;
 using MapNotepad.Models;
@@ -10,7 +9,7 @@ using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.ViewModels
 {
-    public class AddPinPageViewModel : ViewModelCollectionBase
+    public class AddPinPageViewModel : ViewModelMapBase
     {
         private CustomPin _customPin;
 
@@ -47,11 +46,13 @@ namespace MapNotepad.ViewModels
         {
         }
 
-        private ICommand _SavePinCommand;
-        public ICommand SavePinCommand => _SavePinCommand ??= new Command(OnSavePinCommandAsync);
+        #region Commands
+        private ICommand _savePinCommand;
+        public ICommand SavePinCommand => _savePinCommand ??= new Command(OnSavePinCommandAsync);
 
-        private ICommand _MapClickedCommand;
-        public ICommand MapClickedCommand => _MapClickedCommand ??= new Command<MapClickedEventArgs>(OnMapClickedCommand);
+        private ICommand _mapClickedCommand;
+        public ICommand MapClickedCommand => _mapClickedCommand ??= new Command<MapClickedEventArgs>(OnMapClickedCommand);
+        #endregion
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -73,7 +74,8 @@ namespace MapNotepad.ViewModels
 
         private void OnMapClickedCommand(MapClickedEventArgs args)//wtf it works
         {
-            UpdateCollection();   //clear temporary pins
+            UpdateMap();   //clear temporary pins
+
             Latitude = args.Point.Latitude;
             Longitude = args.Point.Longitude;
 
@@ -84,7 +86,7 @@ namespace MapNotepad.ViewModels
             PinCollection = new ObservableCollection<Pin>(PinCollection); //trigger property changed to show new pin
         }
 
-        private async void OnSavePinCommandAsync(object obj)
+        private async void OnSavePinCommandAsync()
         {
             _customPin.Label = Label;
             _customPin.Description = Description;

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
+using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
 using Prism.Navigation;
 using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.ViewModels
 {
-    public class MapPageViewModel : ViewModelCollectionBase
+    public class MapPageViewModel : ViewModelMapBase
     {
         private Pin _selectedPin;
         public Pin SelectedPin
@@ -25,10 +26,10 @@ namespace MapNotepad.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            if (parameters.TryGetValue(nameof(Pin), out Pin pin))
+            if (parameters.TryGetValue(nameof(CustomPin), out CustomPin pin))
             {
                 SelectedPin = PinCollection.FirstOrDefault(x => x.Label == pin.Label);
-                CameraPosition = pin.Position;
+                CameraPosition = new Position(pin.Latitude, pin.Longitude);
             }
         }
     }

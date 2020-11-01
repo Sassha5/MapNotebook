@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MapNotepad.Services.AuthorizationService;
 using MapNotepad.Views;
 using Prism.Navigation;
@@ -43,11 +42,13 @@ namespace MapNotepad.ViewModels
             }
         }
 
-        private ICommand _SignUpCommand;
-        public ICommand SignUpCommand => _SignUpCommand ??= new Command(OnSignUpCommandAsync);
+        #region Commands
+        private ICommand _signUpCommand;
+        public ICommand SignUpCommand => _signUpCommand ??= new Command(OnSignUpCommandAsync);
 
-        private ICommand _AuthorizeCommand;
-        public ICommand AuthorizeCommand => _AuthorizeCommand ??= new Command(OnAuthorizeCommandAsync);
+        private ICommand _authorizeCommand;
+        public ICommand AuthorizeCommand => _authorizeCommand ??= new Command(OnAuthorizeCommandAsync);
+        #endregion
 
         private async void OnSignUpCommandAsync()
         {
@@ -63,7 +64,7 @@ namespace MapNotepad.ViewModels
             }
             else
             {
-                //await Application.Current.MainPage.DisplayAlert(Resources["Oops"], Resources["WrongCredentials"], Resources["Ok"]);
+                await Application.Current.MainPage.DisplayAlert(Resources["Oops"], Resources["WrongCredentials"], Resources["Ok"]);
                 Password = string.Empty;
             }
         }

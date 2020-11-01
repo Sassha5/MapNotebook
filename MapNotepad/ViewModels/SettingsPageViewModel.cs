@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MapNotepad.Services.SettingsManagerService;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -14,20 +13,19 @@ namespace MapNotepad.ViewModels
         private bool _darkThemeIsChecked;
         public bool DarkThemeIsChecked
         {
-            get { return _darkThemeIsChecked; }
+            get => _darkThemeIsChecked; 
             set
             {
-                _darkThemeIsChecked = value;
+                SetProperty(ref _darkThemeIsChecked, value);
                 if (value) { _settingsManagerService.Theme = (int)OSAppTheme.Dark; }
                 else { _settingsManagerService.Theme = (int)OSAppTheme.Light; }
-                RaisePropertyChanged($"{nameof(DarkThemeIsChecked)}");
             }
         }
 
         private string _selectedLanguage;
         public string SelectedLanguage
         {
-            get { return _selectedLanguage; }
+            get => _selectedLanguage;
             set
             {
                 if (!string.IsNullOrEmpty(value)) { _selectedLanguage = value; }

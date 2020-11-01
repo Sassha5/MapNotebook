@@ -18,11 +18,13 @@ namespace MapNotepad.ViewModels
             _authorizationService = authorizationService;
         }
 
-        private ICommand _LogoutCommand;
-        public ICommand LogoutCommand => _LogoutCommand ??= new Command(OnLogoutCommandAsync);
+        #region Commands
+        private ICommand _logoutCommand;
+        public ICommand LogoutCommand => _logoutCommand ??= new Command(OnLogoutCommandAsync);
 
-        private ICommand _SettingsCommand;
-        public ICommand SettingsCommand => _SettingsCommand ??= new Command(OnSettingsCommandAsync);
+        private ICommand _settingsCommand;
+        public ICommand SettingsCommand => _settingsCommand ??= new Command(OnSettingsCommandAsync);
+        #endregion
 
         private async void OnSettingsCommandAsync(object obj)
         {

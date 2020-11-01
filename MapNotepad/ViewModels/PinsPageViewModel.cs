@@ -1,11 +1,9 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Views;
 using Prism.Navigation;
 using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.ViewModels
 {
@@ -18,23 +16,25 @@ namespace MapNotepad.ViewModels
         {
         }
 
-        private ICommand _ToAddPinPageCommand;
-        public ICommand ToAddPinPageCommand => _ToAddPinPageCommand ??= new Command(OnToAddPinPageCommandAsync);
+        #region Commands
+        private ICommand _toAddPinPageCommand;
+        public ICommand ToAddPinPageCommand => _toAddPinPageCommand ??= new Command(OnToAddPinPageCommandAsync);
 
-        private ICommand _DeleteCommand;
-        public ICommand DeleteCommand => _DeleteCommand ??= new Command<Pin>(OnDeleteCommandAsync);
+        private ICommand _deleteCommand;
+        public ICommand DeleteCommand => _deleteCommand ??= new Command<CustomPin>(OnDeleteCommandAsync);
 
-        private ICommand _EditCommand;
-        public ICommand EditCommand => _EditCommand ??= new Command<Pin>(OnEditCommandAsync);
+        private ICommand _editCommand;
+        public ICommand EditCommand => _editCommand ??= new Command<CustomPin>(OnEditCommandAsync);
 
-        private ICommand _PinTappedCommand;
-        public ICommand PinTappedCommand => _PinTappedCommand ??= new Command<Pin>(OnPinTappedCommandAsync);
+        private ICommand _pinTappedCommand;
+        public ICommand PinTappedCommand => _pinTappedCommand ??= new Command<CustomPin>(OnPinTappedCommandAsync);
+        #endregion
 
-        private async void OnPinTappedCommandAsync(Pin pin)
+        private async void OnPinTappedCommandAsync(CustomPin pin)
         {
             NavigationParameters navParams = new NavigationParameters
             {
-                { nameof(Pin), pin }
+                { nameof(CustomPin), pin }
             };
             await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}?selectedTab={nameof(MapPage)}", navParams);
         }
@@ -44,7 +44,7 @@ namespace MapNotepad.ViewModels
             await NavigationService.NavigateAsync($"{nameof(AddPinPage)}");
         }
 
-        private async void OnDeleteCommandAsync(Pin pin)
+        private async void OnDeleteCommandAsync(CustomPin pin)
         {
             //bool result = await Confirm();
             //if (result)
@@ -52,11 +52,11 @@ namespace MapNotepad.ViewModels
             //}
         }
 
-        private async void OnEditCommandAsync(Pin pin)
+        private async void OnEditCommandAsync(CustomPin pin)
         {
             NavigationParameters navParams = new NavigationParameters
             {
-                { nameof(CustomPin), GetCustomPin(pin) }
+                { nameof(CustomPin), pin }
             };                                              //TODO fix map to not show old pin location
             await NavigationService.NavigateAsync(nameof(AddPinPage), navParams);
         }
