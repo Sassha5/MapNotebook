@@ -27,7 +27,9 @@
                                 MyLocationEnabled="True"
                                 Grid.Row="0"
                                 SelectedPin="{Binding SelectedPin, Mode=TwoWay}"
-                                PinsCollection="{Binding PinCollection}">
+                                HasZoomEnabled="True"
+                                PinsCollection="{Binding PinCollection}"
+                                MapCameraPosition="{Binding CameraPosition}">
             </controls:CustomMap>
         </StackLayout>
     </ContentPage.Content>

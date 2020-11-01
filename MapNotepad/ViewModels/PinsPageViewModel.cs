@@ -36,7 +36,7 @@ namespace MapNotepad.ViewModels
             {
                 { nameof(Pin), pin }
             };
-            await NavigationService.NavigateAsync($"{nameof(MainPage)}?selectedTab={nameof(MapPage)}", navParams);
+            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}?selectedTab={nameof(MapPage)}", navParams);
         }
 
         private async void OnToAddPinPageCommandAsync(object obj)
@@ -54,8 +54,10 @@ namespace MapNotepad.ViewModels
 
         private async void OnEditCommandAsync(Pin pin)
         {
-            NavigationParameters navParams = new NavigationParameters(); //TODO fix map to not show old pin location
-            navParams.Add(nameof(CustomPin), GetCustomPin(pin));
+            NavigationParameters navParams = new NavigationParameters
+            {
+                { nameof(CustomPin), GetCustomPin(pin) }
+            };                                              //TODO fix map to not show old pin location
             await NavigationService.NavigateAsync(nameof(AddPinPage), navParams);
         }
     }

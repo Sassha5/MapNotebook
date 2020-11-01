@@ -21,11 +21,28 @@ namespace MapNotepad.Controls
         public ObservableCollection<Pin> PinsCollection
         {
             get => (ObservableCollection<Pin>)GetValue(PinsCollectionProperty);
-            set { SetValue(PinsCollectionProperty, value); }
+            set => SetValue(PinsCollectionProperty, value);
+        }
+
+        public static readonly BindableProperty MapCameraPositionProperty =
+            BindableProperty.Create(
+                propertyName: nameof(MapCameraPosition),
+                returnType: typeof(Position),
+                declaringType: typeof(CustomMap),
+                defaultBindingMode: BindingMode.TwoWay,
+                propertyChanged: CameraPositionPropertyChanged);
+
+        
+        public Position MapCameraPosition
+        {
+            get => (Position)GetValue(MapCameraPositionProperty);
+            set => SetValue(PinsCollectionProperty, value);
         }
 
         public CustomMap()
         {
+            UiSettings.ZoomControlsEnabled = true;
+            UiSettings.ZoomGesturesEnabled = true;
             UiSettings.MyLocationButtonEnabled = true;
             PinsCollection = new ObservableCollection<Pin>();
             PinsCollection.CollectionChanged += Pins_CollectionChanged;
@@ -42,6 +59,19 @@ namespace MapNotepad.Controls
             foreach (var pin in newPins)
             {
                 map.Pins.Add(pin);
+            }
+        }
+
+        private static void UpdateCameraPosition(CustomMap map, Position cameraPosition)
+        {
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(cameraPosition, Distance.FromMiles(5)));
+        }
+
+        private static void CameraPositionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (newValue != oldValue && bindable as CustomMap != null && newValue != null)
+            {
+                UpdateCameraPosition(bindable as CustomMap, (Position)newValue);
             }
         }
 

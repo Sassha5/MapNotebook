@@ -28,6 +28,7 @@ namespace MapNotepad.ViewModels
             if (parameters.TryGetValue(nameof(Pin), out Pin pin))
             {
                 SelectedPin = PinCollection.FirstOrDefault(x => x.Label == pin.Label);
+                CameraPosition = pin.Position;
             }
         }
     }

@@ -22,6 +22,12 @@ namespace MapNotepad.ViewModels
             get => _searchBarText;
             set => SetProperty(ref _searchBarText, value);
         }
+        private Position _cameraPosition;
+        public Position CameraPosition
+        {
+            get => _cameraPosition;
+            set => SetProperty(ref _cameraPosition, value);
+        }
         private ObservableCollection<Pin> _pinCollection;
         public ObservableCollection<Pin> PinCollection
         {
