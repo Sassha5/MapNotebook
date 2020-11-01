@@ -13,7 +13,8 @@
                    Text="{Binding SearchBarText}"
                    SearchCommand="{Binding SearchCommand}"
                    Placeholder="{Binding Resources[Search]}"
-                   x:Name="searchBar">
+                   x:Name="searchBar"
+                   Style="{StaticResource SearchBarStyle}">
             <SearchBar.Behaviors>
                 <prism:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}"/>
             </SearchBar.Behaviors>
@@ -27,7 +28,8 @@
                       ItemsSource="{Binding PinCollection}" 
                       RowHeight="100" 
                       Margin="10"
-                      HasUnevenRows="False">
+                      HasUnevenRows="False"
+                      Style="{StaticResource ListViewStyle}">
                 <ListView.Behaviors>
                     <prism:EventToCommandBehavior                         
                             EventName="ItemTapped"
@@ -50,12 +52,16 @@
                             <StackLayout VerticalOptions="Center"
                                      Margin="10,0,0,0">
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Label}" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Label}"
+                                           Style="{StaticResource SmallLabelStyle}"
+                                           VerticalOptions="Center"/>
                                     <CheckBox IsChecked="{Binding IsFavorite, Mode=TwoWay}"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Position.Latitude}"/>
-                                    <Label Text="{Binding Position.Longitude}" />
+                                    <Label Text="{Binding Position.Latitude}"
+                                           Style="{StaticResource SmallLabelStyle}"/>
+                                    <Label Text="{Binding Position.Longitude}"
+                                           Style="{StaticResource SmallLabelStyle}"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

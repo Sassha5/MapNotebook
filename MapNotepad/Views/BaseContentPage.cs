@@ -8,6 +8,7 @@ namespace MapNotepad.Views
     {
         public BaseContentPage()
         {
+            Style = (Style)Application.Current.Resources["ContentPageStyle"];
         }
     }
 }

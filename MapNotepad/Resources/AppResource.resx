@@ -159,4 +159,7 @@
     <data name="SavePin" xml:space="preserve">
     <value>Save Pin</value>
   </data>
+    <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
 </root>

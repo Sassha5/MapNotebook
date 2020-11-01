@@ -17,16 +17,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackLayout Orientation="Horizontal" Grid.Row="0">
-            <Label 
-                Text="{Binding Resources[DarkTheme]}"
-                VerticalOptions="Center"/>
+            <Label Style="{StaticResource MediumLabelStyle}"
+                   Text="{Binding Resources[DarkTheme]}"
+                   VerticalOptions="Center"/>
             <CheckBox IsChecked="{Binding Path=DarkThemeIsChecked, Mode=TwoWay}"/>
         </StackLayout>
         <StackLayout Grid.Row="1">
-            <Label Text="{Binding Resources[Language]}"/>
-            <Picker
-                ItemsSource="{Binding Path=Languages, Mode=TwoWay}"
-                SelectedItem="{Binding Path=SelectedLanguage, Mode=TwoWay}"/>
+            <Label Style="{StaticResource MediumLabelStyle}"
+                   Text="{Binding Resources[Language]}"/>
+            <Picker Style="{StaticResource PickerStyle}"
+                    ItemsSource="{Binding Path=Languages, Mode=TwoWay}"
+                    SelectedItem="{Binding Path=SelectedLanguage, Mode=TwoWay}"/>
         </StackLayout>
     </Grid>
 </views:BaseContentPage>

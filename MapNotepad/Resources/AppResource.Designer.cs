@@ -334,5 +334,11 @@ namespace MapNotepad.Resources {
                 return ResourceManager.GetString("SavePin", resourceCulture);
             }
         }
+        
+        internal static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
     }
 }

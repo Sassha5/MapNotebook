@@ -14,7 +14,8 @@
                        Placeholder="{Binding Resources[Search]}"
                        Text="{Binding SearchBarText}"
                        SearchCommand="{Binding SearchCommand}"
-                       x:Name="searchBar">
+                       x:Name="searchBar"
+                       Style="{StaticResource SearchBarStyle}">
                 <SearchBar.Behaviors>
     		    		<prism:EventToCommandBehavior EventName="TextChanged"
                                                       Command="{Binding SearchCommand}"/>
