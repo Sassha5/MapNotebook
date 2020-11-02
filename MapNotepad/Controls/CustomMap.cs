@@ -10,6 +10,14 @@ namespace MapNotepad.Controls
 {
     public class CustomMap : ClusteredMap
     {
+        public CustomMap()
+        {
+            UiSettings.MyLocationButtonEnabled = true;
+            PinsCollection = new ObservableCollection<Pin>();
+            PinsCollection.CollectionChanged += Pins_CollectionChanged;
+        }
+
+        #region Properties
         public static readonly BindableProperty PinsCollectionProperty =
             BindableProperty.Create(
                 propertyName: nameof(PinsCollection),
@@ -32,22 +40,14 @@ namespace MapNotepad.Controls
                 defaultBindingMode: BindingMode.TwoWay,
                 propertyChanged: CameraPositionPropertyChanged);
 
-        
         public Position MapCameraPosition
         {
             get => (Position)GetValue(MapCameraPositionProperty);
             set => SetValue(PinsCollectionProperty, value);
         }
+        #endregion
 
-        public CustomMap()
-        {
-            UiSettings.ZoomControlsEnabled = true;
-            UiSettings.ZoomGesturesEnabled = true;
-            UiSettings.MyLocationButtonEnabled = true;
-            PinsCollection = new ObservableCollection<Pin>();
-            PinsCollection.CollectionChanged += Pins_CollectionChanged;
-        }
-
+        #region Helpers
         private void Pins_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             UpdatePins(this, sender as IEnumerable<Pin>);
@@ -82,6 +82,6 @@ namespace MapNotepad.Controls
                 UpdatePins(bindable as CustomMap, newValue as ObservableCollection<Pin>);
             }
         }
-
+        #endregion
     }
 }

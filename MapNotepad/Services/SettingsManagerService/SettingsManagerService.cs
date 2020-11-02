@@ -13,11 +13,14 @@ namespace MapNotepad.Services.SettingsManagerService
         {
             _appSettings = appSettings;
         }
+
+        #region Properties
         public int AuthorizedUserID
         {
             get => _appSettings.GetValueOrDefault(nameof(AuthorizedUserID), Constants.NoAuthorizedUser);
             set => _appSettings.AddOrUpdateValue(nameof(AuthorizedUserID), value);
         }
+
         public int Theme
         {
             get => _appSettings.GetValueOrDefault(nameof(Theme), (int)OSAppTheme.Light);
@@ -27,10 +30,7 @@ namespace MapNotepad.Services.SettingsManagerService
                 Application.Current.UserAppTheme = (OSAppTheme)value;
             }
         }
-        public bool UserLoggedIn
-        {
-            get => AuthorizedUserID != Constants.NoAuthorizedUser;
-        }
+
         public string Language
         {
             get => _appSettings.GetValueOrDefault(nameof(Language), Constants.DefaultLanguage);
@@ -39,6 +39,14 @@ namespace MapNotepad.Services.SettingsManagerService
                 _appSettings.AddOrUpdateValue(nameof(Language), value);
                 MessagingCenter.Send<object, CultureChangedMessage>(this, string.Empty, new CultureChangedMessage(value));
             }
+        }
+        #endregion
+
+        public void ClearData()
+        {
+            AuthorizedUserID = default;
+            Theme = default;
+            Language = default;
         }
     }
 }

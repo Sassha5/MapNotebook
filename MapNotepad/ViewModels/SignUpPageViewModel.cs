@@ -14,12 +14,6 @@ namespace MapNotepad.ViewModels
         private readonly IValidationService _validationService;
         //private readonly IUserDialogs _userDialogs;
 
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
-
-
         public SignUpPageViewModel(INavigationService navigationService,
                                     IRegistrationService registrationService,
                                     IValidationService validationService)
@@ -29,6 +23,11 @@ namespace MapNotepad.ViewModels
             _validationService = validationService;
             _registrationService = registrationService;
         }
+
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
 
         private ICommand _RegisterCommand;
         public ICommand RegisterCommand => _RegisterCommand ??= new Command(OnRegisterCommandAsync);

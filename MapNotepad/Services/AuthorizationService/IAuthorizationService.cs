@@ -6,5 +6,6 @@ namespace MapNotepad.Services.AuthorizationService
         bool TryAuthorize(string email, string password);
         void Authorize(string email, string password);
         void Logout();
+        bool IsAuthorized();
     }
 }

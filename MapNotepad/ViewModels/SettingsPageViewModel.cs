@@ -9,7 +9,15 @@ namespace MapNotepad.ViewModels
     {
         private readonly ISettingsManagerService _settingsManagerService;
 
+        public SettingsPageViewModel(INavigationService navigationService,
+                                     ISettingsManagerService settingsManagerService)
+                                     : base(navigationService)
+        {
+            _settingsManagerService = settingsManagerService;
+        }
+
         #region Properties
+
         private bool _darkThemeIsChecked;
         public bool DarkThemeIsChecked
         {
@@ -33,14 +41,8 @@ namespace MapNotepad.ViewModels
             }
         }
         public List<string> Languages { get; set; }
-        #endregion
 
-        public SettingsPageViewModel(INavigationService navigationService,
-                                     ISettingsManagerService settingsManagerService)
-                                     : base(navigationService)
-        {
-            _settingsManagerService = settingsManagerService;
-        }
+        #endregion
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {

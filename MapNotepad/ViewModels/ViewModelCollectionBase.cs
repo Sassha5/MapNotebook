@@ -11,27 +11,33 @@ namespace MapNotepad.ViewModels
     {
         private readonly IPinsManagerService _pinsManagerService;
 
-        #region Properties
-        private string _searchBarText;
-        public string SearchBarText
-        {
-            get => _searchBarText;
-            set => SetProperty(ref _searchBarText, value);
-        }
-        private ObservableCollection<CustomPin> _customPinCollection;
-        public ObservableCollection<CustomPin> CustomPinCollection
-        {
-            get => _customPinCollection;
-            set => SetProperty(ref _customPinCollection, value);
-        }
-        #endregion
-
         public ViewModelCollectionBase(INavigationService navigationService,
                                        IPinsManagerService pinsManagerService)
                                        : base(navigationService)
         {
             _pinsManagerService = pinsManagerService;
         }
+
+
+        #region Properties
+
+        private string _searchBarText;
+        public string SearchBarText
+        {
+            get => _searchBarText;
+            set => SetProperty(ref _searchBarText, value);
+        }
+
+        private ObservableCollection<CustomPin> _customPinCollection;
+        public ObservableCollection<CustomPin> CustomPinCollection
+        {
+            get => _customPinCollection;
+            set => SetProperty(ref _customPinCollection, value);
+        }
+
+        #endregion
+
+        
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -41,7 +47,9 @@ namespace MapNotepad.ViewModels
         private ICommand _SearchCommand;
         public ICommand SearchCommand => _SearchCommand ??= new Command(OnSearchCommand);
 
-        protected void OnSearchCommand()
+        #region Protected implementation
+
+        protected virtual void OnSearchCommand()
         {
             if (!string.IsNullOrEmpty(SearchBarText))
             {
@@ -68,5 +76,7 @@ namespace MapNotepad.ViewModels
             _pinsManagerService.DeletePin(pin);
             UpdateCollection();
         }
+
+        #endregion
     }
 }

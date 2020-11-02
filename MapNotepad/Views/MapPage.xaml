@@ -8,29 +8,40 @@
                        x:Class="MapNotepad.Views.MapPage"
                        x:Name="mapPage"
                        Title="{Binding Resources[Map]}">
-    <ContentPage.Content>
-        <StackLayout>
-            <SearchBar HorizontalOptions="CenterAndExpand"
+
+    <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <controls:CustomMap x:Name="map"
+                                VerticalOptions="FillAndExpand"
+                                MyLocationEnabled="True"
+                                SelectedPin="{Binding SelectedPin, Mode=TwoWay}"
+                                HasZoomEnabled="True"
+                                PinsCollection="{Binding PinCollection}"
+                                MapCameraPosition="{Binding CameraPosition}"
+                                PinClicked="PinClicked"
+                                MapClicked="MapClicked">
+        </controls:CustomMap>
+        <Frame x:Name="pinInfo"
+                   VerticalOptions="End">
+            <StackLayout>
+                <Label Text="{Binding Resources[Description]}"/>
+                <Label Text="{Binding Description, Mode=TwoWay}"/>
+            </StackLayout>
+        </Frame>
+        <SearchBar VerticalOptions="Start"
+                       Grid.Row="0"
                        Placeholder="{Binding Resources[Search]}"
                        Text="{Binding SearchBarText}"
                        SearchCommand="{Binding SearchCommand}"
                        x:Name="searchBar"
                        Style="{StaticResource SearchBarStyle}">
-                <SearchBar.Behaviors>
-    		    		<prism:EventToCommandBehavior EventName="TextChanged"
+            <SearchBar.Behaviors>
+                <prism:EventToCommandBehavior EventName="TextChanged"
                                                       Command="{Binding SearchCommand}"/>
-				</SearchBar.Behaviors>
-            </SearchBar>
-            <controls:CustomMap x:Name="map"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand"
-                                MyLocationEnabled="True"
-                                Grid.Row="0"
-                                SelectedPin="{Binding SelectedPin, Mode=TwoWay}"
-                                HasZoomEnabled="True"
-                                PinsCollection="{Binding PinCollection}"
-                                MapCameraPosition="{Binding CameraPosition}">
-            </controls:CustomMap>
-        </StackLayout>
-    </ContentPage.Content>
+            </SearchBar.Behaviors>
+        </SearchBar>
+    </Grid>
 </views:BaseContentPage>

@@ -26,17 +26,25 @@
         </Grid.RowDefinitions>
         <Entry Grid.Row="0"
                Placeholder="{Binding Resources[Label]}"
-               Text="{Binding CustomPin.Label}"/>
+               Text="{Binding Label}"
+               Style="{StaticResource EntryStyle}"/>
         <Entry Grid.Row="1"
                Placeholder="{Binding Resources[Description]}"
-               Text="{Binding CustomPin.Description}"/>
+               Text="{Binding Description}"
+               Style="{StaticResource EntryStyle}"/>
         <StackLayout Orientation="Horizontal" Grid.Row="2">
-            <Label Text="{Binding Resources[Latitude]}" VerticalOptions="Center"/>
+            <Label Text="{Binding Resources[Latitude]}"
+                   VerticalOptions="Center"
+                   Style="{StaticResource SmallLabelStyle}"/>
             <Entry HorizontalOptions="FillAndExpand"
-                    Text="{Binding CustomPin.Latitude}"/>
-            <Label Text="{Binding Resources[Longitude]}" VerticalOptions="Center"/>
+                   Text="{Binding Latitude}"
+                   Style="{StaticResource EntryStyle}"/>
+            <Label Text="{Binding Resources[Longitude]}"
+                   VerticalOptions="Center"
+                   Style="{StaticResource SmallLabelStyle}"/>
             <Entry HorizontalOptions="FillAndExpand"
-                    Text="{Binding CustomPin.Longitude}"/>
+                   Text="{Binding Longitude}"
+                   Style="{StaticResource EntryStyle}"/>
         </StackLayout>
         <controls:CustomMap x:Name="map"
                   VerticalOptions="FillAndExpand"

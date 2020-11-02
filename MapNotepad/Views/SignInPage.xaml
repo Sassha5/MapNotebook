@@ -32,7 +32,8 @@
         <Button x:Name="signInButton"
                 Text="{Binding Resources[SignIn]}" 
                 Grid.Row="6"
-                Command="{Binding AuthorizeCommand}"/>
+                Command="{Binding AuthorizeCommand}"
+                Style="{StaticResource ButtonStyle}"/>
         <Label HorizontalOptions="Center"
                 VerticalOptions="CenterAndExpand" Grid.Row="7"
                Style="{StaticResource LargeLabelStyle}">

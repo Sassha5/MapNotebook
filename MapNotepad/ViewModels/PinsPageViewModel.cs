@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Views;
@@ -17,6 +18,7 @@ namespace MapNotepad.ViewModels
         }
 
         #region Commands
+
         private ICommand _toAddPinPageCommand;
         public ICommand ToAddPinPageCommand => _toAddPinPageCommand ??= new Command(OnToAddPinPageCommandAsync);
 
@@ -28,7 +30,27 @@ namespace MapNotepad.ViewModels
 
         private ICommand _pinTappedCommand;
         public ICommand PinTappedCommand => _pinTappedCommand ??= new Command<CustomPin>(OnPinTappedCommandAsync);
+
+        private ICommand _favouriteChangedCommand;
+        public ICommand FavouriteChangedCommand => _favouriteChangedCommand ??= new Command<CustomPin>(OnFavouriteChangedCommand);
+
         #endregion
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+        }
+
+        #region Command execution methods
+
+        private void OnFavouriteChangedCommand(CustomPin pin)
+        {
+            if (pin != null)
+            {
+                pin.IsFavorite = !pin.IsFavorite;
+                //SavePin(pin); //working strange because this command is triggered on navigation
+            }
+        }
 
         private async void OnPinTappedCommandAsync(CustomPin pin)
         {
@@ -46,7 +68,7 @@ namespace MapNotepad.ViewModels
 
         private async void OnDeleteCommandAsync(CustomPin pin)
         {
-            //bool result = await Confirm();
+            //bool result = await Confirm(); //TODO
             //if (result)
             DeletePin(pin);
             //}
@@ -60,5 +82,7 @@ namespace MapNotepad.ViewModels
             };                                              //TODO fix map to not show old pin location
             await NavigationService.NavigateAsync(nameof(AddPinPage), navParams);
         }
+
+        #endregion
     }
 }

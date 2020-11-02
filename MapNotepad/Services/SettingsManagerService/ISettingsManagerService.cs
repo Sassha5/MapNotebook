@@ -6,6 +6,6 @@ namespace MapNotepad.Services.SettingsManagerService
         int AuthorizedUserID { get; set; }
         int Theme { get; set; }
         string Language { get; set; }
-        bool UserLoggedIn { get; }
+        void ClearData();
     }
 }

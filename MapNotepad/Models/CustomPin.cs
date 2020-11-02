@@ -4,8 +4,9 @@ using SQLite;
 namespace MapNotepad.Models
 {
     [Table("Pins")]
-    public class CustomPin : BaseModel
+    public class CustomPin : IModelBase
     {
+        public int Id { get; set; }
         public string Label { get; set; }
         public string Adress { get; set; }
         public int UserId { get; set; }

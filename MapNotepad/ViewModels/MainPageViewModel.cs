@@ -19,12 +19,16 @@ namespace MapNotepad.ViewModels
         }
 
         #region Commands
+
         private ICommand _logoutCommand;
         public ICommand LogoutCommand => _logoutCommand ??= new Command(OnLogoutCommandAsync);
 
         private ICommand _settingsCommand;
         public ICommand SettingsCommand => _settingsCommand ??= new Command(OnSettingsCommandAsync);
+
         #endregion
+
+        #region Command execution methods
 
         private async void OnSettingsCommandAsync(object obj)
         {
@@ -36,5 +40,7 @@ namespace MapNotepad.ViewModels
             _authorizationService.Logout();
             await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
         }
+
+        #endregion
     }
 }

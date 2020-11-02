@@ -13,7 +13,14 @@ namespace MapNotepad.ViewModels
     {
         private CustomPin _customPin;
 
+        public AddPinPageViewModel(INavigationService navigationService,
+                                IPinsManagerService pinsManagerService)
+                                : base(navigationService, pinsManagerService)
+        {
+        }
+
         #region Properties
+
         private string _label;
         public string Label
         {
@@ -38,21 +45,20 @@ namespace MapNotepad.ViewModels
             get => _longitude;
             set => SetProperty(ref _longitude, value);
         }
+
         #endregion
 
-        public AddPinPageViewModel(INavigationService navigationService,
-                                IPinsManagerService pinsManagerService)
-                                : base(navigationService, pinsManagerService)
-        {
-        }
-
         #region Commands
+
         private ICommand _savePinCommand;
         public ICommand SavePinCommand => _savePinCommand ??= new Command(OnSavePinCommandAsync);
 
         private ICommand _mapClickedCommand;
         public ICommand MapClickedCommand => _mapClickedCommand ??= new Command<MapClickedEventArgs>(OnMapClickedCommand);
+
         #endregion
+
+        #region INavigatedAware override
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -71,6 +77,10 @@ namespace MapNotepad.ViewModels
                 Longitude = customPin.Longitude;
             }
         }
+
+        #endregion
+
+        #region Command execution methods
 
         private void OnMapClickedCommand(MapClickedEventArgs args)//wtf it works
         {
@@ -96,5 +106,7 @@ namespace MapNotepad.ViewModels
             SavePin(_customPin);
             await NavigationService.GoBackAsync();
         }
+
+        #endregion
     }
 }

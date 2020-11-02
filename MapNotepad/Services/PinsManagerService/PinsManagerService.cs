@@ -20,6 +20,7 @@ namespace MapNotepad.Services.PinsManagerService
             _repositoryService.CreateTable<CustomPin>();
         }
 
+        #region Methods
         public int SavePin(CustomPin pin)
         {
             pin.UserId = _settingsManagerService.AuthorizedUserID;
@@ -51,5 +52,6 @@ namespace MapNotepad.Services.PinsManagerService
             return GetCurrentUserPins().Where(x => x.Label.ToLower().Contains(searchValue.ToLower())
                                           || x.Description.ToLower().Contains(searchValue.ToLower()));
         }
+        #endregion
     }
 }

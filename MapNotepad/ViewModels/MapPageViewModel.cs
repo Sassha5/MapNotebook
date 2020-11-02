@@ -9,19 +9,34 @@ namespace MapNotepad.ViewModels
 {
     public class MapPageViewModel : ViewModelMapBase
     {
+        public MapPageViewModel(INavigationService navigationService,
+                               IPinsManagerService pinsManagerService)
+                               : base(navigationService, pinsManagerService)
+        {
+        }
+
+        #region Properties
+
         private Pin _selectedPin;
         public Pin SelectedPin
         {
             get => _selectedPin;
-            set => SetProperty(ref _selectedPin, value);
+            set
+            {
+                SetProperty(ref _selectedPin, value);
+                //Description = _selectedPin.Tag.ToString(); //exception when navigating from pinpage
+            }
         }
-
-
-        public MapPageViewModel(INavigationService navigationService,
-                                IPinsManagerService pinsManagerService)
-                                : base(navigationService, pinsManagerService)
+        private string _description;
+        public string Description
         {
+            get => _description;
+            set => SetProperty(ref _description, value);
         }
+
+        #endregion
+
+        #region INavigatedAware override
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -32,5 +47,7 @@ namespace MapNotepad.ViewModels
                 CameraPosition = new Position(pin.Latitude, pin.Longitude);
             }
         }
+
+        #endregion
     }
 }

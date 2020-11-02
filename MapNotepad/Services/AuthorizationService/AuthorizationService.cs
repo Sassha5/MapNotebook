@@ -21,9 +21,14 @@ namespace MapNotepad.Services.AuthorizationService
             _settingsManagerService.AuthorizedUserID = _usersManagerService.GetUserId(email, password);
         }
 
+        public bool IsAuthorized()
+        {
+            return _settingsManagerService.AuthorizedUserID != Constants.NoAuthorizedUser;
+        }
+
         public void Logout()
         {
-            _settingsManagerService.AuthorizedUserID = Constants.NoAuthorizedUser;
+            _settingsManagerService.ClearData();
         }
 
         public bool TryAuthorize(string email, string password)

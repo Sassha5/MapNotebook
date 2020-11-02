@@ -7,7 +7,7 @@
 
 
     <Application.Resources>
-
+        
         <Color x:Key="TransparentColor">Transparent</Color>
 
         <!-- Light colors -->

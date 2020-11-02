@@ -18,9 +18,9 @@ namespace MapNotepad
 {
     public partial class App : PrismApplication
     {
-        private ISettingsManagerService _settingsManager;
-        private ISettingsManagerService SettingsManager =>
-            _settingsManager ??= Container.Resolve<ISettingsManagerService>();
+        private IAuthorizationService _authorizationService;
+        private IAuthorizationService AuthorizationService =>
+            _authorizationService ??= Container.Resolve<IAuthorizationService>();
 
         public App(IPlatformInitializer initializer = null) : base(initializer)
         {
@@ -32,11 +32,11 @@ namespace MapNotepad
             Device.SetFlags(new string[] { "AppTheme_Experimental" });
 
             InitializeComponent();
-
-            Application.Current.UserAppTheme = (OSAppTheme)SettingsManager.Theme;
+            //TODO how to set theme without SettingsManager?
+            //Application.Current.UserAppTheme = (OSAppTheme)SettingsManager.Theme;
 
             string path = nameof(SignInPage);
-            if (SettingsManager.UserLoggedIn)
+            if (AuthorizationService.IsAuthorized())
             {
                 path = nameof(Views.MainPage);
             }

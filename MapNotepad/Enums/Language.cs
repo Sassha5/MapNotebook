@@ -3,7 +3,6 @@ namespace MapNotepad.Enums
 {
     enum Language
     {
-        EN,
-        RU
+        EN
     }
 }

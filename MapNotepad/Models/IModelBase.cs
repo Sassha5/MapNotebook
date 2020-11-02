@@ -1,9 +1,8 @@
-﻿using System;
-using SQLite;
+﻿using SQLite;
 
 namespace MapNotepad.Models
 {
-    public abstract class BaseModel
+    public interface IModelBase
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
         public int Id { get; set; }

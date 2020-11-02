@@ -10,7 +10,16 @@ namespace MapNotepad.ViewModels
     {
         private readonly IAuthorizationService _authorizationService;
 
+        public SignInPageViewModel(INavigationService navigationService,
+                               IAuthorizationService authorizationService)
+                                  : base(navigationService)
+        {
+            _authorizationService = authorizationService;
+
+        }
+
         #region Properties
+
         private string _email;
         public string Email
         {
@@ -24,15 +33,10 @@ namespace MapNotepad.ViewModels
             get => _password;
             set => SetProperty(ref _password, value);
         }
+
         #endregion
 
-        public SignInPageViewModel(INavigationService navigationService,
-                               IAuthorizationService authorizationService)
-                                  : base(navigationService)
-        {
-            _authorizationService = authorizationService;
-
-        }
+        #region INavigatedAware override
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -42,13 +46,19 @@ namespace MapNotepad.ViewModels
             }
         }
 
+        #endregion
+
         #region Commands
+
         private ICommand _signUpCommand;
         public ICommand SignUpCommand => _signUpCommand ??= new Command(OnSignUpCommandAsync);
 
         private ICommand _authorizeCommand;
         public ICommand AuthorizeCommand => _authorizeCommand ??= new Command(OnAuthorizeCommandAsync);
+
         #endregion
+
+        #region Command execution methods
 
         private async void OnSignUpCommandAsync()
         {
@@ -68,5 +78,7 @@ namespace MapNotepad.ViewModels
                 Password = string.Empty;
             }
         }
+
+        #endregion
     }
 }

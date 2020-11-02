@@ -57,7 +57,14 @@
                                     <Label Text="{Binding Label}"
                                            Style="{StaticResource SmallLabelStyle}"
                                            VerticalOptions="Center"/>
-                                    <CheckBox IsChecked="{Binding IsFavorite, Mode=TwoWay}"/>
+                                    <CheckBox IsChecked="{Binding IsFavorite, Mode=TwoWay}">
+                                        <CheckBox.Behaviors>
+                                            <prism:EventToCommandBehavior EventName="CheckedChanged"
+                                                                          Command="{Binding Path=BindingContext.FavouriteChangedCommand, 
+                                                                                    Source={x:Reference pinsPage}}" 
+                                                                          CommandParameter="{Binding .}"/>
+                                        </CheckBox.Behaviors>
+                                    </CheckBox>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Latitude}"

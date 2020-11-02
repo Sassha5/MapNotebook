@@ -19,24 +19,29 @@
         <Entry x:Name="emailInput"
                Grid.Row="0"
                Placeholder="{Binding Resources[Email]}"
-               Text="{Binding Email}"/>
+               Text="{Binding Email}"
+               Style="{StaticResource EntryStyle}"/>
         <Entry x:Name="nameInput"
                Grid.Row="1"
                Placeholder="{Binding Resources[Name]}"
-               Text="{Binding Name}"/>
+               Text="{Binding Name}"
+               Style="{StaticResource EntryStyle}"/>
         <Entry x:Name="passwordFirstInput"
                Placeholder="{Binding Resources[Password]}"
                IsPassword="True" 
                Grid.Row="2"
-               Text="{Binding Password}"/>
+               Text="{Binding Password}"
+               Style="{StaticResource EntryStyle}"/>
         <Entry x:Name="passwordSecondInput"
                Placeholder="{Binding Resources[ConfirmPassword]}"
                IsPassword="True" 
                Grid.Row="3"
-               Text="{Binding ConfirmPassword}"/>
+               Text="{Binding ConfirmPassword}"
+               Style="{StaticResource EntryStyle}"/>
         <Button x:Name="signUpButton" 
                 Text="{Binding Resources[SignUp]}" 
                 Grid.Row="7"
-                Command="{Binding RegisterCommand}"/>
+                Command="{Binding RegisterCommand}"
+                Style="{StaticResource ButtonStyle}"/>
     </Grid>
 </views:BaseContentPage>

@@ -10,7 +10,15 @@ namespace MapNotepad.ViewModels
 {
     public class ViewModelMapBase : ViewModelCollectionBase
     {
+        public ViewModelMapBase(INavigationService navigationService,
+                                IPinsManagerService pinsManagerService)
+                                : base(navigationService,
+                                       pinsManagerService)
+        {
+        }
+
         #region Properties
+
         private ObservableCollection<Pin> _pinCollection;
         public ObservableCollection<Pin> PinCollection
         {
@@ -23,13 +31,15 @@ namespace MapNotepad.ViewModels
             get => _cameraPosition;
             set => SetProperty(ref _cameraPosition, value);
         }
+
         #endregion
 
-        public ViewModelMapBase(INavigationService navigationService,
-                                IPinsManagerService pinsManagerService)
-                                : base(navigationService,
-                                       pinsManagerService)
+        #region Overrides
+
+        protected override void OnSearchCommand()
         {
+            base.OnSearchCommand();
+            UpdateMap();
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -37,6 +47,8 @@ namespace MapNotepad.ViewModels
             base.OnNavigatedTo(parameters); //TODO favorite not working because checkbox changes locally and sets back after updating collection from repo
             UpdateMap();
         }
+
+        #endregion
 
         protected void UpdateMap()
         {

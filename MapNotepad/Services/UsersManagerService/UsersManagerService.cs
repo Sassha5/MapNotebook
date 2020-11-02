@@ -15,6 +15,7 @@ namespace MapNotepad.Services.UsersManagerService
             _repositoryService.CreateTable<User>();
         }
 
+        #region Methods
         public int AddUser(User user)
         {
             return _repositoryService.InsertItem(user);
@@ -40,5 +41,6 @@ namespace MapNotepad.Services.UsersManagerService
             var user = _repositoryService.GetItems<User>().Where(x => x.Email == email);
             return user != null;
         }
+        #endregion
     }
 }

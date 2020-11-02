@@ -9,11 +9,20 @@ namespace MapNotepad.ViewModels
 {
     public class ViewModelBase : BindableBase, IInitialize, INavigatedAware, IDestructible
     {
+        public ViewModelBase(INavigationService navigationService)
+        {
+            NavigationService = navigationService;
+            Resources = new LocalizedResources(typeof(AppResource), "en"); //TODO take language from settings, not hardcoded "en"
+        }
+
+        #region Properties
+
         public LocalizedResources Resources
         {
             get;
             private set;
         }
+
         protected INavigationService NavigationService { get; private set; }
 
         private string _title;
@@ -23,11 +32,9 @@ namespace MapNotepad.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public ViewModelBase(INavigationService navigationService)
-        {
-            NavigationService = navigationService;
-            Resources = new LocalizedResources(typeof(AppResource), "en"); //TODO take language from settings, not hardcoded "en"
-        }
+        #endregion
+
+        #region Interfaces implementation
 
         public virtual void Initialize(INavigationParameters parameters) { }
 
@@ -41,6 +48,8 @@ namespace MapNotepad.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+
+        #endregion
 
         public new event PropertyChangedEventHandler PropertyChanged;
     }
