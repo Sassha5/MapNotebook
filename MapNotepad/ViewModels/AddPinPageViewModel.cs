@@ -27,18 +27,21 @@ namespace MapNotepad.ViewModels
             get => _label;
             set => SetProperty(ref _label, value);
         }
+
         private string _description;
         public string Description
         {
             get => _description;
             set => SetProperty(ref _description, value);
         }
+
         private double _latitude;
         public double Latitude
         {
             get => _latitude;
             set => SetProperty(ref _latitude, value);
         }
+
         private double _longitude;
         public double Longitude
         {
@@ -54,7 +57,7 @@ namespace MapNotepad.ViewModels
         public ICommand SavePinCommand => _savePinCommand ??= new Command(OnSavePinCommandAsync);
 
         private ICommand _mapClickedCommand;
-        public ICommand MapClickedCommand => _mapClickedCommand ??= new Command<MapClickedEventArgs>(OnMapClickedCommand);
+        public ICommand MapClickedCommand => _mapClickedCommand ??= new Command<Position>(OnMapClickedCommand);
 
         #endregion
 
@@ -82,15 +85,15 @@ namespace MapNotepad.ViewModels
 
         #region Command execution methods
 
-        private void OnMapClickedCommand(MapClickedEventArgs args)//wtf it works
+        private void OnMapClickedCommand(Position args)//wtf it works
         {
             UpdateMap();   //clear temporary pins
 
-            Latitude = args.Point.Latitude;
-            Longitude = args.Point.Longitude;
+            Latitude = args.Latitude;
+            Longitude = args.Longitude;
 
-            _customPin.Latitude = Latitude;
             _customPin.Longitude = Longitude;
+            _customPin.Latitude = Latitude;
                 
             PinCollection.Add(ModelsExtension.ToPin(_customPin)); //add pin only in collection to show, not in repo
             PinCollection = new ObservableCollection<Pin>(PinCollection); //trigger property changed to show new pin

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.Views
@@ -19,7 +15,7 @@ namespace MapNotepad.Views
         {
             if (pinInfo.TranslationY <= 0)
             {
-                pinInfo.TranslateTo(0, pinInfo.TranslationY + 300, 1000);
+                pinInfo.TranslateTo(0, pinInfo.TranslationY + 300, 500);
             }
         }
 
@@ -27,7 +23,7 @@ namespace MapNotepad.Views
         {
             if (pinInfo.TranslationY > 0)
             {
-                pinInfo.TranslateTo(0, pinInfo.TranslationY - 300, 1000);
+                pinInfo.TranslateTo(0, pinInfo.TranslationY - 300, 500);
             }
         }
     }

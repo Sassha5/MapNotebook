@@ -27,11 +27,42 @@
         <Frame x:Name="pinInfo"
                    VerticalOptions="End">
             <StackLayout>
-                <Label Text="{Binding Resources[Description]}"/>
-                <Label Text="{Binding Description, Mode=TwoWay}"/>
+                <Label Style="{StaticResource MediumLabelStyle}"
+                                       VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Label: "/>
+                            <Span Text="{Binding SelectedPin.Label}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Style="{StaticResource SmallLabelStyle}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Latitude: "/>
+                            <Span Text="{Binding SelectedPin.Position.Latitude}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Style="{StaticResource SmallLabelStyle}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Longitude: "/>
+                            <Span Text="{Binding SelectedPin.Position.Longitude}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Style="{StaticResource SmallLabelStyle}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Description: "/>
+                            <Span Text="{Binding Description}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
             </StackLayout>
         </Frame>
-        <SearchBar VerticalOptions="Start"
+        <SearchBar VerticalOptions="StartAndExpand"
                        Grid.Row="0"
                        Placeholder="{Binding Resources[Search]}"
                        Text="{Binding SearchBarText}"

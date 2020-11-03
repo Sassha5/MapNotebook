@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
+using Acr.UserDialogs;
 using MapNotepad.Services.RegistrationService;
-using MapNotepad.Services.ValidationService;
+using MapNotepad.Validation;
 using MapNotepad.Views;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -11,16 +12,14 @@ namespace MapNotepad.ViewModels
     {
 
         private readonly IRegistrationService _registrationService;
-        private readonly IValidationService _validationService;
-        //private readonly IUserDialogs _userDialogs;
+        private readonly IUserDialogs _userDialogs;
 
         public SignUpPageViewModel(INavigationService navigationService,
                                     IRegistrationService registrationService,
-                                    IValidationService validationService)
+                                    IUserDialogs userDialogs)
                                     : base(navigationService)
         {
-            //_userDialogs = userDialogs;
-            _validationService = validationService;
+            _userDialogs = userDialogs;
             _registrationService = registrationService;
         }
 
@@ -34,14 +33,20 @@ namespace MapNotepad.ViewModels
 
         private async void OnRegisterCommandAsync()
         {
-            //switch (_validationService.ValidateNewUser(Email, Password, ConfirmPassword)) //TODO after localization
+            Validator.CheckEmail(Email);
+            Validator.CheckPassword(Password);
+            if (!Password.Equals(ConfirmPassword))
+            {
+
+            }
+            //switch (Validator.CheckNewUser(Email, Password, ConfirmPassword))
             //{
             //    case ValidationStatus.EmailIsTaken:
-            //        await _userDialogs.AlertAsync(Resources["LoginIsTaken"], Resources["Oops"], Resources["Damn"]); break;
-            //    case ValidationStatus.LoginIsTooShort:
-            //        await _userDialogs.AlertAsync(Resources["LoginIsTooShort"], Resources["Oops"], Resources["Ok"]); break;
-            //    case ValidationStatus.LoginStartsWithNumber:
-            //        await _userDialogs.AlertAsync(Resources["LoginStartsWithNumber"], Resources["Oops"], Resources["Damn"]); break;
+            //        await _userDialogs.AlertAsync(Resources["EmailIsTaken"], Resources["Oops"], Resources["Damn"]); break;
+            //    case ValidationStatus.EmailIsTooShort:
+            //        await _userDialogs.AlertAsync(Resources["EmailIsTooShort"], Resources["Oops"], Resources["Ok"]); break;
+            //    case ValidationStatus.EmailStartsWithNumber:
+            //        await _userDialogs.AlertAsync(Resources["EmailStartsWithNumber"], Resources["Oops"], Resources["Damn"]); break;
             //    case ValidationStatus.PasswordIsTooShort:
             //        await _userDialogs.AlertAsync(Resources["PasswordIsTooShort"], Resources["Oops"], Resources["Damn"]); break;
             //    case ValidationStatus.PasswordIsWeak:
@@ -50,15 +55,14 @@ namespace MapNotepad.ViewModels
             //        await _userDialogs.AlertAsync(Resources["PasswordsAreNotEqual"], Resources["Oops"], Resources["Thanks"]); break;
             //    case ValidationStatus.Success:
             //        await _userDialogs.AlertAsync(Resources["RedirectingToSignIn"], Resources["Success"], Resources["Finally"]);
-            //        RegistrationSuccess();
+            //        ValidationSuccess();
             //        break;
             //    default:
             //        await _userDialogs.AlertAsync(Resources["Unknown"], Resources["Oops"], Resources["Damn"]); break;
             //}
-
-            RegistrationSuccess();
+            ValidationSuccess();
         }
-        private async void RegistrationSuccess()
+        private async void ValidationSuccess()
         {
             _registrationService.Register(Name, Email, Password);
             NavigationParameters navParams = new NavigationParameters
@@ -67,5 +71,7 @@ namespace MapNotepad.ViewModels
             };
             await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}", navParams);
         }
+
+
     }
 }

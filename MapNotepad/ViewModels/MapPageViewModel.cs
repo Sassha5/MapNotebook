@@ -24,7 +24,10 @@ namespace MapNotepad.ViewModels
             set
             {
                 SetProperty(ref _selectedPin, value);
-                //Description = _selectedPin.Tag.ToString(); //exception when navigating from pinpage
+                if (_selectedPin != null)
+                {
+                    Description = _selectedPin.Tag.ToString();
+                }
             }
         }
         private string _description;

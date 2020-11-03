@@ -54,33 +54,45 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0.4*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <ImageButton Grid.Column="0"
-                                             Grid.Row="0"
-                                             Grid.RowSpan="2"
                                              Source="{Binding IsFavoriteImagePath}"
                                              Command="{Binding Path=BindingContext.FavouriteChangeCommand, 
                                                        Source={x:Reference pinsPage}}" 
-                                             CommandParameter="{Binding .}"/>
-                                <Label Grid.Column="1"
-                                       Grid.Row="0"
-                                            Text="{Binding Label}"
-                                           Style="{StaticResource SmallLabelStyle}"
-                                           VerticalOptions="Center"/>
-                                <Label Grid.Column="1"
-                                        Grid.Row="1"
-                                        Text="{Binding Latitude}"
-                                           Style="{StaticResource SmallLabelStyle}"/>
-                                <Label Grid.Column="2"
-                                        Grid.Row="1"
-                                        Text="{Binding Longitude}"
-                                           Style="{StaticResource SmallLabelStyle}"/>
+                                             CommandParameter="{Binding .}"
+                                             Style="{StaticResource ImageButtonStyle}"/>
+                                <StackLayout Grid.Column="1"
+                                             VerticalOptions="Center">
+                                    <Label Style="{StaticResource MediumLabelStyle}"
+                                       VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Label: "/>
+                                                <Span Text="{Binding Label}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Style="{StaticResource SmallLabelStyle}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Latitude: "/>
+                                                <Span Text="{Binding Latitude}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Style="{StaticResource SmallLabelStyle}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Longitude: "/>
+                                                <Span Text="{Binding Longitude}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -88,15 +100,10 @@
             </ListView>
 
             <Button Grid.Row="0" 
-                    Text="+"
+                    Text="Add"
                     BorderRadius="35"
-                    VerticalOptions="End"
-                    HorizontalOptions="End"
-                    HeightRequest="70"
-                    WidthRequest="70"
-                    Margin="0,0,20,20"
-                    BackgroundColor="SkyBlue"
-                    Command="{Binding ToAddPinPageCommand}"/>
+                    Command="{Binding ToAddPinPageCommand}"
+                    Style="{StaticResource CircleButtonStyle}"/>
         </Grid>
     </StackLayout>
 </views:BaseContentPage>

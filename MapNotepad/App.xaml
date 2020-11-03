@@ -85,7 +85,7 @@
                     Value="{AppThemeBinding Light={StaticResource TransparentColor}, 
                                             Dark={StaticResource TransparentColor}}" />
             <Setter Property="Margin"
-                    Value="20,10,20,10"/>
+                    Value="20"/>
         </Style>
 
         <Style x:Key="CircleButtonStyle"
@@ -93,6 +93,9 @@
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding Light={StaticResource LightNavigationBarColor}, 
                                             Dark={StaticResource DarkNavigationBarColor}}" />
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource LightSecondaryTextColor}, 
+                                            Dark={StaticResource DarkPrimaryTextColor}}" />
             <Setter Property="Margin"
                     Value="0,0,20,22"/>
             <Setter Property="HorizontalOptions"

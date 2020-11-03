@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Net.Mail;
 using System.Text.RegularExpressions;
-using MapNotepad.Enums;
 
 namespace MapNotepad.Validation
 {
@@ -12,47 +11,24 @@ namespace MapNotepad.Validation
         {
         }
 
-        public static ValidationStatus CheckNewUser(string email, string password, string confirmPassword)
+        public static bool CheckEmail(string email) //do i need validation status, or just bool?
         {
-            ValidationStatus status;
-
-            if (password.Equals(confirmPassword))
+            bool result;
+            try
             {
-                status = CheckEmail(email);
-                if (status == ValidationStatus.Success)
-                {
-                    status = CheckPassword(password);
-                }
+                MailAddress mail = new MailAddress(email);
+                result = true;
             }
-            else
+            catch
             {
-                status = ValidationStatus.PasswordsAreNotEqual;
+                result = false;
             }
-
-            return status;
-        }
-
-        public static ValidationStatus CheckEmail(string email)
-        {                                 //этот метод должен проверять наличие имейла в базе, чтобы не было повторяющихся
-            //ValidationStatus status;                           //вынести эту проверку сразу во вьюмодель?
-            //if (_usersManagerService.TryFindMail(email)) { status = ValidationStatus.EmailIsTaken; }
-            //else if (email.Length < Constants.MinEmailLength) { status = ValidationStatus.EmailIsTooShort; }
-            //else if (char.IsDigit(email[0])) { status = ValidationStatus.EmailStartsWithNumber; }
-            //else { status = ValidationStatus.Success; }
-            //// TODO regex for email check
-            //return status;
-            return ValidationStatus.Success;
+            return result;
         }                                       
 
-        public static ValidationStatus CheckPassword(string password)
+        public static bool CheckPassword(string password)
         {
-            ValidationStatus status;
-
-            if (password.Length < Constants.MinPasswordLength) { status = ValidationStatus.PasswordIsTooShort; }
-            else if (!_passwordRegex.IsMatch(password)) { status = ValidationStatus.PasswordIsWeak; }
-            else { status = ValidationStatus.Success; }
-
-            return status;
+            return _passwordRegex.IsMatch(password);
         }
     }
 }

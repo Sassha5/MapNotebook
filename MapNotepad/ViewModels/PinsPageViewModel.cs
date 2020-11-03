@@ -48,13 +48,15 @@ namespace MapNotepad.ViewModels
             if (pin != null)
             {
                 pin.IsFavorite = !pin.IsFavorite;
-                SavePin(pin); //working strange because this command is triggered on navigation
+                SavePin(pin);
                 UpdateCollection();
             }
         }
 
         private async void OnPinTappedCommandAsync(CustomPin pin)
         {
+            pin.IsFavorite = true;
+            SavePin(pin);
             NavigationParameters navParams = new NavigationParameters
             {
                 { nameof(CustomPin), pin }

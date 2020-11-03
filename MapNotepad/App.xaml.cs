@@ -1,11 +1,11 @@
 ﻿using System;
+using Acr.UserDialogs;
 using MapNotepad.Services.AuthorizationService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.RegistrationService;
 using MapNotepad.Services.RepositoryService;
 using MapNotepad.Services.SettingsManagerService;
 using MapNotepad.Services.UsersManagerService;
-using MapNotepad.Services.ValidationService;
 using MapNotepad.ViewModels;
 using MapNotepad.Views;
 using Plugin.Settings;
@@ -55,6 +55,7 @@ namespace MapNotepad
             containerRegistry.RegisterForNavigation<AddPinPage, AddPinPageViewModel>();
 
             containerRegistry.RegisterInstance(CrossSettings.Current);
+            containerRegistry.RegisterInstance(UserDialogs.Instance);
 
             containerRegistry.RegisterInstance<ISettingsManagerService>(Container.Resolve<SettingsManagerService>());
             containerRegistry.RegisterInstance<IRepositoryService>(Container.Resolve<RepositoryService>());
@@ -62,7 +63,6 @@ namespace MapNotepad
             containerRegistry.RegisterInstance<IUsersManagerService>(Container.Resolve<UsersManagerService>());
             containerRegistry.RegisterInstance<IRegistrationService>(Container.Resolve<RegistrationService>());
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
-            containerRegistry.RegisterInstance<IValidationService>(Container.Resolve<ValidationService>());
         }
     }
 }
