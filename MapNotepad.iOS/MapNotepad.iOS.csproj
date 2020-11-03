@@ -152,4 +152,11 @@
       <Name>MapNotepad</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_fav.png" />
+    <BundleResource Include="Resources\ic_notfav.png" />
+    <BundleResource Include="Resources\ic_exit_to_app.png" />
+    <BundleResource Include="Resources\ic_save.png" />
+    <BundleResource Include="Resources\ic_settings.png" />
+  </ItemGroup>
 </Project>

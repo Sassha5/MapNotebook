@@ -11,7 +11,7 @@
         <ToolbarItem Order="Primary"
                  Priority="0"
                  Command="{Binding SavePinCommand}"
-                 Text="{Binding Resources[SavePin]}"/>
+                 IconImageSource="ic_save.png"/>
     </views:BaseContentPage.ToolbarItems>
     <Grid>
         <Grid.RowDefinitions>

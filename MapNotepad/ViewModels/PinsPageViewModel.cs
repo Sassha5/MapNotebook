@@ -31,8 +31,8 @@ namespace MapNotepad.ViewModels
         private ICommand _pinTappedCommand;
         public ICommand PinTappedCommand => _pinTappedCommand ??= new Command<CustomPin>(OnPinTappedCommandAsync);
 
-        private ICommand _favouriteChangedCommand;
-        public ICommand FavouriteChangedCommand => _favouriteChangedCommand ??= new Command<CustomPin>(OnFavouriteChangedCommand);
+        private ICommand _favouriteChangeCommand;
+        public ICommand FavouriteChangeCommand => _favouriteChangeCommand ??= new Command<CustomPin>(OnFavouriteChangeCommand);
 
         #endregion
 
@@ -43,12 +43,13 @@ namespace MapNotepad.ViewModels
 
         #region Command execution methods
 
-        private void OnFavouriteChangedCommand(CustomPin pin)
+        private void OnFavouriteChangeCommand(CustomPin pin)
         {
             if (pin != null)
             {
                 pin.IsFavorite = !pin.IsFavorite;
-                //SavePin(pin); //working strange because this command is triggered on navigation
+                SavePin(pin); //working strange because this command is triggered on navigation
+                UpdateCollection();
             }
         }
 

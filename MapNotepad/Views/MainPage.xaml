@@ -19,11 +19,11 @@
         <ToolbarItem Order="Primary"
                  Priority="1"
                  Command="{Binding LogoutCommand}"
-                 Text="{Binding Resources[Logout]}"/>
+                 IconImageSource="ic_exit_to_app.png"/>
         <ToolbarItem Order="Primary"
                  Priority="0"
                  Command="{Binding SettingsCommand}"
-                 Text="{Binding Resources[Settings]}"/>
+                 IconImageSource="ic_settings"/>
     </TabbedPage.ToolbarItems>
     <TabbedPage.Children>
         <views:MapPage />
