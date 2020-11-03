@@ -7,7 +7,7 @@
 
 
     <Application.Resources>
-        
+
         <Color x:Key="TransparentColor">Transparent</Color>
 
         <!-- Light colors -->
@@ -78,7 +78,7 @@
             <Setter Property="Margin"
                     Value="20,10,20,10"/>
         </Style>
-        
+
         <Style x:Key="ImageButtonStyle"
                TargetType="ImageButton">
             <Setter Property="BackgroundColor"
@@ -107,7 +107,7 @@
             <Setter Property="WidthRequest"
                     Value="70"/>
         </Style>
-        
+
         <Style x:Key="EntryStyle"
                TargetType="Entry">
             <Setter Property="BackgroundColor"
@@ -119,8 +119,25 @@
             <Setter Property="PlaceholderColor"
                     Value="{AppThemeBinding Light={StaticResource LightTertiaryTextColor}, 
                                             Dark={StaticResource DarkTertiaryTextColor}}" />
+            <Setter Property="Margin"
+                    Value="10"/>
             <Setter Property="ClearButtonVisibility"
                     Value="WhileEditing"/>
+        </Style>
+        
+        <Style x:Key="CustomEntryFrameStyle"
+               TargetType="Frame">
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Light={StaticResource LightBackgroundColor}, 
+                                            Dark={StaticResource DarkBackgroundColor}}"/>
+            <Setter Property="BorderColor"
+                            Value="Black"/>
+            <Setter Property="CornerRadius"
+                    Value="10"/>
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Margin"
+                    Value="10"/>
         </Style>
 
         <Style x:Key="SearchBarStyle"
@@ -172,7 +189,7 @@
             <Setter Property="VerticalOptions"
                     Value="Center"/>
         </Style>
-        
+
         <Style x:Key="PickerStyle"
                TargetType="Picker">
             <!--<Setter Property="BackgroundColor"

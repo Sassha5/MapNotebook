@@ -23,10 +23,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Entry Grid.Row="0"
-               Placeholder="{Binding Resources[Label]}"
-               Text="{Binding Label}"
-               Style="{StaticResource EntryStyle}"/>
+        <Frame Grid.Row="0"
+               Style="{StaticResource CustomEntryFrameStyle}">
+            <Entry Placeholder="{Binding Resources[Label]}"
+                   Text="{Binding Label}"/>
+        </Frame>
         <Entry Grid.Row="1"
                Placeholder="{Binding Resources[Description]}"
                Text="{Binding Description}"
