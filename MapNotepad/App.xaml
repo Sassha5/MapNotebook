@@ -19,19 +19,22 @@
         <Color x:Key="LightSecondaryTextColor">White</Color>
         <Color x:Key="LightTertiaryTextColor">Gray</Color>
 
-        <!-- Dark colors -->
+        <!-- Dark colors --><!--#292e34-->
         <Color x:Key="DarkBackgroundColor">#18191d</Color>
         <Color x:Key="DarkNavigationBarColor">#2b5279</Color>
-        <Color x:Key="DarkPrimaryColor">#292e34</Color>
+        <Color x:Key="DarkPrimaryColor">#203141</Color>
         <!--<Color x:Key="DarkSecondaryColor">White</Color>-->
         <Color x:Key="DarkPrimaryTextColor">White</Color>
         <Color x:Key="DarkSecondaryTextColor">Black</Color>
         <Color x:Key="DarkTertiaryTextColor">Gray</Color>
 
+
         <Style TargetType="NavigationPage">
+
             <Setter Property="BarBackgroundColor"
                     Value="{AppThemeBinding Light={StaticResource LightNavigationBarColor}, 
                                             Dark={StaticResource DarkNavigationBarColor}}" />
+
             <Setter Property="BarTextColor"
                     Value="{AppThemeBinding Light={StaticResource LightSecondaryTextColor}, 
                                             Dark={StaticResource DarkPrimaryTextColor}}" />
@@ -85,7 +88,7 @@
                     Value="{AppThemeBinding Light={StaticResource TransparentColor}, 
                                             Dark={StaticResource TransparentColor}}" />
             <Setter Property="Margin"
-                    Value="20"/>
+                    Value="30"/>
         </Style>
 
         <Style x:Key="CircleButtonStyle"
@@ -129,7 +132,7 @@
                TargetType="Frame">
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding Light={StaticResource LightBackgroundColor}, 
-                                            Dark={StaticResource DarkBackgroundColor}}"/>
+                                            Dark={StaticResource DarkPrimaryColor}}"/>
             <Setter Property="BorderColor"
                             Value="Black"/>
             <Setter Property="CornerRadius"
@@ -138,6 +141,8 @@
                     Value="False"/>
             <Setter Property="Margin"
                     Value="10"/>
+            <Setter Property="Padding"
+                    Value="0"/>
         </Style>
 
         <Style x:Key="SearchBarStyle"

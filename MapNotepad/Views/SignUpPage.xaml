@@ -16,30 +16,33 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Entry x:Name="emailInput"
-               Grid.Row="0"
-               Placeholder="{Binding Resources[Email]}"
-               Text="{Binding Email}"
-               Style="{StaticResource EntryStyle}"/>
-        <Entry x:Name="nameInput"
-               Grid.Row="1"
-               Placeholder="{Binding Resources[Name]}"
-               Text="{Binding Name}"
-               Style="{StaticResource EntryStyle}"/>
-        <Entry x:Name="passwordFirstInput"
-               Placeholder="{Binding Resources[Password]}"
-               IsPassword="True" 
-               Grid.Row="2"
-               Text="{Binding Password}"
-               Style="{StaticResource EntryStyle}"/>
-        <Entry x:Name="passwordSecondInput"
-               Placeholder="{Binding Resources[ConfirmPassword]}"
-               IsPassword="True" 
-               Grid.Row="3"
-               Text="{Binding ConfirmPassword}"
-               Style="{StaticResource EntryStyle}"/>
-        <Button x:Name="signUpButton" 
-                Text="{Binding Resources[SignUp]}" 
+        <Frame Grid.Row="0"
+               Style="{StaticResource CustomEntryFrameStyle}">
+            <Entry Placeholder="{Binding Resources[Email]}"
+                   Text="{Binding Email}"
+                   Style="{StaticResource EntryStyle}"/>
+        </Frame>
+        <Frame Grid.Row="1"
+               Style="{StaticResource CustomEntryFrameStyle}">
+            <Entry Placeholder="{Binding Resources[Name]}"
+                   Text="{Binding Name}"
+                   Style="{StaticResource EntryStyle}"/>
+        </Frame>
+        <Frame Grid.Row="2"
+               Style="{StaticResource CustomEntryFrameStyle}">
+            <Entry Placeholder="{Binding Resources[Password]}"
+                   IsPassword="True" 
+                   Text="{Binding Password}"
+                   Style="{StaticResource EntryStyle}"/>
+        </Frame>
+        <Frame Grid.Row="3"
+               Style="{StaticResource CustomEntryFrameStyle}">
+            <Entry Placeholder="{Binding Resources[ConfirmPassword]}"
+                   IsPassword="True" 
+                   Text="{Binding ConfirmPassword}"
+                   Style="{StaticResource EntryStyle}"/>
+        </Frame>
+        <Button Text="{Binding Resources[SignUp]}" 
                 Grid.Row="7"
                 Command="{Binding RegisterCommand}"
                 Style="{StaticResource ButtonStyle}"/>

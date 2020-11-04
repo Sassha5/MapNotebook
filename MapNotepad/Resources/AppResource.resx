@@ -162,4 +162,13 @@
     <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
+     <data name="BadEmail" xml:space="preserve">
+    <value>Not a valid email</value>
+  </data>
+     <data name="BadPassword" xml:space="preserve">
+    <value>Password should contain a number, upper and lower case letters and a special character</value>
+  </data>
+    <data name="InvalidLabel" xml:space="preserve">
+    <value>It's not a valid label name'</value>
+  </data>
 </root>

@@ -16,19 +16,25 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
-        <Entry x:Name="emailInput"
-               Placeholder="{Binding Resources[Email]}"
-               Grid.Row="0"
-               Text="{Binding Email}"
-               Style="{StaticResource EntryStyle}"/>
-        <Entry x:Name="passwordInput"
-               Placeholder="{Binding Resources[Password]}"
-               IsPassword="True" 
-               Grid.Row="1"
-               Text="{Binding Password}"
-               Style="{StaticResource EntryStyle}"/>
+        <Frame Grid.Row="0"
+               Style="{StaticResource CustomEntryFrameStyle}">
+            <Entry x:Name="emailInput"
+                   Placeholder="{Binding Resources[Email]}"
+                   Text="{Binding Email}"
+                   Style="{StaticResource EntryStyle}"
+                   TextChanged="TextChanged"/>
+        </Frame>
+        <Frame Grid.Row="1"
+               Style="{StaticResource CustomEntryFrameStyle}">
+            <Entry x:Name="passwordInput"
+                   Placeholder="{Binding Resources[Password]}"
+                   IsPassword="True" 
+                   Text="{Binding Password}"
+                   Style="{StaticResource EntryStyle}"
+                   TextChanged="TextChanged"/>
+        </Frame>
         <Button x:Name="signInButton"
                 Text="{Binding Resources[SignIn]}" 
                 Grid.Row="6"

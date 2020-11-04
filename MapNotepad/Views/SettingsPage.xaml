@@ -5,29 +5,12 @@
                         x:Class="MapNotepad.Views.SettingsPage"
                         Title="{Binding Resources[Settings]}">
 
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <StackLayout Orientation="Horizontal" Grid.Row="0">
-            <Label Style="{StaticResource MediumLabelStyle}"
+
+    <StackLayout Orientation="Horizontal"
+                 VerticalOptions="Start">
+        <Label Style="{StaticResource MediumLabelStyle}"
                    Text="{Binding Resources[DarkTheme]}"
                    VerticalOptions="Center"/>
-            <CheckBox IsChecked="{Binding Path=DarkThemeIsChecked, Mode=TwoWay}"/>
-        </StackLayout>
-        <StackLayout Grid.Row="1">
-            <Label Style="{StaticResource MediumLabelStyle}"
-                   Text="{Binding Resources[Language]}"/>
-            <Picker Style="{StaticResource PickerStyle}"
-                    ItemsSource="{Binding Path=Languages, Mode=TwoWay}"
-                    SelectedItem="{Binding Path=SelectedLanguage, Mode=TwoWay}"/>
-        </StackLayout>
-    </Grid>
+        <CheckBox IsChecked="{Binding Path=DarkThemeIsChecked, Mode=TwoWay}"/>
+    </StackLayout>
 </views:BaseContentPage>

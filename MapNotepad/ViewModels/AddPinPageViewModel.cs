@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Acr.UserDialogs;
 using MapNotepad.Extensions;
 using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
+using MapNotepad.Services.ThemeManagerService;
 using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
@@ -11,12 +13,18 @@ namespace MapNotepad.ViewModels
 {
     public class AddPinPageViewModel : ViewModelMapBase
     {
+        private readonly IUserDialogs _userDialogs;
         private CustomPin _customPin;
 
         public AddPinPageViewModel(INavigationService navigationService,
-                                IPinsManagerService pinsManagerService)
-                                : base(navigationService, pinsManagerService)
+                                IPinsManagerService pinsManagerService,
+                                IThemeManagerService themeManagerService,
+                                IUserDialogs userDialogs)
+                                : base(navigationService,
+                                      pinsManagerService,
+                                      themeManagerService)
         {
+            _userDialogs = userDialogs;
         }
 
         #region Properties
@@ -68,7 +76,7 @@ namespace MapNotepad.ViewModels
             base.OnNavigatedTo(parameters);
             _customPin = new CustomPin()
             {
-                Label = string.Empty,
+                Label = "New Pin",
                 IsFavorite = true
             };
             if (parameters.TryGetValue(nameof(CustomPin), out CustomPin customPin))
@@ -101,13 +109,20 @@ namespace MapNotepad.ViewModels
 
         private async void OnSavePinCommandAsync()
         {
-            _customPin.Label = Label;
-            _customPin.Description = Description;
-            _customPin.Latitude = Latitude;
-            _customPin.Longitude = Longitude;
+            if (!string.IsNullOrEmpty(_customPin.Label))
+            {
+                _customPin.Label = Label;
+                _customPin.Description = Description;
+                _customPin.Latitude = Latitude;
+                _customPin.Longitude = Longitude;//how to check is valid?
 
-            SavePin(_customPin);
-            await NavigationService.GoBackAsync();
+                SavePin(_customPin);
+                await NavigationService.GoBackAsync();
+            }
+            else
+            {
+                await _userDialogs.AlertAsync(Resources["InvalidLabel"]);
+            }
         }
 
         #endregion

@@ -23,22 +23,67 @@ namespace MapNotepad.ViewModels
             _registrationService = registrationService;
         }
 
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
+        #region Properties
+
+        private string _email;
+        public string Email
+        {
+            get => _email;
+            set => SetProperty(ref _email, value);
+        }
+
+        private string _password;
+        public string Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
+        }
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set => SetProperty(ref _name, value);
+        }
+
+        private string _confirmPassword;
+        public string ConfirmPassword
+        {
+            get => _confirmPassword;
+            set => SetProperty(ref _confirmPassword, value);
+        }
+
+        #endregion
 
         private ICommand _RegisterCommand;
         public ICommand RegisterCommand => _RegisterCommand ??= new Command(OnRegisterCommandAsync);
 
         private async void OnRegisterCommandAsync()
         {
-            Validator.CheckEmail(Email);
-            Validator.CheckPassword(Password);
-            if (!Password.Equals(ConfirmPassword))
+            if (Validator.CheckEmail(Email))
             {
-
+                if (Validator.CheckPassword(Password))
+                {
+                    if (Password.Equals(ConfirmPassword))
+                    {
+                        await _userDialogs.AlertAsync(Resources["RedirectingToSignIn"], Resources["Success"], Resources["Finally"]);
+                        ValidationSuccess();
+                    }
+                    else
+                    {
+                        await _userDialogs.AlertAsync(Resources["PasswordsAreNotEqual"], Resources["Oops"], Resources["Damn"]);
+                    }
+                }
+                else
+                {
+                    await _userDialogs.AlertAsync(Resources["BadPassword"], Resources["Oops"], Resources["Damn"]);
+                }
             }
+            else
+            {
+                await _userDialogs.AlertAsync(Resources["BadEmail"], Resources["Oops"], Resources["Damn"]);
+            }
+
             //switch (Validator.CheckNewUser(Email, Password, ConfirmPassword))
             //{
             //    case ValidationStatus.EmailIsTaken:
@@ -60,7 +105,6 @@ namespace MapNotepad.ViewModels
             //    default:
             //        await _userDialogs.AlertAsync(Resources["Unknown"], Resources["Oops"], Resources["Damn"]); break;
             //}
-            ValidationSuccess();
         }
         private async void ValidationSuccess()
         {

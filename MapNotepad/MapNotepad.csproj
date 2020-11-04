@@ -41,9 +41,13 @@
     <Folder Include="Resources\" />
     <Folder Include="Controls\" />
     <Folder Include="Validation\" />
+    <Folder Include="Services\ThemeManagerService\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\RegisterPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DarkMapStyle.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\AppResource.resx">
@@ -58,5 +62,9 @@
     <Compile Update="Resources\AppResource.Designer.cs">
       <DependentUpon>AppResource.resx</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\MapDarkTheme.json" />
+    <None Remove="Resources\DarkMapStyle.json" />
   </ItemGroup>
 </Project>

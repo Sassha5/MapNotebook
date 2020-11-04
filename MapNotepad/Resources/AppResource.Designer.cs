@@ -340,5 +340,23 @@ namespace MapNotepad.Resources {
                 return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
+        
+        internal static string BadEmail {
+            get {
+                return ResourceManager.GetString("BadEmail", resourceCulture);
+            }
+        }
+        
+        internal static string BadPassword {
+            get {
+                return ResourceManager.GetString("BadPassword", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidLabel {
+            get {
+                return ResourceManager.GetString("InvalidLabel", resourceCulture);
+            }
+        }
     }
 }

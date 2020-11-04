@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MapNotepad // namespace != folder tree, is it bad?
+namespace MapNotepad
 {
     public static class Constants
     {

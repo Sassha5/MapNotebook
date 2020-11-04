@@ -2,6 +2,7 @@
 using System.Linq;
 using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
+using MapNotepad.Services.ThemeManagerService;
 using Prism.Navigation;
 using Xamarin.Forms.GoogleMaps;
 
@@ -10,8 +11,11 @@ namespace MapNotepad.ViewModels
     public class MapPageViewModel : ViewModelMapBase
     {
         public MapPageViewModel(INavigationService navigationService,
-                               IPinsManagerService pinsManagerService)
-                               : base(navigationService, pinsManagerService)
+                               IPinsManagerService pinsManagerService,
+                               IThemeManagerService themeManagerService)
+                               : base(navigationService,
+                                     pinsManagerService,
+                                     themeManagerService)
         {
         }
 
@@ -27,6 +31,10 @@ namespace MapNotepad.ViewModels
                 if (_selectedPin != null)
                 {
                     Description = _selectedPin.Tag.ToString();
+                }
+                else
+                {
+                    Description = string.Empty;
                 }
             }
         }

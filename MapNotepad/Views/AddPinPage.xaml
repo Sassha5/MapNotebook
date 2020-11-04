@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -26,31 +26,35 @@
         <Frame Grid.Row="0"
                Style="{StaticResource CustomEntryFrameStyle}">
             <Entry Placeholder="{Binding Resources[Label]}"
-                   Text="{Binding Label}"/>
+                   Text="{Binding Label}"
+                   Style="{StaticResource EntryStyle}"/>
         </Frame>
-        <Entry Grid.Row="1"
-               Placeholder="{Binding Resources[Description]}"
-               Text="{Binding Description}"
-               Style="{StaticResource EntryStyle}"/>
+        <Frame Grid.Row="1"
+               Style="{StaticResource CustomEntryFrameStyle}">
+            <Entry Placeholder="{Binding Resources[Description]}"
+                   Text="{Binding Description}"
+                   Style="{StaticResource EntryStyle}"/>
+        </Frame>
         <StackLayout Orientation="Horizontal" Grid.Row="2">
-            <Label Text="{Binding Resources[Latitude]}"
-                   VerticalOptions="Center"
-                   Style="{StaticResource SmallLabelStyle}"/>
-            <Entry HorizontalOptions="FillAndExpand"
-                   Text="{Binding Latitude}"
-                   Style="{StaticResource EntryStyle}"/>
-            <Label Text="{Binding Resources[Longitude]}"
-                   VerticalOptions="Center"
-                   Style="{StaticResource SmallLabelStyle}"/>
-            <Entry HorizontalOptions="FillAndExpand"
-                   Text="{Binding Longitude}"
-                   Style="{StaticResource EntryStyle}"/>
+            <Frame HorizontalOptions="FillAndExpand"
+                Style="{StaticResource CustomEntryFrameStyle}">
+                <Entry Placeholder="{Binding Resources[Latitude]}"
+                       Text="{Binding Latitude}"
+                       Style="{StaticResource EntryStyle}"/>
+            </Frame>
+            <Frame HorizontalOptions="FillAndExpand"
+                Style="{StaticResource CustomEntryFrameStyle}">
+                <Entry Placeholder="{Binding Resources[Longitude]}"
+                       Text="{Binding Longitude}"
+                       Style="{StaticResource EntryStyle}"/>
+            </Frame>
         </StackLayout>
         <controls:CustomMap x:Name="map"
                   VerticalOptions="FillAndExpand"
                   Grid.Row="3"
                   Grid.RowSpan="4"
-                  PinsCollection="{Binding PinCollection}">
+                  PinsCollection="{Binding PinCollection}"
+                  MapStyle="{Binding MapStyle}">
             <controls:CustomMap.Behaviors>
                 <prism:EventToCommandBehavior                         
                             EventName="MapClicked"

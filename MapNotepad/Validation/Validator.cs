@@ -6,24 +6,15 @@ namespace MapNotepad.Validation
     public class Validator
     {
         private static Regex _passwordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$");
+        private static Regex _emailRegex = new Regex(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
 
         static Validator()
         {
         }
 
-        public static bool CheckEmail(string email) //do i need validation status, or just bool?
+        public static bool CheckEmail(string email)
         {
-            bool result;
-            try
-            {
-                MailAddress mail = new MailAddress(email);
-                result = true;
-            }
-            catch
-            {
-                result = false;
-            }
-            return result;
+            return _emailRegex.IsMatch(email);
         }                                       
 
         public static bool CheckPassword(string password)

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MapNotepad.Services.SettingsManagerService;
+﻿using MapNotepad.Services.ThemeManagerService;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -7,13 +6,13 @@ namespace MapNotepad.ViewModels
 {
     public class SettingsPageViewModel : ViewModelBase
     {
-        private readonly ISettingsManagerService _settingsManagerService;
+        private readonly IThemeManagerService _themeManagerService;
 
         public SettingsPageViewModel(INavigationService navigationService,
-                                     ISettingsManagerService settingsManagerService)
+                                     IThemeManagerService themeManagerService)
                                      : base(navigationService)
         {
-            _settingsManagerService = settingsManagerService;
+            _themeManagerService = themeManagerService;
         }
 
         #region Properties
@@ -25,22 +24,10 @@ namespace MapNotepad.ViewModels
             set
             {
                 SetProperty(ref _darkThemeIsChecked, value);
-                if (value) { _settingsManagerService.Theme = (int)OSAppTheme.Dark; }
-                else { _settingsManagerService.Theme = (int)OSAppTheme.Light; }
+                if (value) { _themeManagerService.SetApplicationTheme(OSAppTheme.Dark); }
+                else { _themeManagerService.SetApplicationTheme(OSAppTheme.Light); }
             }
         }
-
-        private string _selectedLanguage;
-        public string SelectedLanguage
-        {
-            get => _selectedLanguage;
-            set
-            {
-                if (!string.IsNullOrEmpty(value)) { _selectedLanguage = value; }
-                _settingsManagerService.Language = SelectedLanguage;
-            }
-        }
-        public List<string> Languages { get; set; }
 
         #endregion
 

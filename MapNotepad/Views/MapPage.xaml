@@ -22,10 +22,13 @@
                                 PinsCollection="{Binding PinCollection}"
                                 MapCameraPosition="{Binding CameraPosition}"
                                 PinClicked="PinClicked"
-                                MapClicked="MapClicked">
+                                MapClicked="MapClicked"
+                                MapStyle="{Binding MapStyle}">
         </controls:CustomMap>
         <Frame x:Name="pinInfo"
-                   VerticalOptions="End">
+               VerticalOptions="End"
+               BackgroundColor="{AppThemeBinding Light={StaticResource LightBackgroundColor}, 
+                                            Dark={StaticResource DarkBackgroundColor} }">
             <StackLayout>
                 <Label Style="{StaticResource MediumLabelStyle}"
                                        VerticalOptions="Center">

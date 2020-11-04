@@ -5,6 +5,7 @@ using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.RegistrationService;
 using MapNotepad.Services.RepositoryService;
 using MapNotepad.Services.SettingsManagerService;
+using MapNotepad.Services.ThemeManagerService;
 using MapNotepad.Services.UsersManagerService;
 using MapNotepad.ViewModels;
 using MapNotepad.Views;
@@ -22,6 +23,10 @@ namespace MapNotepad
         private IAuthorizationService AuthorizationService =>
             _authorizationService ??= Container.Resolve<IAuthorizationService>();
 
+        private IThemeManagerService _themeManagerService;
+        private IThemeManagerService ThemeManagerService =>
+            _themeManagerService ??= Container.Resolve<IThemeManagerService>();
+
         public App(IPlatformInitializer initializer = null) : base(initializer)
         {
 
@@ -32,8 +37,8 @@ namespace MapNotepad
             Device.SetFlags(new string[] { "AppTheme_Experimental" });
 
             InitializeComponent();
-            //TODO how to set theme without SettingsManager?
-            //Application.Current.UserAppTheme = (OSAppTheme)SettingsManager.Theme;
+
+            ThemeManagerService.SetPreviousTheme();
 
             string path = nameof(SignInPage);
             if (AuthorizationService.IsAuthorized())
@@ -63,6 +68,7 @@ namespace MapNotepad
             containerRegistry.RegisterInstance<IUsersManagerService>(Container.Resolve<UsersManagerService>());
             containerRegistry.RegisterInstance<IRegistrationService>(Container.Resolve<RegistrationService>());
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
+            containerRegistry.RegisterInstance<IThemeManagerService>(Container.Resolve<ThemeManagerService>());
         }
     }
 }

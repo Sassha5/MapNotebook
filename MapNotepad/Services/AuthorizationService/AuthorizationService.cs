@@ -1,5 +1,4 @@
-﻿using System;
-using MapNotepad.Services.SettingsManagerService;
+﻿using MapNotepad.Services.SettingsManagerService;
 using MapNotepad.Services.UsersManagerService;
 
 namespace MapNotepad.Services.AuthorizationService
@@ -35,7 +34,5 @@ namespace MapNotepad.Services.AuthorizationService
         {
             return !(_usersManagerService.GetUserId(email, password) == Constants.NoAuthorizedUser);
         }
-
-
     }
 }

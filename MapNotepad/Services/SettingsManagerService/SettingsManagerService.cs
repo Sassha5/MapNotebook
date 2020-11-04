@@ -24,11 +24,7 @@ namespace MapNotepad.Services.SettingsManagerService
         public int Theme
         {
             get => _appSettings.GetValueOrDefault(nameof(Theme), (int)OSAppTheme.Light);
-            set
-            {
-                _appSettings.AddOrUpdateValue(nameof(Theme), value);
-                Application.Current.UserAppTheme = (OSAppTheme)value;
-            }
+            set => _appSettings.AddOrUpdateValue(nameof(Theme), value);
         }
 
         public string Language
@@ -44,9 +40,9 @@ namespace MapNotepad.Services.SettingsManagerService
 
         public void ClearData()
         {
-            AuthorizedUserID = default;
-            Theme = default;
-            Language = default;
+            AuthorizedUserID = Constants.NoAuthorizedUser;
+            Theme = (int)OSAppTheme.Light;
+            Language = Constants.DefaultLanguage;
         }
     }
 }
