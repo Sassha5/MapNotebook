@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using MapNotepad.Localization;
 using MapNotepad.Resources;
 using Prism.Mvvm;
@@ -7,7 +8,7 @@ using Prism.Navigation;
 
 namespace MapNotepad.ViewModels
 {
-    public class ViewModelBase : BindableBase, IInitialize, INavigatedAware, IDestructible
+    public abstract class ViewModelBase : BindableBase, IInitialize, INavigatedAware, IDestructible
     {
         public ViewModelBase(INavigationService navigationService)
         {
@@ -17,20 +18,9 @@ namespace MapNotepad.ViewModels
 
         #region Properties
 
-        public LocalizedResources Resources
-        {
-            get;
-            private set;
-        }
+        public LocalizedResources Resources { get; private set; }
 
         protected INavigationService NavigationService { get; private set; }
-
-        private string _title;
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
 
         #endregion
 
@@ -38,11 +28,22 @@ namespace MapNotepad.ViewModels
 
         public virtual void Initialize(INavigationParameters parameters) { }
 
-        public virtual void OnNavigatedFrom(INavigationParameters parameters) { }
+        public virtual void OnNavigatedFrom(INavigationParameters parameters)
+        {
 
-        public virtual void OnNavigatedTo(INavigationParameters parameters) { }
+        }
 
-        public virtual void Destroy() { }
+        public virtual Task OnNavigatedToAsync(INavigationParameters parameters) => Task.FromResult(true);
+
+        public virtual void OnNavigatedTo(INavigationParameters parameters)
+        {
+            OnNavigatedToAsync(parameters);
+        }
+
+        public virtual void Destroy()
+        {
+
+        }
 
         public void OnPropertyChanged([CallerMemberName] string property = null)
         {

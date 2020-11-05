@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using MapNotepad.Models;
 using SQLite;
 
@@ -8,41 +9,46 @@ namespace MapNotepad.Services.RepositoryService
 {
     class RepositoryService : IRepositoryService
     {
-        private readonly SQLiteConnection database;
+        private readonly SQLiteAsyncConnection database;
 
         public RepositoryService()
         {
-            database = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db"));
+            database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db"));
         }
 
-        public int CreateTable<T>() where T : IModelBase, new()
+        public void CreateTableAsync<T>() where T : IModelBase, new()
         {
-            return (int)database.CreateTable<T>();
+            database.CreateTableAsync<T>();
         }
 
-        public IEnumerable<T> GetItems<T>() where T : IModelBase, new()
+        public async Task<IEnumerable<T>> GetItemsAsync<T>() where T : IModelBase, new()
         {
-            return database.Table<T>();
+            return await database.Table<T>().ToListAsync();
         }
 
-        public T GetItem<T>(int id) where T : IModelBase, new()
+        public Task<T> GetItemAsync<T>(int id) where T : IModelBase, new()
         {
-            return database.Get<T>(id);
+            return database.GetAsync<T>(id);
         }
 
-        public int DeleteItem<T>(int id) where T : IModelBase, new()
+        //public Task<T> GetItemAsync<T>(Func<T, bool> pred) where T : IModelBase, new()
+        //{
+        //    return database.GetAsync<T>(pred);
+        //}
+
+        public Task<int> DeleteItemAsync<T>(int id) where T : IModelBase, new()
         {
-            return database.Delete<T>(id);
+            return database.DeleteAsync<T>(id);
         }
 
-        public int InsertItem<T>(T item) where T : IModelBase, new()
+        public Task<int> InsertItemAsync<T>(T item) where T : IModelBase, new()
         {
-            return database.Insert(item);
+            return database.InsertAsync(item);
         }
 
-        public int UpdateItem<T>(T item) where T : IModelBase, new()
+        public Task<int> UpdateItemAsync<T>(T item) where T : IModelBase, new()
         {
-            return database.Update(item);
+            return database.UpdateAsync(item);
         }
     }
 }

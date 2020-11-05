@@ -67,9 +67,10 @@ namespace MapNotepad.ViewModels
 
         private async void OnAuthorizeCommandAsync()
         {
-            if (_authorizationService.TryAuthorize(Email, Password))
+            var canAuthorize = await _authorizationService.CanAuthorizeAsync(Email, Password);
+            if (canAuthorize)
             {
-                _authorizationService.Authorize(Email, Password);
+                _authorizationService.AuthorizeAsync(Email, Password);
                 await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
             }
             else

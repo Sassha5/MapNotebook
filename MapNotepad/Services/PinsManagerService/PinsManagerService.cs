@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MapNotepad.Models;
 using MapNotepad.Services.RepositoryService;
 using MapNotepad.Services.SettingsManagerService;
@@ -17,40 +18,45 @@ namespace MapNotepad.Services.PinsManagerService
         {
             _settingsManagerService = settingsManagerService;
             _repositoryService = repositoryService;
-            _repositoryService.CreateTable<CustomPin>();
+            _repositoryService.CreateTableAsync<CustomPin>();
         }
 
         #region Methods
-        public int SavePin(CustomPin pin)
+        public async Task<int> SavePinAsync(CustomPin pin)
         {
             pin.UserId = _settingsManagerService.AuthorizedUserID;
+
             int id;
+
             if (pin.Id != 0)
             {
-                _repositoryService.UpdateItem(pin);
+                await _repositoryService.UpdateItemAsync(pin);
                 id = pin.Id;
             }
             else
             {
-                id = _repositoryService.InsertItem(pin);
+                id = await _repositoryService.InsertItemAsync(pin);
             }
+
             return id;
         }
 
-        public int DeletePin(CustomPin pin)
+        public Task<int> DeletePinAsync(CustomPin pin)
         {
-            return _repositoryService.DeleteItem<CustomPin>(pin.Id);
+            return _repositoryService.DeleteItemAsync<CustomPin>(pin.Id);
         }
 
-        public IEnumerable<CustomPin> GetCurrentUserPins()
+        public async Task<IEnumerable<CustomPin>> GetCurrentUserPinsAsync()
         {
-            return _repositoryService.GetItems<CustomPin>().Where(x => x.UserId == _settingsManagerService.AuthorizedUserID);
+            var pins = await _repositoryService.GetItemsAsync<CustomPin>();
+            return pins.Where(x => x.UserId == _settingsManagerService.AuthorizedUserID);
         }
 
-        public IEnumerable<CustomPin> GetCurrentUserPins(string searchValue)
+        public async Task<IEnumerable<CustomPin>> GetCurrentUserPinsAsync(string searchValue)
         {
-            return GetCurrentUserPins().Where(x => x.Label.ToLower().Contains(searchValue.ToLower())
-                                          || x.Description.ToLower().Contains(searchValue.ToLower()));
+            var pins = await GetCurrentUserPinsAsync();
+            return pins.Where(x => x.Label.ToLower().Contains(searchValue.ToLower())
+                          || x.Description.ToLower().Contains(searchValue.ToLower()));
         }
         #endregion
     }

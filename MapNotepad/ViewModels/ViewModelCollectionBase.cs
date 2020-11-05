@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
@@ -28,7 +30,7 @@ namespace MapNotepad.ViewModels
             set => SetProperty(ref _searchBarText, value);
         }
 
-        private ObservableCollection<CustomPin> _customPinCollection;
+        protected ObservableCollection<CustomPin> _customPinCollection;
         public ObservableCollection<CustomPin> CustomPinCollection
         {
             get => _customPinCollection;
@@ -37,46 +39,56 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            UpdateCollection();
+            await UpdateCollectionAsync();
         }
 
         private ICommand _SearchCommand;
-        public ICommand SearchCommand => _SearchCommand ??= new Command(OnSearchCommand);
+        public ICommand SearchCommand => _SearchCommand ??= new Command(OnSearchCommandAsync);
 
         #region Protected implementation
 
-        protected virtual void OnSearchCommand()
+        
+
+        protected async Task UpdateCollectionAsync()
+        {
+            var pins = await _pinsManagerService.GetCurrentUserPinsAsync();
+            
+            CustomPinCollection = new ObservableCollection<CustomPin>(pins);
+        }
+
+        protected Task<int> SavePinAsync(CustomPin pin)
+        {
+            return _pinsManagerService.SavePinAsync(pin);
+        }
+
+        protected async Task<int> DeletePinAsync(CustomPin pin)
+        {
+            int id = await _pinsManagerService.DeletePinAsync(pin);
+            await UpdateCollectionAsync();
+            return id;
+        }
+
+        protected async virtual Task SearchAsync()
         {
             if (!string.IsNullOrEmpty(SearchBarText))
             {
-                CustomPinCollection = new ObservableCollection<CustomPin>(_pinsManagerService.GetCurrentUserPins(SearchBarText));
+                var pins = await _pinsManagerService.GetCurrentUserPinsAsync(SearchBarText);
+                CustomPinCollection = new ObservableCollection<CustomPin>(pins);
             }
             else
             {
-                UpdateCollection();
+                await UpdateCollectionAsync();
             }
         }
 
-        protected void UpdateCollection()
-        {
-            CustomPinCollection = new ObservableCollection<CustomPin>(_pinsManagerService.GetCurrentUserPins());
-        }
-
-        protected void SavePin(CustomPin pin)
-        {
-            _pinsManagerService.SavePin(pin);
-        }
-
-        protected void DeletePin(CustomPin pin)
-        {
-            _pinsManagerService.DeletePin(pin);
-            UpdateCollection();
-        }
-
         #endregion
+
+        private async void OnSearchCommandAsync()
+        {
+            await SearchAsync();
+        }
     }
 }

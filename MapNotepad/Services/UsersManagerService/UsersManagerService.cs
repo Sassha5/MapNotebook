@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using MapNotepad.Models;
 using MapNotepad.Services.RepositoryService;
 
@@ -12,19 +13,20 @@ namespace MapNotepad.Services.UsersManagerService
         public UsersManagerService(IRepositoryService repositoryService)
         {
             _repositoryService = repositoryService;
-            _repositoryService.CreateTable<User>();
+            _repositoryService.CreateTableAsync<User>();
         }
 
         #region Methods
-        public int AddUser(User user)
+        public Task<int> AddUserAsync(User user)
         {
-            return _repositoryService.InsertItem(user);
+            return _repositoryService.InsertItemAsync(user);
         }
 
-        public int GetUserId(string email, string password)
+        public async Task<int> GetUserIdAsync(string email, string password)
         {
             int id;
-            var user = _repositoryService.GetItems<User>().FirstOrDefault(x => x.Email == email && x.Password == password);
+            var userEnumerable = await _repositoryService.GetItemsAsync<User>();
+            var user = userEnumerable.FirstOrDefault(x => x.Email == email && x.Password == password);
             if (user != null)
             {
                 id = user.Id;
@@ -36,9 +38,10 @@ namespace MapNotepad.Services.UsersManagerService
             return id;
         }
 
-        public bool TryFindMail(string email)
+        public async Task<bool> EmailExistsAsync(string email)
         {
-            var user = _repositoryService.GetItems<User>().Where(x => x.Email == email);
+            var userEnumerable = await _repositoryService.GetItemsAsync<User>();
+            var user = userEnumerable.Where(x => x.Email == email);
             return user != null;
         }
         #endregion

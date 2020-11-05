@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
+
 namespace MapNotepad.Services.RegistrationService
 {
     public interface IRegistrationService
     {
-        int Register(string name, string email, string password);
+        Task<int> RegisterAsync(string name, string email, string password);
     }
 }

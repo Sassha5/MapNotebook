@@ -162,6 +162,9 @@
     <BundleResource Include="Resources\ic_exit_to_app.png" />
     <BundleResource Include="Resources\ic_save.png" />
     <BundleResource Include="Resources\ic_settings.png" />
+    <BundleResource Include="Resources\ic_add.png" />
+    <BundleResource Include="Resources\ic_map.png" />
+    <BundleResource Include="Resources\ic_pin.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Renderers\" />

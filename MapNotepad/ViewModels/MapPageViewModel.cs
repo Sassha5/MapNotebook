@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeManagerService;
@@ -28,14 +29,7 @@ namespace MapNotepad.ViewModels
             set
             {
                 SetProperty(ref _selectedPin, value);
-                if (_selectedPin != null)
-                {
-                    Description = _selectedPin.Tag.ToString();
-                }
-                else
-                {
-                    Description = string.Empty;
-                }
+                Description = _selectedPin != null ? _selectedPin.Tag.ToString() : string.Empty;
             }
         }
         private string _description;
@@ -49,9 +43,9 @@ namespace MapNotepad.ViewModels
 
         #region INavigatedAware override
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            base.OnNavigatedTo(parameters);
+            await base.OnNavigatedToAsync(parameters);
             if (parameters.TryGetValue(nameof(CustomPin), out CustomPin pin))
             {
                 SelectedPin = PinCollection.FirstOrDefault(x => x.Label == pin.Label);

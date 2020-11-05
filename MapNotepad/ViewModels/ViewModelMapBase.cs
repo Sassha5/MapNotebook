@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using MapNotepad.Extensions;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeManagerService;
@@ -49,23 +50,25 @@ namespace MapNotepad.ViewModels
 
         #region Overrides
 
-        protected override void OnSearchCommand()
+        protected override async Task SearchAsync()
         {
-            base.OnSearchCommand();
-            UpdateMap();
+            await base.SearchAsync();
+
+            await UpdateMap();
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            base.OnNavigatedTo(parameters);
-            UpdateMap();
+            await base.OnNavigatedToAsync(parameters);
+
+            await UpdateMap();
         }
 
         #endregion
 
-        protected void UpdateMap()
+        protected async Task UpdateMap()
         {
-            PinCollection = IEnumerableExtension.ToObservableCollection(CustomPinCollection.Where(x => x.IsFavorite));
+            PinCollection = _customPinCollection.Where(x => x.IsFavorite).ToObservableCollection();
             MapStyle = _themeManagerService.GetCurrentMapStyle();
         }
     }

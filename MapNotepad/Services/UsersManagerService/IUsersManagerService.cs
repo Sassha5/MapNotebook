@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MapNotepad.Models;
 
 namespace MapNotepad.Services.UsersManagerService
 {
     public interface IUsersManagerService
     {
-        int AddUser(User user);
-        bool TryFindMail(string email);
-        int GetUserId(string email, string password);
+        Task<int> AddUserAsync(User user);
+        Task<bool> EmailExistsAsync(string email);
+        Task<int> GetUserIdAsync(string email, string password);
     }
 }

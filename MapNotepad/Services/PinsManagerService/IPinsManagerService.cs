@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MapNotepad.Models;
 
 namespace MapNotepad.Services.PinsManagerService
 {
     public interface IPinsManagerService
     {
-        IEnumerable<CustomPin> GetCurrentUserPins();
-        IEnumerable<CustomPin> GetCurrentUserPins(string searchValue);
-        int SavePin(CustomPin pin);
-        int DeletePin(CustomPin pin);
+        Task<IEnumerable<CustomPin>> GetCurrentUserPinsAsync();
+        Task<IEnumerable<CustomPin>> GetCurrentUserPinsAsync(string searchValue);
+        Task<int> SavePinAsync(CustomPin pin);
+        Task<int> DeletePinAsync(CustomPin pin);
     }
 }

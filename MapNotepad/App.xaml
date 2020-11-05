@@ -113,9 +113,9 @@
 
         <Style x:Key="EntryStyle"
                TargetType="Entry">
-            <Setter Property="BackgroundColor"
+            <!--<Setter Property="BackgroundColor"
                     Value="{AppThemeBinding Light={StaticResource LightBackgroundColor}, 
-                                            Dark={StaticResource DarkBackgroundColor}}" />
+                                            Dark={StaticResource DarkBackgroundColor}}" />-->
             <Setter Property="TextColor"
                     Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, 
                                             Dark={StaticResource DarkPrimaryTextColor}}" />
@@ -142,7 +142,7 @@
             <Setter Property="Margin"
                     Value="10"/>
             <Setter Property="Padding"
-                    Value="0"/>
+                    Value="{OnPlatform Android=0, iOS=0}"/>
         </Style>
 
         <Style x:Key="SearchBarStyle"

@@ -99,8 +99,8 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button Grid.Row="0" 
-                    Text="Add"
+            <Button Grid.Row="0"
+                    ImageSource="ic_add.png"
                     BorderRadius="35"
                     Command="{Binding ToAddPinPageCommand}"
                     Style="{StaticResource CircleButtonStyle}"/>

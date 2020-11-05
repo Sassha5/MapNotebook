@@ -65,7 +65,7 @@ namespace MapNotepad.ViewModels
         public ICommand SavePinCommand => _savePinCommand ??= new Command(OnSavePinCommandAsync);
 
         private ICommand _mapClickedCommand;
-        public ICommand MapClickedCommand => _mapClickedCommand ??= new Command<Position>(OnMapClickedCommand);
+        public ICommand MapClickedCommand => _mapClickedCommand ??= new Command<Position>(OnMapClickedCommandAsync);
 
         #endregion
 
@@ -93,9 +93,9 @@ namespace MapNotepad.ViewModels
 
         #region Command execution methods
 
-        private void OnMapClickedCommand(Position args)//wtf it works
+        private async void OnMapClickedCommandAsync(Position args)//wtf it works
         {
-            UpdateMap();   //clear temporary pins
+            await UpdateMap();   //clear temporary pins
 
             Latitude = args.Latitude;
             Longitude = args.Longitude;
@@ -116,7 +116,7 @@ namespace MapNotepad.ViewModels
                 _customPin.Latitude = Latitude;
                 _customPin.Longitude = Longitude;//how to check is valid?
 
-                SavePin(_customPin);
+                await SavePinAsync(_customPin);
                 await NavigationService.GoBackAsync();
             }
             else

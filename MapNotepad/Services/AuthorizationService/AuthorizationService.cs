@@ -1,4 +1,5 @@
-﻿using MapNotepad.Services.SettingsManagerService;
+﻿using System.Threading.Tasks;
+using MapNotepad.Services.SettingsManagerService;
 using MapNotepad.Services.UsersManagerService;
 
 namespace MapNotepad.Services.AuthorizationService
@@ -15,9 +16,10 @@ namespace MapNotepad.Services.AuthorizationService
             _usersManagerService = usersManagerService;
         }
 
-        public void Authorize(string email, string password)
+        public async void AuthorizeAsync(string email, string password)
         {
-            _settingsManagerService.AuthorizedUserID = _usersManagerService.GetUserId(email, password);
+            var userId = await _usersManagerService.GetUserIdAsync(email, password);
+            _settingsManagerService.AuthorizedUserID = userId;
         }
 
         public bool IsAuthorized()
@@ -30,9 +32,10 @@ namespace MapNotepad.Services.AuthorizationService
             _settingsManagerService.ClearData();
         }
 
-        public bool TryAuthorize(string email, string password)
+        public async Task<bool> CanAuthorizeAsync(string email, string password)
         {
-            return !(_usersManagerService.GetUserId(email, password) == Constants.NoAuthorizedUser);
+            var userId = await _usersManagerService.GetUserIdAsync(email, password);
+            return userId != Constants.NoAuthorizedUser;
         }
     }
 }

@@ -2,16 +2,16 @@
 <!--do i need prism library here?-->
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:MapNotepad.Views"
+            xmlns:views="clr-namespace:MapNotepad.Views"
             xmlns:prism="http://prismlibrary.com"
-             prism:ViewModelLocator.AutowireViewModel="True"
+            prism:ViewModelLocator.AutowireViewModel="True"
             xmlns:behaviors="clr-namespace:MapNotepad.Behaviors"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
             x:Class="MapNotepad.Views.MainPage"
             Title="{Binding Resources[MainPage]}"
             Style="{StaticResource TabbedPageStyle}">
     <!--Pages can be added as references or inline-->
-    <!--xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            android:TabbedPage.ToolbarPlacement="Bottom"-->
     <TabbedPage.Behaviors>
         <behaviors:TabbedPageNavigationBehavior />
     </TabbedPage.Behaviors>
@@ -26,7 +26,7 @@
                  IconImageSource="ic_settings"/>
     </TabbedPage.ToolbarItems>
     <TabbedPage.Children>
-        <views:MapPage />
-        <views:PinsPage />
+        <views:MapPage IconImageSource="ic_map.png"/>
+        <views:PinsPage IconImageSource="ic_pin.png"/>
     </TabbedPage.Children>
 </TabbedPage>

@@ -108,7 +108,7 @@ namespace MapNotepad.ViewModels
         }
         private async void ValidationSuccess()
         {
-            _registrationService.Register(Name, Email, Password);
+            await _registrationService.RegisterAsync(Name, Email, Password);
             NavigationParameters navParams = new NavigationParameters
             {
                 { $"{nameof(Email)}", Email }

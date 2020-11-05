@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MapNotepad.Models;
 using MapNotepad.Services.UsersManagerService;
 
@@ -13,14 +14,16 @@ namespace MapNotepad.Services.RegistrationService
             _usersManagerService = usersManagerService;
         }
 
-        public int Register(string name, string email, string password)
+        public Task<int> RegisterAsync(string name, string email, string password)
         {
-            return _usersManagerService.AddUser(new User()
+            User newUser = new User()
             {
                 Name = name,
                 Email = email,
                 Password = password
-            });
+            };
+            return _usersManagerService.AddUserAsync(newUser); ;
+            
         }
     }
 }
