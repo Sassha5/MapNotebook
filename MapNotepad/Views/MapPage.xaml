@@ -11,21 +11,26 @@
 
     <Grid HorizontalOptions="FillAndExpand"
               VerticalOptions="FillAndExpand">
+
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
         <controls:CustomMap x:Name="map"
-                                VerticalOptions="FillAndExpand"
-                                MyLocationEnabled="True"
-                                SelectedPin="{Binding SelectedPin, Mode=TwoWay}"
-                                HasZoomEnabled="True"
-                                PinsCollection="{Binding PinCollection}"
-                                MapCameraPosition="{Binding CameraPosition}"
-                                PinClicked="PinClicked"
-                                MapClicked="MapClicked"
-                                MapStyle="{Binding MapStyle}">
-        </controls:CustomMap>
+                            Grid.Row="1"
+                            VerticalOptions="FillAndExpand"
+                            MyLocationEnabled="{Binding LocationGranted}"
+                            SelectedPin="{Binding SelectedPin, Mode=TwoWay}"
+                            HasZoomEnabled="True"
+                            PinsCollection="{Binding PinCollection}"
+                            MapCameraPosition="{Binding CameraPosition}"
+                            PinClicked="PinClicked"
+                            MapClicked="MapClicked"
+                            MapStyle="{Binding MapStyle}"/>
+
         <Frame x:Name="pinInfo"
+               Grid.Row="1"
                VerticalOptions="End"
                BackgroundColor="{AppThemeBinding Light={StaticResource LightBackgroundColor}, 
                                             Dark={StaticResource DarkBackgroundColor} }">
@@ -66,12 +71,13 @@
             </StackLayout>
         </Frame>
         <SearchBar VerticalOptions="StartAndExpand"
-                       Grid.Row="0"
-                       Placeholder="{Binding Resources[Search]}"
-                       Text="{Binding SearchBarText}"
-                       SearchCommand="{Binding SearchCommand}"
-                       x:Name="searchBar"
-                       Style="{StaticResource SearchBarStyle}">
+                   Grid.Row="0"
+                   Placeholder="{Binding Resources[Search]}"
+                   Text="{Binding SearchBarText}"
+                   SearchCommand="{Binding SearchCommand}"
+                   x:Name="searchBar"
+                   Style="{StaticResource SearchBarStyle}">
+
             <SearchBar.Behaviors>
                 <prism:EventToCommandBehavior EventName="TextChanged"
                                                       Command="{Binding SearchCommand}"/>

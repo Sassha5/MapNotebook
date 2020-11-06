@@ -28,10 +28,7 @@ namespace MapNotepad.ViewModels
 
         public virtual void Initialize(INavigationParameters parameters) { }
 
-        public virtual void OnNavigatedFrom(INavigationParameters parameters)
-        {
-
-        }
+        public virtual void OnNavigatedFrom(INavigationParameters parameters) { }
 
         public virtual Task OnNavigatedToAsync(INavigationParameters parameters) => Task.FromResult(true);
 
@@ -40,10 +37,7 @@ namespace MapNotepad.ViewModels
             OnNavigatedToAsync(parameters);
         }
 
-        public virtual void Destroy()
-        {
-
-        }
+        public virtual void Destroy() { }
 
         public void OnPropertyChanged([CallerMemberName] string property = null)
         {

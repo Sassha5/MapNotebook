@@ -123,24 +123,30 @@
                     Value="{AppThemeBinding Light={StaticResource LightTertiaryTextColor}, 
                                             Dark={StaticResource DarkTertiaryTextColor}}" />
             <Setter Property="Margin"
-                    Value="10"/>
+                    Value="0"/>
             <Setter Property="ClearButtonVisibility"
                     Value="WhileEditing"/>
         </Style>
         
         <Style x:Key="CustomEntryFrameStyle"
                TargetType="Frame">
+
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding Light={StaticResource LightBackgroundColor}, 
                                             Dark={StaticResource DarkPrimaryColor}}"/>
+
             <Setter Property="BorderColor"
                             Value="Black"/>
+
             <Setter Property="CornerRadius"
                     Value="10"/>
+
             <Setter Property="HasShadow"
                     Value="False"/>
+
             <Setter Property="Margin"
                     Value="10"/>
+
             <Setter Property="Padding"
                     Value="{OnPlatform Android=0, iOS=0}"/>
         </Style>

@@ -1,6 +1,7 @@
 ﻿using System;
 using Acr.UserDialogs;
 using MapNotepad.Services.AuthorizationService;
+using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.RegistrationService;
 using MapNotepad.Services.RepositoryService;
@@ -13,6 +14,7 @@ using Plugin.Settings;
 using Prism;
 using Prism.Ioc;
 using Prism.Unity;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MapNotepad
@@ -27,6 +29,10 @@ namespace MapNotepad
         private IThemeManagerService ThemeManagerService =>
             _themeManagerService ??= Container.Resolve<IThemeManagerService>();
 
+        //private IPermissionService _permissionService;
+        //private IPermissionService PermissionService =>
+        //    _permissionService ??= Container.Resolve<IPermissionService>();
+
         public App(IPlatformInitializer initializer = null) : base(initializer)
         {
 
@@ -39,6 +45,8 @@ namespace MapNotepad
             InitializeComponent();
 
             ThemeManagerService.SetPreviousTheme();
+
+            //await PermissionService.RequestPermissionAsync<Permissions.LocationWhenInUse>();
 
             string path = nameof(SignInPage);
             if (AuthorizationService.IsAuthorized())
@@ -69,6 +77,7 @@ namespace MapNotepad
             containerRegistry.RegisterInstance<IRegistrationService>(Container.Resolve<RegistrationService>());
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
             containerRegistry.RegisterInstance<IThemeManagerService>(Container.Resolve<ThemeManagerService>());
+            containerRegistry.RegisterInstance<IPermissionService>(Container.Resolve<PermissionService>());
         }
     }
 }

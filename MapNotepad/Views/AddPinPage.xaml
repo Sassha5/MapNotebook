@@ -12,6 +12,7 @@
                  Command="{Binding SavePinCommand}"
                  IconImageSource="ic_save.png"/>
     </views:BaseContentPage.ToolbarItems>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -23,44 +24,59 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
         <Frame Grid.Row="0"
                Style="{StaticResource CustomEntryFrameStyle}">
+
             <Entry Placeholder="{Binding Resources[Label]}"
                    Text="{Binding Label}"
                    Style="{StaticResource EntryStyle}"/>
         </Frame>
+
         <Frame Grid.Row="1"
                Style="{StaticResource CustomEntryFrameStyle}">
+
             <Entry Placeholder="{Binding Resources[Description]}"
                    Text="{Binding Description}"
                    Style="{StaticResource EntryStyle}"/>
         </Frame>
+
         <StackLayout Orientation="Horizontal" Grid.Row="2">
+
             <Frame HorizontalOptions="FillAndExpand"
-                Style="{StaticResource CustomEntryFrameStyle}">
+                   Style="{StaticResource CustomEntryFrameStyle}">
+
                 <Entry Placeholder="{Binding Resources[Latitude]}"
                        Text="{Binding Latitude}"
                        Style="{StaticResource EntryStyle}"/>
             </Frame>
+
             <Frame HorizontalOptions="FillAndExpand"
-                Style="{StaticResource CustomEntryFrameStyle}">
+                   Style="{StaticResource CustomEntryFrameStyle}">
+
                 <Entry Placeholder="{Binding Resources[Longitude]}"
                        Text="{Binding Longitude}"
                        Style="{StaticResource EntryStyle}"/>
             </Frame>
+
         </StackLayout>
+
         <controls:CustomMap x:Name="map"
-                  VerticalOptions="FillAndExpand"
-                  Grid.Row="3"
-                  Grid.RowSpan="4"
-                  PinsCollection="{Binding PinCollection}"
-                  MapStyle="{Binding MapStyle}">
+                            VerticalOptions="FillAndExpand"
+                            Grid.Row="3"
+                            Grid.RowSpan="4"
+                            PinsCollection="{Binding PinCollection}"
+                            MapStyle="{Binding MapStyle}">
+
             <controls:CustomMap.Behaviors>
                 <prism:EventToCommandBehavior                         
                             EventName="MapClicked"
                             Command="{Binding MapClickedCommand}"
                             EventArgsParameterPath="Point"/>
             </controls:CustomMap.Behaviors>
+
         </controls:CustomMap>
+
     </Grid>
+
 </views:BaseContentPage>

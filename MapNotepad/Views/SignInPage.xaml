@@ -8,6 +8,7 @@
                         Title="{Binding Resources[SignIn]}">
 
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -18,8 +19,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
+
         <Frame Grid.Row="0"
                Style="{StaticResource CustomEntryFrameStyle}">
+
             <Entry x:Name="emailInput"
                    Placeholder="{Binding Resources[Email]}"
                    Text="{Binding Email}"

@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Acr.UserDialogs;
 using MapNotepad.Extensions;
 using MapNotepad.Models;
+using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeManagerService;
 using Prism.Navigation;
@@ -19,10 +20,12 @@ namespace MapNotepad.ViewModels
         public AddPinPageViewModel(INavigationService navigationService,
                                 IPinsManagerService pinsManagerService,
                                 IThemeManagerService themeManagerService,
+                                IPermissionService permissionService,
                                 IUserDialogs userDialogs)
                                 : base(navigationService,
                                       pinsManagerService,
-                                      themeManagerService)
+                                      themeManagerService,
+                                      permissionService)
         {
             _userDialogs = userDialogs;
         }
@@ -95,7 +98,7 @@ namespace MapNotepad.ViewModels
 
         private async void OnMapClickedCommandAsync(Position args)//wtf it works
         {
-            await UpdateMap();   //clear temporary pins
+            UpdateMap();   //clear temporary pins
 
             Latitude = args.Latitude;
             Longitude = args.Longitude;

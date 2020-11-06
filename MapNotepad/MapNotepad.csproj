@@ -42,6 +42,7 @@
     <Folder Include="Controls\" />
     <Folder Include="Validation\" />
     <Folder Include="Services\ThemeManagerService\" />
+    <Folder Include="Services\PermissionService\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\RegisterPage.xaml" />

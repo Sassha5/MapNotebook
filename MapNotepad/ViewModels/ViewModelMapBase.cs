@@ -3,9 +3,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using MapNotepad.Extensions;
+using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeManagerService;
 using Prism.Navigation;
+using Xamarin.Essentials;
 using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.ViewModels
@@ -13,14 +15,17 @@ namespace MapNotepad.ViewModels
     public class ViewModelMapBase : ViewModelCollectionBase
     {
         private IThemeManagerService _themeManagerService;
+        private IPermissionService _permissionService;
 
         public ViewModelMapBase(INavigationService navigationService,
                                 IPinsManagerService pinsManagerService,
-                                IThemeManagerService themeManagerService)
+                                IThemeManagerService themeManagerService,
+                                IPermissionService permissionService)
                                 : base(navigationService,
                                        pinsManagerService)
         {
             _themeManagerService = themeManagerService;
+            _permissionService = permissionService;
         }
 
         #region Properties
@@ -46,6 +51,13 @@ namespace MapNotepad.ViewModels
             set => SetProperty(ref _mapStyle, value);
         }
 
+        private bool _LocationGranted;
+        public bool LocationGranted
+        {
+            get => _LocationGranted;
+            set => SetProperty(ref _LocationGranted, value);
+        }
+
         #endregion
 
         #region Overrides
@@ -54,19 +66,24 @@ namespace MapNotepad.ViewModels
         {
             await base.SearchAsync();
 
-            await UpdateMap();
+            UpdateMap();
         }
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
+            if (!LocationGranted)
+            {
+                LocationGranted = await _permissionService.RequestPermissionAsync<Permissions.LocationWhenInUse>() == PermissionStatus.Granted;
+            }
+
             await base.OnNavigatedToAsync(parameters);
 
-            await UpdateMap();
+            UpdateMap();
         }
 
         #endregion
 
-        protected async Task UpdateMap()
+        protected void UpdateMap()
         {
             PinCollection = _customPinCollection.Where(x => x.IsFavorite).ToObservableCollection();
             MapStyle = _themeManagerService.GetCurrentMapStyle();

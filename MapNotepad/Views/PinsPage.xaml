@@ -99,11 +99,28 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button Grid.Row="0"
-                    ImageSource="ic_add.png"
-                    BorderRadius="35"
-                    Command="{Binding ToAddPinPageCommand}"
-                    Style="{StaticResource CircleButtonStyle}"/>
+            <Frame Grid.Row="0"
+                   VerticalOptions="End"
+                   HorizontalOptions="End"
+                   Margin="30"
+                   Padding="0"
+                   HeightRequest="70"
+                   WidthRequest="70"
+                   CornerRadius="35"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource LightNavigationBarColor}, 
+                                            Dark={StaticResource DarkNavigationBarColor}}">
+
+                <Image HeightRequest="55"
+                       WidthRequest="55"
+                       Source="ic_add.png"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToAddPinPageCommand}"/>
+                </Frame.GestureRecognizers>
+
+            </Frame>
         </Grid>
     </StackLayout>
 </views:BaseContentPage>

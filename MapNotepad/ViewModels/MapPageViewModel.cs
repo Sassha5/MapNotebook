@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using MapNotepad.Models;
+using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeManagerService;
 using Prism.Navigation;
@@ -13,10 +14,12 @@ namespace MapNotepad.ViewModels
     {
         public MapPageViewModel(INavigationService navigationService,
                                IPinsManagerService pinsManagerService,
-                               IThemeManagerService themeManagerService)
+                               IThemeManagerService themeManagerService,
+                               IPermissionService permissionService)
                                : base(navigationService,
                                      pinsManagerService,
-                                     themeManagerService)
+                                     themeManagerService,
+                                     permissionService)
         {
         }
 
@@ -32,6 +35,7 @@ namespace MapNotepad.ViewModels
                 Description = _selectedPin != null ? _selectedPin.Tag.ToString() : string.Empty;
             }
         }
+
         private string _description;
         public string Description
         {
