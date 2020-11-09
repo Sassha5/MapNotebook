@@ -37,35 +37,20 @@ namespace MapNotepad.ViewModels
 
         #region Properties
 
-        private Pin _selectedPin;
-        public Pin SelectedPin
+        private CustomPin _selectedCustomPin;
+        public CustomPin SelectedCustomPin
         {
-            get => _selectedPin;
-            set
-            {
-                SetProperty(ref _selectedPin, value);
-                SetFrameProperties();
-            }
-        }
-
-        private string _description;
-        public string Description
-        {
-            get => _description;
-            set => SetProperty(ref _description, value);
-        }
-
-        private string _reminder;
-        public string Reminder
-        {
-            get => _reminder;
-            set => SetProperty(ref _reminder, value);
+            get => _selectedCustomPin;
+            set => SetProperty(ref _selectedCustomPin, value);
         }
 
         #endregion
 
         private ICommand _addReminderCommand;
         public ICommand AddReminderCommand => _addReminderCommand ??= new Command(OnAddReminderCommandAsync);
+
+        private ICommand _selectedPinChangedCommand;
+        public ICommand SelectedPinChangedCommand => _selectedPinChangedCommand ??= new Command<object>(OnSelectedPinChangedCommand);
 
         #region INavigatedAware override
 
@@ -75,18 +60,18 @@ namespace MapNotepad.ViewModels
 
             if (parameters.TryGetValue(nameof(CustomPin), out CustomPin pin))
             {
-                SelectedPin = PinCollection.FirstOrDefault(x => x.Label == pin.Label);
+                SelectedCustomPin = pin;
                 CameraPosition = new Position(pin.Latitude, pin.Longitude);
             }
 
-            await _notificationService.SendPush("Hui", "v rotebal;");
+            //await _notificationService.SendPush("Hui", "v rotebal;");
         }
 
         #endregion
 
         private async void OnAddReminderCommandAsync()
         {
-            if (_selectedPin != null)
+            if (_selectedCustomPin != null)
             {
                 await PopupNavigation.Instance.PushAsync(new AddReminderPopup());
                 //var result = await UserDialogs.Instance.PromptAsync("Enter reminder:");
@@ -97,13 +82,12 @@ namespace MapNotepad.ViewModels
             }
         }
 
-        private void SetFrameProperties()
+
+        private void OnSelectedPinChangedCommand(object pinObj)
         {
-            var customPin = CustomPinCollection.FirstOrDefault(x => x.Label == _selectedPin.Label);
-            if (customPin != null)
+            if (pinObj is Pin pin)
             {
-                Description = customPin.Description;
-                Reminder = customPin.Reminder;
+                SelectedCustomPin = CustomPinCollection.FirstOrDefault(x => x.Label == pin.Label);
             }
         }
     }

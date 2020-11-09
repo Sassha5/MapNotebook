@@ -15,7 +15,6 @@ namespace MapNotepad.ViewModels
     public class AddPinPageViewModel : ViewModelMapBase
     {
         private readonly IUserDialogs _userDialogs;
-        private CustomPin _customPin;
 
         public AddPinPageViewModel(INavigationService navigationService,
                                 IPinsManagerService pinsManagerService,
@@ -32,33 +31,40 @@ namespace MapNotepad.ViewModels
 
         #region Properties
 
-        private string _label;
-        public string Label
+        private CustomPin _customPin;
+        public CustomPin CustomPin
         {
-            get => _label;
-            set => SetProperty(ref _label, value);
+            get => _customPin;
+            set => SetProperty(ref _customPin, value);
         }
 
-        private string _description;
-        public string Description
-        {
-            get => _description;
-            set => SetProperty(ref _description, value);
-        }
+        //private string _label;
+        //public string Label
+        //{
+        //    get => _label;
+        //    set => SetProperty(ref _label, value);
+        //}
 
-        private double _latitude;
-        public double Latitude
-        {
-            get => _latitude;
-            set => SetProperty(ref _latitude, value);
-        }
+        //private string _description;
+        //public string Description
+        //{
+        //    get => _description;
+        //    set => SetProperty(ref _description, value);
+        //}
 
-        private double _longitude;
-        public double Longitude
-        {
-            get => _longitude;
-            set => SetProperty(ref _longitude, value);
-        }
+        //private double _latitude;
+        //public double Latitude
+        //{
+        //    get => _latitude;
+        //    set => SetProperty(ref _latitude, value);
+        //}
+
+        //private double _longitude;
+        //public double Longitude
+        //{
+        //    get => _longitude;
+        //    set => SetProperty(ref _longitude, value);
+        //}
 
         #endregion
 
@@ -68,7 +74,7 @@ namespace MapNotepad.ViewModels
         public ICommand SavePinCommand => _savePinCommand ??= new Command(OnSavePinCommandAsync);
 
         private ICommand _mapClickedCommand;
-        public ICommand MapClickedCommand => _mapClickedCommand ??= new Command<Position>(OnMapClickedCommand);
+        public ICommand MapClickedCommand => _mapClickedCommand ??= new Command<Position>(OnMapClickedCommandAsync);
 
         #endregion
 
@@ -77,18 +83,17 @@ namespace MapNotepad.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            _customPin = new CustomPin()
-            {
-                Label = "New Pin",
-                IsFavorite = true
-            };
+            CustomPin = new CustomPin();
             if (parameters.TryGetValue(nameof(CustomPin), out CustomPin customPin))
             {
-                _customPin.Id = customPin.Id;
-                Label = customPin.Label;
-                Description = customPin.Description;
-                Latitude = customPin.Latitude;
-                Longitude = customPin.Longitude;
+                CustomPin = new CustomPin()
+                {
+                    Id = customPin.Id,
+                    Label = customPin.Label,
+                    Description = customPin.Description,
+                    Latitude = customPin.Latitude,
+                    Longitude = customPin.Longitude
+                };
             }
         }
 
@@ -96,28 +101,31 @@ namespace MapNotepad.ViewModels
 
         #region Command execution methods
 
-        private void OnMapClickedCommand(Position args)//wtf it works
+        private async void OnMapClickedCommandAsync(Position args)//wtf it works
         {
-            UpdateMap();   //clear temporary pins
+            await UpdateCollectionAsync();   //clear temporary pins
 
-            Latitude = args.Latitude;
-            Longitude = args.Longitude;
+            CustomPin = new CustomPin()
+            {
+                Label = string.IsNullOrEmpty(CustomPin.Label) ? "New Pin" : CustomPin.Label,
+                Description = CustomPin.Description,
+                IsFavorite = true,
+                Latitude = args.Latitude,
+                Longitude = args.Longitude
+            };
 
-            _customPin.Longitude = Longitude;
-            _customPin.Latitude = Latitude;
-
-            PinCollection.Add(ModelsExtension.ToPin(_customPin)); //add pin only in collection to show, not in repo
-            PinCollection = new ObservableCollection<Pin>(PinCollection); //trigger property changed to show new pin
+            CustomPinCollection.Add(_customPin);                                 //add pin only in collection to show, not in repo
+            CustomPinCollection = new ObservableCollection<CustomPin>(CustomPinCollection);//trigger property changed to show new pin
         }
 
         private async void OnSavePinCommandAsync()
         {
             if (!string.IsNullOrEmpty(_customPin.Label))
             {
-                _customPin.Label = Label;
-                _customPin.Description = Description;
-                _customPin.Latitude = Latitude;
-                _customPin.Longitude = Longitude;//how to check is valid?
+                //_customPin.Label = Label;
+                //_customPin.Description = Description;
+                //_customPin.Latitude = Latitude;
+                //_customPin.Longitude = Longitude;//how to check is valid?
 
                 await SavePinAsync(_customPin);
                 await NavigationService.GoBackAsync();

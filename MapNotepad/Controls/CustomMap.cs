@@ -13,36 +13,22 @@ namespace MapNotepad.Controls
         public CustomMap()
         {
             UiSettings.MyLocationButtonEnabled = true;
-            CustomPinsCollection = new ObservableCollection<CustomPin>();
         }
 
         #region Properties
-        public static readonly BindableProperty PinsCollectionProperty =
-            BindableProperty.Create(
-                propertyName: nameof(PinsCollection),
-                returnType: typeof(ObservableCollection<Pin>),
-                declaringType: typeof(CustomMap),
-                defaultBindingMode: BindingMode.TwoWay,
-                propertyChanged: PinsPropertyChanged);
 
-        public ObservableCollection<Pin> PinsCollection
-        {
-            get => (ObservableCollection<Pin>)GetValue(PinsCollectionProperty);
-            set => SetValue(PinsCollectionProperty, value);
-        }
-
-        public static readonly BindableProperty CustomPinsCollectionProperty =
+        public static readonly BindableProperty CustomPinCollectionProperty =
             BindableProperty.Create(
-                propertyName: nameof(CustomPinsCollection),
+                propertyName: nameof(CustomPinCollection),
                 returnType: typeof(ObservableCollection<CustomPin>),
                 declaringType: typeof(CustomMap),
                 defaultBindingMode: BindingMode.TwoWay,
-                propertyChanged: CustomPinsPropertyChanged);
+                propertyChanged: CustomPinCollectionPropertyChanged);
 
-        public ObservableCollection<CustomPin> CustomPinsCollection
+        public ObservableCollection<CustomPin> CustomPinCollection
         {
-            get => (ObservableCollection<CustomPin>)GetValue(CustomPinsCollectionProperty);
-            set => SetValue(CustomPinsCollectionProperty, value);
+            get => (ObservableCollection<CustomPin>)GetValue(CustomPinCollectionProperty);
+            set => SetValue(CustomPinCollectionProperty, value);
         }
 
         public static readonly BindableProperty MapCameraPositionProperty =
@@ -59,6 +45,20 @@ namespace MapNotepad.Controls
             set => SetValue(MapCameraPositionProperty, value);
         }
 
+        public static readonly BindableProperty SelectedCustomPinProperty =
+            BindableProperty.Create(
+                propertyName: nameof(SelectedCustomPin),
+                returnType: typeof(CustomPin),
+                declaringType: typeof(CustomMap),
+                defaultBindingMode: BindingMode.TwoWay,
+                propertyChanged: SelectedCustomPinPropertyChanged);
+
+        public CustomPin SelectedCustomPin
+        {
+            get => (CustomPin)GetValue(SelectedCustomPinProperty);
+            set => SetValue(SelectedCustomPinProperty, value);
+        }
+
         #endregion
 
         #region Helpers
@@ -73,8 +73,7 @@ namespace MapNotepad.Controls
             }
         }
 
-
-        private static void CustomPinsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void CustomPinCollectionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var map = bindable as CustomMap;
             var newPins = newValue as ObservableCollection<CustomPin>;
@@ -89,17 +88,13 @@ namespace MapNotepad.Controls
             }
         }
 
-        private static void PinsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void SelectedCustomPinPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var map = bindable as CustomMap;
-            var newPins = newValue as ObservableCollection<Pin>;
-            if (newValue != oldValue && map != null && newPins != null)
+            var newSelectedPin = (CustomPin)newValue;
+            if (newValue != oldValue && map != null && newSelectedPin != null)
             {
-                map.Pins.Clear();
-                foreach (var pin in newPins)
-                {
-                    map.Pins.Add(pin);
-                }
+                map.SelectedPin = newSelectedPin.ToPin();
             }
         }
 

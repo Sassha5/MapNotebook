@@ -26,30 +26,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--<Frame Grid.Row="0"
-               Style="{StaticResource CustomEntryFrameStyle}">
-
-            <Entry Placeholder="{Binding Resources[Label]}"
-                   Text="{Binding Label}"
-                   Style="{StaticResource EntryStyle}"/>
-        </Frame>-->
-
         <controls:CustomEntry Grid.Row="0"
-                              Text="{Binding BindingContext.Label,
+                              Text="{Binding BindingContext.CustomPin.Label,
                                      Source={x:Reference addPinPage}}"
                               Placeholder="{Binding BindingContext.Resources[Label],
                                             Source={x:Reference addPinPage}}"/>
 
-        <!--<Frame Grid.Row="1"
-               Style="{StaticResource CustomEntryFrameStyle}">
-
-            <Entry Placeholder="{Binding Resources[Description]}"
-                   Text="{Binding Description}"
-                   Style="{StaticResource EntryStyle}"/>
-        </Frame>-->
-
         <controls:CustomEntry Grid.Row="1"
-                              Text="{Binding BindingContext.Description,
+                              Text="{Binding BindingContext.CustomPin.Description,
                                      Source={x:Reference addPinPage}}"
                               Placeholder="{Binding BindingContext.Resources[Description],
                                             Source={x:Reference addPinPage}}"/>
@@ -57,13 +41,13 @@
         <StackLayout Orientation="Horizontal" Grid.Row="2">
 
             <controls:CustomEntry HorizontalOptions="FillAndExpand"
-                                    Text="{Binding BindingContext.Latitude,
+                                    Text="{Binding BindingContext.CustomPin.Latitude,
                                      Source={x:Reference addPinPage}}"
                                   Placeholder="{Binding BindingContext.Resources[Latitude],
                                             Source={x:Reference addPinPage}}"/>
 
             <controls:CustomEntry HorizontalOptions="FillAndExpand"
-                                    Text="{Binding BindingContext.Longitude,
+                                    Text="{Binding BindingContext.CustomPin.Longitude,
                                      Source={x:Reference addPinPage}}"
                                   Placeholder="{Binding BindingContext.Resources[Longitude],
                                             Source={x:Reference addPinPage}}"/>
@@ -74,7 +58,7 @@
                             VerticalOptions="FillAndExpand"
                             Grid.Row="3"
                             Grid.RowSpan="4"
-                            PinsCollection="{Binding PinCollection}"
+                            CustomPinCollection="{Binding CustomPinCollection}"
                             MapStyle="{Binding MapStyle}">
 
             <controls:CustomMap.Behaviors>

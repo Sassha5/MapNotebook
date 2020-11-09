@@ -41,14 +41,6 @@ namespace MapNotepad.Droid
             LoadApplication(new App(new AndroidInitializer()));
         }
 
-        protected override void OnStart()
-        {
-            base.OnStart();
-
-            //StartService(new Android.Content.Intent("sassha5.mapnotepad.AnotherNotificationService"));
-        }
-
-
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

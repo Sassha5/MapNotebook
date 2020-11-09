@@ -4,7 +4,7 @@
                        xmlns:prism="http://prismlibrary.com"
                        prism:ViewModelLocator.AutowireViewModel="True"
                        xmlns:views="clr-namespace:MapNotepad.Views"
-                       xmlns:controls="clr-namespace:MapNotepad.Controls"
+                       xmlns:controls="clr-namespace:MapNotepad.Controls" xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
                        x:Class="MapNotepad.Views.MapPage"
                        x:Name="mapPage"
                        Title="{Binding Resources[Map]}">
@@ -21,13 +21,23 @@
                             Grid.Row="1"
                             VerticalOptions="FillAndExpand"
                             MyLocationEnabled="{Binding LocationGranted}"
-                            SelectedPin="{Binding SelectedPin, Mode=TwoWay}"
+                            SelectedCustomPin="{Binding SelectedCustomPin, Mode=TwoWay}"
                             HasZoomEnabled="True"
-                            PinsCollection="{Binding PinCollection}"
+                            CustomPinCollection="{Binding CustomPinCollection}"
                             MapCameraPosition="{Binding CameraPosition}"
                             PinClicked="PinClicked"
                             MapClicked="MapClicked"
-                            MapStyle="{Binding MapStyle}"/>
+                            MapStyle="{Binding MapStyle}">
+
+            <maps:Map.Behaviors>
+
+                <prism:EventToCommandBehavior EventName="SelectedPinChanged"
+                                              Command="{Binding SelectedPinChangedCommand}"
+                                              EventArgsParameterPath="SelectedPin"/>
+
+            </maps:Map.Behaviors>
+
+        </controls:CustomMap>
 
         <Frame x:Name="pinInfo"
                Grid.Row="1"
@@ -42,7 +52,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Label: "/>
-                            <Span Text="{Binding SelectedPin.Label}"/>
+                            <Span Text="{Binding SelectedCustomPin.Label}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -51,7 +61,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Latitude: "/>
-                            <Span Text="{Binding SelectedPin.Position.Latitude}"/>
+                            <Span Text="{Binding SelectedCustomPin.Latitude}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -60,7 +70,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Longitude: "/>
-                            <Span Text="{Binding SelectedPin.Position.Longitude}"/>
+                            <Span Text="{Binding SelectedCustomPin.Longitude}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -69,7 +79,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Description: "/>
-                            <Span Text="{Binding Description}"/>
+                            <Span Text="{Binding SelectedCustomPin.Description}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -78,7 +88,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Reminder: "/>
-                            <Span Text="{Binding Reminder}"/>
+                            <Span Text="{Binding SelectedCustomPin.Reminder}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -100,7 +110,7 @@
 
             <SearchBar.Behaviors>
                 <prism:EventToCommandBehavior EventName="TextChanged"
-                                                      Command="{Binding SearchCommand}"/>
+                                              Command="{Binding SearchCommand}"/>
             </SearchBar.Behaviors>
 
         </SearchBar>

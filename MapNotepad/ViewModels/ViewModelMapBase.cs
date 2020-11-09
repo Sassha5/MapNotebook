@@ -30,12 +30,12 @@ namespace MapNotepad.ViewModels
 
         #region Properties
 
-        private ObservableCollection<Pin> _pinCollection;
-        public ObservableCollection<Pin> PinCollection
-        {
-            get => _pinCollection;
-            set => SetProperty(ref _pinCollection, value);
-        }
+        //private ObservableCollection<Pin> _pinCollection;
+        //public ObservableCollection<Pin> PinCollection
+        //{
+        //    get => _pinCollection;
+        //    set => SetProperty(ref _pinCollection, value);
+        //}
 
         private Position _cameraPosition;
         public Position CameraPosition
@@ -62,13 +62,6 @@ namespace MapNotepad.ViewModels
 
         #region Overrides
 
-        protected override async Task SearchAsync()
-        {
-            await base.SearchAsync();
-
-            UpdateMap();
-        }
-
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             if (!LocationGranted)
@@ -78,15 +71,9 @@ namespace MapNotepad.ViewModels
 
             await base.OnNavigatedToAsync(parameters);
 
-            UpdateMap();
+            MapStyle = _themeManagerService.GetCurrentMapStyle();
         }
 
         #endregion
-
-        protected void UpdateMap()
-        {
-            PinCollection = _customPinCollection.Where(x => x.IsFavorite).ToObservableCollection();
-            MapStyle = _themeManagerService.GetCurrentMapStyle();
-        }
     }
 }

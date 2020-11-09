@@ -11,22 +11,34 @@
             x:Class="MapNotepad.Views.MainPage"
             Title="{Binding Resources[MainPage]}"
             Style="{StaticResource TabbedPageStyle}">
+
     <!--Pages can be added as references or inline-->
     <TabbedPage.Behaviors>
+
         <behaviors:TabbedPageNavigationBehavior />
+
     </TabbedPage.Behaviors>
+
     <TabbedPage.ToolbarItems>
+
         <ToolbarItem Order="Primary"
                  Priority="1"
                  Command="{Binding LogoutCommand}"
                  IconImageSource="ic_exit_to_app.png"/>
+
         <ToolbarItem Order="Primary"
                  Priority="0"
                  Command="{Binding SettingsCommand}"
                  IconImageSource="ic_settings"/>
+
     </TabbedPage.ToolbarItems>
+
     <TabbedPage.Children>
+
         <views:MapPage IconImageSource="ic_map.png"/>
+
         <views:PinsPage IconImageSource="ic_pin.png"/>
+
     </TabbedPage.Children>
+
 </TabbedPage>
