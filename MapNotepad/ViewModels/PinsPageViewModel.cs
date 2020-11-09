@@ -49,7 +49,6 @@ namespace MapNotepad.ViewModels
             {
                 pin.IsFavorite = !pin.IsFavorite;
                 await SavePinAsync(pin);
-                await UpdateCollectionAsync();
             }
         }
 

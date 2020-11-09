@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using MapNotepad.Services.SettingsManagerService;
+using MapNotepad.Services.SettingsService;
 using MapNotepad.Services.UsersManagerService;
 
 namespace MapNotepad.Services.AuthorizationService
@@ -7,10 +7,10 @@ namespace MapNotepad.Services.AuthorizationService
     class AuthorizationService : IAuthorizationService
     {
         private readonly IUsersManagerService _usersManagerService;
-        private readonly ISettingsManagerService _settingsManagerService;
+        private readonly ISettingsService _settingsManagerService;
 
         public AuthorizationService(IUsersManagerService usersManagerService,
-                                    ISettingsManagerService settingsManagerService)
+                                    ISettingsService settingsManagerService)
         {
             _settingsManagerService = settingsManagerService;
             _usersManagerService = usersManagerService;

@@ -1,4 +1,4 @@
-﻿using MapNotepad.Services.ThemeManagerService;
+﻿using MapNotepad.Services.ThemeService;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -6,10 +6,10 @@ namespace MapNotepad.ViewModels
 {
     public class SettingsPageViewModel : ViewModelBase
     {
-        private readonly IThemeManagerService _themeManagerService;
+        private readonly IThemeService _themeManagerService;
 
         public SettingsPageViewModel(INavigationService navigationService,
-                                     IThemeManagerService themeManagerService)
+                                     IThemeService themeManagerService)
                                      : base(navigationService)
         {
             _themeManagerService = themeManagerService;

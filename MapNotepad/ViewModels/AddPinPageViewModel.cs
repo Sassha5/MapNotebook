@@ -5,7 +5,7 @@ using MapNotepad.Extensions;
 using MapNotepad.Models;
 using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
-using MapNotepad.Services.ThemeManagerService;
+using MapNotepad.Services.ThemeService;
 using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
@@ -19,7 +19,7 @@ namespace MapNotepad.ViewModels
 
         public AddPinPageViewModel(INavigationService navigationService,
                                 IPinsManagerService pinsManagerService,
-                                IThemeManagerService themeManagerService,
+                                IThemeService themeManagerService,
                                 IPermissionService permissionService,
                                 IUserDialogs userDialogs)
                                 : base(navigationService,
@@ -68,7 +68,7 @@ namespace MapNotepad.ViewModels
         public ICommand SavePinCommand => _savePinCommand ??= new Command(OnSavePinCommandAsync);
 
         private ICommand _mapClickedCommand;
-        public ICommand MapClickedCommand => _mapClickedCommand ??= new Command<Position>(OnMapClickedCommandAsync);
+        public ICommand MapClickedCommand => _mapClickedCommand ??= new Command<Position>(OnMapClickedCommand);
 
         #endregion
 
@@ -96,7 +96,7 @@ namespace MapNotepad.ViewModels
 
         #region Command execution methods
 
-        private async void OnMapClickedCommandAsync(Position args)//wtf it works
+        private void OnMapClickedCommand(Position args)//wtf it works
         {
             UpdateMap();   //clear temporary pins
 
@@ -105,7 +105,7 @@ namespace MapNotepad.ViewModels
 
             _customPin.Longitude = Longitude;
             _customPin.Latitude = Latitude;
-                
+
             PinCollection.Add(ModelsExtension.ToPin(_customPin)); //add pin only in collection to show, not in repo
             PinCollection = new ObservableCollection<Pin>(PinCollection); //trigger property changed to show new pin
         }

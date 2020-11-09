@@ -1,9 +1,9 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
-namespace MapNotepad.Services.ThemeManagerService
+namespace MapNotepad.Services.ThemeService
 {
-    public interface IThemeManagerService
+    public interface IThemeService
     {
         void SetApplicationTheme(OSAppTheme theme);
         void SetPreviousTheme();

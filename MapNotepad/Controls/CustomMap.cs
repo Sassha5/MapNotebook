@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+using MapNotepad.Extensions;
+using MapNotepad.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.GoogleMaps.Clustering;
@@ -12,8 +13,7 @@ namespace MapNotepad.Controls
         public CustomMap()
         {
             UiSettings.MyLocationButtonEnabled = true;
-            PinsCollection = new ObservableCollection<Pin>();
-            PinsCollection.CollectionChanged += Pins_CollectionChanged;
+            CustomPinsCollection = new ObservableCollection<CustomPin>();
         }
 
         #region Properties
@@ -31,6 +31,20 @@ namespace MapNotepad.Controls
             set => SetValue(PinsCollectionProperty, value);
         }
 
+        public static readonly BindableProperty CustomPinsCollectionProperty =
+            BindableProperty.Create(
+                propertyName: nameof(CustomPinsCollection),
+                returnType: typeof(ObservableCollection<CustomPin>),
+                declaringType: typeof(CustomMap),
+                defaultBindingMode: BindingMode.TwoWay,
+                propertyChanged: CustomPinsPropertyChanged);
+
+        public ObservableCollection<CustomPin> CustomPinsCollection
+        {
+            get => (ObservableCollection<CustomPin>)GetValue(CustomPinsCollectionProperty);
+            set => SetValue(CustomPinsCollectionProperty, value);
+        }
+
         public static readonly BindableProperty MapCameraPositionProperty =
             BindableProperty.Create(
                 propertyName: nameof(MapCameraPosition),
@@ -42,45 +56,53 @@ namespace MapNotepad.Controls
         public Position MapCameraPosition
         {
             get => (Position)GetValue(MapCameraPositionProperty);
-            set => SetValue(PinsCollectionProperty, value);
+            set => SetValue(MapCameraPositionProperty, value);
         }
+
         #endregion
 
         #region Helpers
-        private void Pins_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            UpdatePins(this, sender as IEnumerable<Pin>);
-        }
-
-        private static void UpdatePins(CustomMap map, IEnumerable<Pin> newPins)
-        {
-            map.Pins.Clear();
-            foreach (var pin in newPins)
-            {
-                map.Pins.Add(pin);
-            }
-        }
-
-        private static void UpdateCameraPosition(CustomMap map, Position cameraPosition)
-        {
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(cameraPosition, Distance.FromMiles(5)));
-        }
 
         private static void CameraPositionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (newValue != oldValue && bindable as CustomMap != null && newValue != null)
+            var map = bindable as CustomMap;
+            var newCameraPosition = (Position)newValue;
+            if (newValue != oldValue && map != null && newCameraPosition != null)
             {
-                UpdateCameraPosition(bindable as CustomMap, (Position)newValue);
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(newCameraPosition, Distance.FromMiles(5)));
+            }
+        }
+
+
+        private static void CustomPinsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var map = bindable as CustomMap;
+            var newPins = newValue as ObservableCollection<CustomPin>;
+
+            if (newValue != oldValue && map != null && newPins != null)
+            {
+                map.Pins.Clear();
+                foreach (var pin in newPins)
+                {
+                    map.Pins.Add(pin.ToPin());
+                }
             }
         }
 
         private static void PinsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (newValue != oldValue && bindable as CustomMap != null && newValue as ObservableCollection<Pin> != null)
+            var map = bindable as CustomMap;
+            var newPins = newValue as ObservableCollection<Pin>;
+            if (newValue != oldValue && map != null && newPins != null)
             {
-                UpdatePins(bindable as CustomMap, newValue as ObservableCollection<Pin>);
+                map.Pins.Clear();
+                foreach (var pin in newPins)
+                {
+                    map.Pins.Add(pin);
+                }
             }
         }
+
         #endregion
     }
 }

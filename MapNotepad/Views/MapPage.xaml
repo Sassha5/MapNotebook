@@ -34,7 +34,9 @@
                VerticalOptions="End"
                BackgroundColor="{AppThemeBinding Light={StaticResource LightBackgroundColor}, 
                                             Dark={StaticResource DarkBackgroundColor} }">
+
             <StackLayout>
+
                 <Label Style="{StaticResource MediumLabelStyle}"
                                        VerticalOptions="Center">
                     <Label.FormattedText>
@@ -44,6 +46,7 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+
                 <Label Style="{StaticResource SmallLabelStyle}">
                     <Label.FormattedText>
                         <FormattedString>
@@ -52,6 +55,7 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+
                 <Label Style="{StaticResource SmallLabelStyle}">
                     <Label.FormattedText>
                         <FormattedString>
@@ -60,6 +64,7 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+
                 <Label Style="{StaticResource SmallLabelStyle}">
                     <Label.FormattedText>
                         <FormattedString>
@@ -68,8 +73,23 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+
+                <Label Style="{StaticResource SmallLabelStyle}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Reminder: "/>
+                            <Span Text="{Binding Reminder}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Button Text="Add reminder"
+                        Command="{Binding AddReminderCommand}"/>
+
             </StackLayout>
+
         </Frame>
+
         <SearchBar VerticalOptions="StartAndExpand"
                    Grid.Row="0"
                    Placeholder="{Binding Resources[Search]}"
@@ -82,6 +102,9 @@
                 <prism:EventToCommandBehavior EventName="TextChanged"
                                                       Command="{Binding SearchCommand}"/>
             </SearchBar.Behaviors>
+
         </SearchBar>
+
     </Grid>
+
 </views:BaseContentPage>

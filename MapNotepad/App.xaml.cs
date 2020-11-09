@@ -5,11 +5,12 @@ using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.RegistrationService;
 using MapNotepad.Services.RepositoryService;
-using MapNotepad.Services.SettingsManagerService;
-using MapNotepad.Services.ThemeManagerService;
+using MapNotepad.Services.SettingsService;
+using MapNotepad.Services.ThemeService;
 using MapNotepad.Services.UsersManagerService;
 using MapNotepad.ViewModels;
 using MapNotepad.Views;
+using Plugin.LocalNotifications;
 using Plugin.Settings;
 using Prism;
 using Prism.Ioc;
@@ -25,9 +26,9 @@ namespace MapNotepad
         private IAuthorizationService AuthorizationService =>
             _authorizationService ??= Container.Resolve<IAuthorizationService>();
 
-        private IThemeManagerService _themeManagerService;
-        private IThemeManagerService ThemeManagerService =>
-            _themeManagerService ??= Container.Resolve<IThemeManagerService>();
+        private IThemeService _themeManagerService;
+        private IThemeService ThemeManagerService =>
+            _themeManagerService ??= Container.Resolve<IThemeService>();
 
         //private IPermissionService _permissionService;
         //private IPermissionService PermissionService =>
@@ -66,17 +67,19 @@ namespace MapNotepad
             containerRegistry.RegisterForNavigation<MapPage, MapPageViewModel>();
             containerRegistry.RegisterForNavigation<PinsPage, PinsPageViewModel>();
             containerRegistry.RegisterForNavigation<AddPinPage, AddPinPageViewModel>();
-
+            
             containerRegistry.RegisterInstance(CrossSettings.Current);
             containerRegistry.RegisterInstance(UserDialogs.Instance);
+            //containerRegistry.RegisterInstance(CrossLocalNotifications.Current);
+            //containerRegistry.RegisterInstance<ITwitterAuthorizationService>(TwitterAuthorizationService.Instance);
 
-            containerRegistry.RegisterInstance<ISettingsManagerService>(Container.Resolve<SettingsManagerService>());
+            containerRegistry.RegisterInstance<ISettingsService>(Container.Resolve<SettingsService>());
             containerRegistry.RegisterInstance<IRepositoryService>(Container.Resolve<RepositoryService>());
             containerRegistry.RegisterInstance<IPinsManagerService>(Container.Resolve<PinsManagerService>());
             containerRegistry.RegisterInstance<IUsersManagerService>(Container.Resolve<UsersManagerService>());
             containerRegistry.RegisterInstance<IRegistrationService>(Container.Resolve<RegistrationService>());
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
-            containerRegistry.RegisterInstance<IThemeManagerService>(Container.Resolve<ThemeManagerService>());
+            containerRegistry.RegisterInstance<IThemeService>(Container.Resolve<ThemeService>());
             containerRegistry.RegisterInstance<IPermissionService>(Container.Resolve<PermissionService>());
         }
     }

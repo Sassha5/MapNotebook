@@ -3,13 +3,13 @@ using MapNotepad.Localization;
 using Plugin.Settings.Abstractions;
 using Xamarin.Forms;
 
-namespace MapNotepad.Services.SettingsManagerService
+namespace MapNotepad.Services.SettingsService
 {
-    class SettingsManagerService : ISettingsManagerService
+    class SettingsService : ISettingsService
     {
         private readonly ISettings _appSettings;
 
-        public SettingsManagerService(ISettings appSettings)
+        public SettingsService(ISettings appSettings)
         {
             _appSettings = appSettings;
         }

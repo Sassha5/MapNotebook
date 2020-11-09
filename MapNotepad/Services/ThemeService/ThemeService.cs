@@ -1,17 +1,17 @@
 ﻿using System.Reflection;
-using MapNotepad.Services.SettingsManagerService;
+using MapNotepad.Services.SettingsService;
 using MapNotepad.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
-namespace MapNotepad.Services.ThemeManagerService
+namespace MapNotepad.Services.ThemeService
 {
-    public class ThemeManagerService : IThemeManagerService
+    public class ThemeService : IThemeService
     {
-        private ISettingsManagerService _settingsManagerService;
+        private ISettingsService _settingsManagerService;
         private string _darkMapStyleFile;
 
-        public ThemeManagerService(ISettingsManagerService settingsManagerService)
+        public ThemeService(ISettingsService settingsManagerService)
         {
             _settingsManagerService = settingsManagerService;
 

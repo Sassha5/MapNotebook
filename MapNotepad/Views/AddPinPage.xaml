@@ -4,7 +4,8 @@
                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                         xmlns:controls="clr-namespace:MapNotepad.Controls"
                         xmlns:prism="http://prismlibrary.com"
-                        x:Class="MapNotepad.Views.AddPinPage">
+                        x:Class="MapNotepad.Views.AddPinPage"
+                        x:Name="addPinPage">
 
     <views:BaseContentPage.ToolbarItems>
         <ToolbarItem Order="Primary"
@@ -25,39 +26,47 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Frame Grid.Row="0"
+        <!--<Frame Grid.Row="0"
                Style="{StaticResource CustomEntryFrameStyle}">
 
             <Entry Placeholder="{Binding Resources[Label]}"
                    Text="{Binding Label}"
                    Style="{StaticResource EntryStyle}"/>
-        </Frame>
+        </Frame>-->
 
-        <Frame Grid.Row="1"
+        <controls:CustomEntry Grid.Row="0"
+                              Text="{Binding BindingContext.Label,
+                                     Source={x:Reference addPinPage}}"
+                              Placeholder="{Binding BindingContext.Resources[Label],
+                                            Source={x:Reference addPinPage}}"/>
+
+        <!--<Frame Grid.Row="1"
                Style="{StaticResource CustomEntryFrameStyle}">
 
             <Entry Placeholder="{Binding Resources[Description]}"
                    Text="{Binding Description}"
                    Style="{StaticResource EntryStyle}"/>
-        </Frame>
+        </Frame>-->
+
+        <controls:CustomEntry Grid.Row="1"
+                              Text="{Binding BindingContext.Description,
+                                     Source={x:Reference addPinPage}}"
+                              Placeholder="{Binding BindingContext.Resources[Description],
+                                            Source={x:Reference addPinPage}}"/>
 
         <StackLayout Orientation="Horizontal" Grid.Row="2">
 
-            <Frame HorizontalOptions="FillAndExpand"
-                   Style="{StaticResource CustomEntryFrameStyle}">
+            <controls:CustomEntry HorizontalOptions="FillAndExpand"
+                                    Text="{Binding BindingContext.Latitude,
+                                     Source={x:Reference addPinPage}}"
+                                  Placeholder="{Binding BindingContext.Resources[Latitude],
+                                            Source={x:Reference addPinPage}}"/>
 
-                <Entry Placeholder="{Binding Resources[Latitude]}"
-                       Text="{Binding Latitude}"
-                       Style="{StaticResource EntryStyle}"/>
-            </Frame>
-
-            <Frame HorizontalOptions="FillAndExpand"
-                   Style="{StaticResource CustomEntryFrameStyle}">
-
-                <Entry Placeholder="{Binding Resources[Longitude]}"
-                       Text="{Binding Longitude}"
-                       Style="{StaticResource EntryStyle}"/>
-            </Frame>
+            <controls:CustomEntry HorizontalOptions="FillAndExpand"
+                                    Text="{Binding BindingContext.Longitude,
+                                     Source={x:Reference addPinPage}}"
+                                  Placeholder="{Binding BindingContext.Resources[Longitude],
+                                            Source={x:Reference addPinPage}}"/>
 
         </StackLayout>
 

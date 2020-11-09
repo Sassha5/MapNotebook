@@ -14,12 +14,12 @@ namespace MapNotepad.Validation
 
         public static bool CheckEmail(string email)
         {
-            return _emailRegex.IsMatch(email);
+            return true;//_emailRegex.IsMatch(email);
         }                                       
 
         public static bool CheckPassword(string password)
         {
-            return _passwordRegex.IsMatch(password);
+            return true;// _passwordRegex.IsMatch(password);
         }
     }
 }

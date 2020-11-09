@@ -11,8 +11,7 @@ namespace MapNotepad.Extensions
             return new Pin
             {
                 Label = customPin.Label,
-                Position = new Position(customPin.Latitude, customPin.Longitude),
-                Tag = customPin.Description
+                Position = new Position(customPin.Latitude, customPin.Longitude)
             };
         }
     }

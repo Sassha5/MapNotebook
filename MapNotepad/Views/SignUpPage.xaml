@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:MapNotepad.Views"
+             xmlns:views="clr-namespace:MapNotepad.Views" xmlns:controls="clr-namespace:MapNotepad.Controls"
              x:Class="MapNotepad.Views.SignUpPage"
+             x:Name="signUpPage"
              Title="{Binding Resources[SignUp]}">
 
     <Grid>
@@ -16,32 +17,33 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Frame Grid.Row="0"
-               Style="{StaticResource CustomEntryFrameStyle}">
-            <Entry Placeholder="{Binding Resources[Email]}"
-                   Text="{Binding Email}"
-                   Style="{StaticResource EntryStyle}"/>
-        </Frame>
-        <Frame Grid.Row="1"
-               Style="{StaticResource CustomEntryFrameStyle}">
-            <Entry Placeholder="{Binding Resources[Name]}"
-                   Text="{Binding Name}"
-                   Style="{StaticResource EntryStyle}"/>
-        </Frame>
-        <Frame Grid.Row="2"
-               Style="{StaticResource CustomEntryFrameStyle}">
-            <Entry Placeholder="{Binding Resources[Password]}"
-                   IsPassword="True" 
-                   Text="{Binding Password}"
-                   Style="{StaticResource EntryStyle}"/>
-        </Frame>
-        <Frame Grid.Row="3"
-               Style="{StaticResource CustomEntryFrameStyle}">
-            <Entry Placeholder="{Binding Resources[ConfirmPassword]}"
-                   IsPassword="True" 
-                   Text="{Binding ConfirmPassword}"
-                   Style="{StaticResource EntryStyle}"/>
-        </Frame>
+
+        <controls:CustomEntry Grid.Row="0"
+                              Text="{Binding BindingContext.Email,
+                                     Source={x:Reference signUpPage}}"
+                              Placeholder="{Binding BindingContext.Resources[Email],
+                                            Source={x:Reference signUpPage}}"/>
+
+        <controls:CustomEntry Grid.Row="1"
+                              Text="{Binding BindingContext.Name,
+                                     Source={x:Reference signUpPage}}"
+                              Placeholder="{Binding BindingContext.Resources[Name],
+                                            Source={x:Reference signUpPage}}"/>
+
+        <controls:CustomEntry Grid.Row="2"
+                              Text="{Binding BindingContext.Password,
+                                     Source={x:Reference signUpPage}}"
+                              IsPassword="True" 
+                              Placeholder="{Binding BindingContext.Resources[Password],
+                                            Source={x:Reference signUpPage}}"/>
+
+        <controls:CustomEntry Grid.Row="3"
+                              Text="{Binding BindingContext.ConfirmPassword,
+                                     Source={x:Reference signUpPage}}"
+                              IsPassword="True" 
+                              Placeholder="{Binding BindingContext.Resources[ConfirmPassword],
+                                            Source={x:Reference signUpPage}}"/>
+
         <Button Text="{Binding Resources[SignUp]}" 
                 Grid.Row="7"
                 Command="{Binding RegisterCommand}"

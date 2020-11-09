@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MapNotepad.Controls.CustomEntry"
+             x:Name="customEntry"
+             BindingContext="{x:Reference customEntry}">
+
+    <Frame HorizontalOptions="FillAndExpand"
+           Style="{StaticResource CustomEntryFrameStyle}">
+
+        <Entry x:Name="entry"
+               Style="{StaticResource EntryStyle}"
+               Text="{Binding Text}"
+               IsPassword="{Binding IsPassword}"
+               Placeholder="{Binding Placeholder}"/>
+
+    </Frame>
+
+</ContentView>

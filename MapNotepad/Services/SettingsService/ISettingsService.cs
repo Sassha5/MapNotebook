@@ -1,7 +1,7 @@
 ﻿using System;
-namespace MapNotepad.Services.SettingsManagerService
+namespace MapNotepad.Services.SettingsService
 {
-    public interface ISettingsManagerService
+    public interface ISettingsService
     {
         int AuthorizedUserID { get; set; }
         int Theme { get; set; }

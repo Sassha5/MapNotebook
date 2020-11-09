@@ -2,9 +2,10 @@
 <views:BaseContentPage  xmlns:views="clr-namespace:MapNotepad.Views"
                         xmlns="http://xamarin.com/schemas/2014/forms"
                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                        xmlns:prism="http://prismlibrary.com"
+                        xmlns:prism="http://prismlibrary.com" xmlns:controls="clr-namespace:MapNotepad.Controls"
                         prism:ViewModelLocator.AutowireViewModel="True"
                         x:Class="MapNotepad.Views.SignInPage"
+                        x:Name="signInPage"
                         Title="{Binding Resources[SignIn]}">
 
     <Grid>
@@ -20,24 +21,25 @@
             <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
 
-        <Frame Grid.Row="0"
-               Style="{StaticResource CustomEntryFrameStyle}">
+         <controls:CustomEntry Grid.Row="0"
+                              Text="{Binding BindingContext.Email,
+                                     Source={x:Reference signInPage}}"
+                              Placeholder="{Binding BindingContext.Resources[Email],
+                                            Source={x:Reference signInPage}}"/>
 
-            <Entry x:Name="emailInput"
-                   Placeholder="{Binding Resources[Email]}"
-                   Text="{Binding Email}"
-                   Style="{StaticResource EntryStyle}"
-                   TextChanged="TextChanged"/>
-        </Frame>
-        <Frame Grid.Row="1"
-               Style="{StaticResource CustomEntryFrameStyle}">
-            <Entry x:Name="passwordInput"
-                   Placeholder="{Binding Resources[Password]}"
-                   IsPassword="True" 
-                   Text="{Binding Password}"
-                   Style="{StaticResource EntryStyle}"
-                   TextChanged="TextChanged"/>
-        </Frame>
+        <controls:CustomEntry Grid.Row="1"
+                              Text="{Binding BindingContext.Password,
+                                     Source={x:Reference signInPage}}"
+                              IsPassword="True"
+                              Placeholder="{Binding BindingContext.Resources[Password],
+                                            Source={x:Reference signInPage}}"/>
+
+        <Button Text="Sign in with Twitter" 
+                Grid.Row="5"
+                Command="{Binding TwitterSignInCommand}"
+                Style="{StaticResource ButtonStyle}"
+                BackgroundColor="#55ACEE"/>
+
         <Button x:Name="signInButton"
                 Text="{Binding Resources[SignIn]}" 
                 Grid.Row="6"

@@ -1,7 +1,9 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using MapNotepad.Services.AuthorizationService;
 using MapNotepad.Views;
 using Prism.Navigation;
+using Xamarin.Auth;
 using Xamarin.Forms;
 
 namespace MapNotepad.ViewModels
@@ -9,13 +11,14 @@ namespace MapNotepad.ViewModels
     public class SignInPageViewModel : ViewModelBase
     {
         private readonly IAuthorizationService _authorizationService;
+        //private readonly ITwitterAuthorizationService _twitterAuthorizationService;
 
         public SignInPageViewModel(INavigationService navigationService,
-                               IAuthorizationService authorizationService)
-                                  : base(navigationService)
+                                   IAuthorizationService authorizationService)
+                                   : base(navigationService)
         {
             _authorizationService = authorizationService;
-
+            //_twitterAuthorizationService = twitterAuthorizationService;
         }
 
         #region Properties
@@ -56,6 +59,9 @@ namespace MapNotepad.ViewModels
         private ICommand _authorizeCommand;
         public ICommand AuthorizeCommand => _authorizeCommand ??= new Command(OnAuthorizeCommandAsync);
 
+        private ICommand _twitterSignInCommand;
+        public ICommand TwitterSignInCommand => _twitterSignInCommand ??= new Command(OnTwitterSignInCommandAsync);
+
         #endregion
 
         #region Command execution methods
@@ -78,6 +84,11 @@ namespace MapNotepad.ViewModels
                 await Application.Current.MainPage.DisplayAlert(Resources["Oops"], Resources["WrongCredentials"], Resources["Ok"]);
                 Password = string.Empty;
             }
+        }
+
+        private void OnTwitterSignInCommandAsync()
+        {
+            //_twitterAuthorizationService.Login();
         }
 
         #endregion

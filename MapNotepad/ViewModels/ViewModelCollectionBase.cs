@@ -50,8 +50,6 @@ namespace MapNotepad.ViewModels
 
         #region Protected implementation
 
-        
-
         protected async Task UpdateCollectionAsync()
         {
             var pins = await _pinsManagerService.GetCurrentUserPinsAsync();
@@ -59,9 +57,11 @@ namespace MapNotepad.ViewModels
             CustomPinCollection = new ObservableCollection<CustomPin>(pins);
         }
 
-        protected Task<int> SavePinAsync(CustomPin pin)
+        protected async Task<int> SavePinAsync(CustomPin pin)
         {
-            return _pinsManagerService.SavePinAsync(pin);
+            int id = await _pinsManagerService.SavePinAsync(pin);
+            await UpdateCollectionAsync();
+            return id;
         }
 
         protected async Task<int> DeletePinAsync(CustomPin pin)

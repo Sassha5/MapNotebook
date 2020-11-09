@@ -23,6 +23,9 @@
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps.Clustering" Version="1.1.0" />
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.466" />
+    <PackageReference Include="Xam.Plugins.Notifier" Version="3.0.1" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.6" />
+    <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -36,13 +39,14 @@
     <Folder Include="Services\PinsManagerService\" />
     <Folder Include="Services\UsersManagerService\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Services\SettingsManagerService\" />
+    <Folder Include="Services\SettingsService\" />
     <Folder Include="Localization\" />
     <Folder Include="Resources\" />
     <Folder Include="Controls\" />
     <Folder Include="Validation\" />
-    <Folder Include="Services\ThemeManagerService\" />
+    <Folder Include="Services\ThemeService\" />
     <Folder Include="Services\PermissionService\" />
+    <Folder Include="Services\NotificationService\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\RegisterPage.xaml" />

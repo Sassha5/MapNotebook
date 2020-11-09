@@ -4,17 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using MapNotepad.Models;
 using MapNotepad.Services.RepositoryService;
-using MapNotepad.Services.SettingsManagerService;
+using MapNotepad.Services.SettingsService;
 
 namespace MapNotepad.Services.PinsManagerService
 {
     class PinsManagerService : IPinsManagerService
     {
         private readonly IRepositoryService _repositoryService;
-        private readonly ISettingsManagerService _settingsManagerService;
+        private readonly ISettingsService _settingsManagerService;
 
         public PinsManagerService(IRepositoryService repositoryService,
-                                    ISettingsManagerService settingsManagerService)
+                                    ISettingsService settingsManagerService)
         {
             _settingsManagerService = settingsManagerService;
             _repositoryService = repositoryService;

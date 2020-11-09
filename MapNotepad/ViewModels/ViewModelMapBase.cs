@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MapNotepad.Extensions;
 using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
-using MapNotepad.Services.ThemeManagerService;
+using MapNotepad.Services.ThemeService;
 using Prism.Navigation;
 using Xamarin.Essentials;
 using Xamarin.Forms.GoogleMaps;
@@ -14,12 +14,12 @@ namespace MapNotepad.ViewModels
 {
     public class ViewModelMapBase : ViewModelCollectionBase
     {
-        private IThemeManagerService _themeManagerService;
-        private IPermissionService _permissionService;
+        private IThemeService _themeManagerService;
+        protected IPermissionService _permissionService;
 
         public ViewModelMapBase(INavigationService navigationService,
                                 IPinsManagerService pinsManagerService,
-                                IThemeManagerService themeManagerService,
+                                IThemeService themeManagerService,
                                 IPermissionService permissionService)
                                 : base(navigationService,
                                        pinsManagerService)
@@ -51,11 +51,11 @@ namespace MapNotepad.ViewModels
             set => SetProperty(ref _mapStyle, value);
         }
 
-        private bool _LocationGranted;
+        private bool _locationGranted;
         public bool LocationGranted
         {
-            get => _LocationGranted;
-            set => SetProperty(ref _LocationGranted, value);
+            get => _locationGranted;
+            set => SetProperty(ref _locationGranted, value);
         }
 
         #endregion
