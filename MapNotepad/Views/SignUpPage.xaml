@@ -7,7 +7,9 @@
              Title="{Binding Resources[SignUp]}">
 
     <Grid>
+
         <Grid.RowDefinitions>
+
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -16,6 +18,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+
         </Grid.RowDefinitions>
 
         <controls:CustomEntry Grid.Row="0"
@@ -48,5 +51,7 @@
                 Grid.Row="7"
                 Command="{Binding RegisterCommand}"
                 Style="{StaticResource ButtonStyle}"/>
+
     </Grid>
+
 </views:BaseContentPage>

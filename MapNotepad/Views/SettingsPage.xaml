@@ -8,9 +8,13 @@
 
     <StackLayout Orientation="Horizontal"
                  VerticalOptions="Start">
+
         <Label Style="{StaticResource MediumLabelStyle}"
-                   Text="{Binding Resources[DarkTheme]}"
-                   VerticalOptions="Center"/>
+               Text="{Binding Resources[DarkTheme]}"
+               VerticalOptions="Center"/>
+
         <CheckBox IsChecked="{Binding Path=DarkThemeIsChecked, Mode=TwoWay}"/>
+
     </StackLayout>
+
 </views:BaseContentPage>

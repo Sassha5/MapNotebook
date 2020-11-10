@@ -76,6 +76,7 @@
     <Compile Include="Renderers\CustomEntryRenderer.cs" />
     <Compile Include="UserNotificationCenterDelegate.cs" />
     <Compile Include="Services\PushNotificationService.cs" />
+    <Compile Include="Services\TwitterAuthorizationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

@@ -47,6 +47,7 @@
     <Folder Include="Services\ThemeService\" />
     <Folder Include="Services\PermissionService\" />
     <Folder Include="Services\NotificationService\" />
+    <Folder Include="Services\AuthorizationService\Twitter\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\RegisterPage.xaml" />

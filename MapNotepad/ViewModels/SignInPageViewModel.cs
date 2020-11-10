@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
+using MapNotepad.Models;
 using MapNotepad.Services.AuthorizationService;
+using MapNotepad.Services.AuthorizationService.Twitter;
 using MapNotepad.Views;
 using Prism.Navigation;
 using Xamarin.Auth;
@@ -8,17 +10,19 @@ using Xamarin.Forms;
 
 namespace MapNotepad.ViewModels
 {
-    public class SignInPageViewModel : ViewModelBase
+    public class SignInPageViewModel : ViewModelBase, IAuthDelegate
     {
         private readonly IAuthorizationService _authorizationService;
-        //private readonly ITwitterAuthorizationService _twitterAuthorizationService;
+        private readonly ITwitterAuthorizationService _twitterAuthorizationService;
 
         public SignInPageViewModel(INavigationService navigationService,
+                                   ITwitterAuthorizationService twitterAuthorizationService,
                                    IAuthorizationService authorizationService)
                                    : base(navigationService)
         {
             _authorizationService = authorizationService;
-            //_twitterAuthorizationService = twitterAuthorizationService;
+            _twitterAuthorizationService = twitterAuthorizationService;
+            _twitterAuthorizationService.RegisterAuthDelegate(this);
         }
 
         #region Properties
@@ -88,7 +92,22 @@ namespace MapNotepad.ViewModels
 
         private void OnTwitterSignInCommandAsync()
         {
-            //_twitterAuthorizationService.Login();
+            _twitterAuthorizationService.Login();
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        public async void AuthSuccess(AuthResult result)
+        {
+            _authorizationService.AuthorizeAsync(result.Id);
+            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
+        }
+
+        public void AuthFailure()
+        {
+            Application.Current.MainPage.DisplayAlert("Nope", "Authorization unsuccessful", "ok");
         }
 
         #endregion

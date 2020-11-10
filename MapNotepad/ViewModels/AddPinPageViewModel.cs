@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Acr.UserDialogs;
-using MapNotepad.Extensions;
 using MapNotepad.Models;
 using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
@@ -38,34 +37,6 @@ namespace MapNotepad.ViewModels
             set => SetProperty(ref _customPin, value);
         }
 
-        //private string _label;
-        //public string Label
-        //{
-        //    get => _label;
-        //    set => SetProperty(ref _label, value);
-        //}
-
-        //private string _description;
-        //public string Description
-        //{
-        //    get => _description;
-        //    set => SetProperty(ref _description, value);
-        //}
-
-        //private double _latitude;
-        //public double Latitude
-        //{
-        //    get => _latitude;
-        //    set => SetProperty(ref _latitude, value);
-        //}
-
-        //private double _longitude;
-        //public double Longitude
-        //{
-        //    get => _longitude;
-        //    set => SetProperty(ref _longitude, value);
-        //}
-
         #endregion
 
         #region Commands
@@ -101,13 +72,14 @@ namespace MapNotepad.ViewModels
 
         #region Command execution methods
 
-        private async void OnMapClickedCommandAsync(Position args)//wtf it works
+        private async void OnMapClickedCommandAsync(Position args)
         {
             await UpdateCollectionAsync();   //clear temporary pins
 
             CustomPin = new CustomPin()
             {
-                Label = string.IsNullOrEmpty(CustomPin.Label) ? "New Pin" : CustomPin.Label,
+                Id = CustomPin.Id,
+                Label = string.IsNullOrEmpty(CustomPin.Label) ? string.Empty : CustomPin.Label,
                 Description = CustomPin.Description,
                 IsFavorite = true,
                 Latitude = args.Latitude,
@@ -122,11 +94,6 @@ namespace MapNotepad.ViewModels
         {
             if (!string.IsNullOrEmpty(_customPin.Label))
             {
-                //_customPin.Label = Label;
-                //_customPin.Description = Description;
-                //_customPin.Latitude = Latitude;
-                //_customPin.Longitude = Longitude;//how to check is valid?
-
                 await SavePinAsync(_customPin);
                 await NavigationService.GoBackAsync();
             }

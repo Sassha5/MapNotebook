@@ -12,8 +12,6 @@ namespace MapNotepad.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-
-        public double LastMapPositionX { get; set; }
-        public double LastMapPositionY { get; set; }
+        public string TwitterId { get; set; }
     }
 }

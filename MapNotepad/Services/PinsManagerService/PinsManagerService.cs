@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MapNotepad.Models;
 using MapNotepad.Services.RepositoryService;
 using MapNotepad.Services.SettingsService;
+using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.Services.PinsManagerService
 {
@@ -21,7 +22,14 @@ namespace MapNotepad.Services.PinsManagerService
             _repositoryService.CreateTableAsync<CustomPin>();
         }
 
+        public Position LastMapPosition
+        {
+            get => _settingsManagerService.LastMapPosition;
+            set => _settingsManagerService.LastMapPosition = value;
+        }
+
         #region Methods
+
         public async Task<int> SavePinAsync(CustomPin pin)
         {
             pin.UserId = _settingsManagerService.AuthorizedUserID;
@@ -58,6 +66,7 @@ namespace MapNotepad.Services.PinsManagerService
             return pins.Where(x => x.Label.ToLower().Contains(searchValue.ToLower())
                           || x.Description.ToLower().Contains(searchValue.ToLower()));
         }
+
         #endregion
     }
 }

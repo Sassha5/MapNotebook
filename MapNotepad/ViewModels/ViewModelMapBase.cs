@@ -30,18 +30,15 @@ namespace MapNotepad.ViewModels
 
         #region Properties
 
-        //private ObservableCollection<Pin> _pinCollection;
-        //public ObservableCollection<Pin> PinCollection
-        //{
-        //    get => _pinCollection;
-        //    set => SetProperty(ref _pinCollection, value);
-        //}
-
         private Position _cameraPosition;
         public Position CameraPosition
         {
             get => _cameraPosition;
-            set => SetProperty(ref _cameraPosition, value);
+            set
+            {
+                SetProperty(ref _cameraPosition, value);
+                //_pinsManagerService.LastMapPosition = CameraPosition;
+            }
         }
 
         private MapStyle _mapStyle;
@@ -72,6 +69,7 @@ namespace MapNotepad.ViewModels
             await base.OnNavigatedToAsync(parameters);
 
             MapStyle = _themeManagerService.GetCurrentMapStyle();
+            //CameraPosition = _pinsManagerService.LastMapPosition;
         }
 
         #endregion

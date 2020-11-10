@@ -4,6 +4,8 @@ using System.Linq;
 
 using Foundation;
 using MapNotepad.iOS.Services;
+using MapNotepad.Services.AuthorizationService;
+using MapNotepad.Services.AuthorizationService.Twitter;
 using MapNotepad.Services.NotificationService;
 using Prism;
 using Prism.Ioc;
@@ -72,7 +74,7 @@ namespace MapNotepad.iOS
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            //containerRegistry.RegisterSingleton<ITwitterAuthorizationService, TwitterAuthorizationService>();
+            containerRegistry.RegisterSingleton<ITwitterAuthorizationService, TwitterAuthorizationService>();
             containerRegistry.RegisterSingleton<INotificationService, PushNotificationService>();
         }
     }

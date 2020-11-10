@@ -2,7 +2,6 @@
 using Acr.UserDialogs;
 using MapNotepad.Services.RegistrationService;
 using MapNotepad.Validation;
-using MapNotepad.Views;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -83,29 +82,8 @@ namespace MapNotepad.ViewModels
             {
                 await _userDialogs.AlertAsync(Resources["BadEmail"], Resources["Oops"], Resources["Damn"]);
             }
-
-            //switch (Validator.CheckNewUser(Email, Password, ConfirmPassword))
-            //{
-            //    case ValidationStatus.EmailIsTaken:
-            //        await _userDialogs.AlertAsync(Resources["EmailIsTaken"], Resources["Oops"], Resources["Damn"]); break;
-            //    case ValidationStatus.EmailIsTooShort:
-            //        await _userDialogs.AlertAsync(Resources["EmailIsTooShort"], Resources["Oops"], Resources["Ok"]); break;
-            //    case ValidationStatus.EmailStartsWithNumber:
-            //        await _userDialogs.AlertAsync(Resources["EmailStartsWithNumber"], Resources["Oops"], Resources["Damn"]); break;
-            //    case ValidationStatus.PasswordIsTooShort:
-            //        await _userDialogs.AlertAsync(Resources["PasswordIsTooShort"], Resources["Oops"], Resources["Damn"]); break;
-            //    case ValidationStatus.PasswordIsWeak:
-            //        await _userDialogs.AlertAsync(Resources["PasswordIsWeak"], Resources["Oops"], Resources["Sure"]); break;
-            //    case ValidationStatus.PasswordsAreNotEqual:
-            //        await _userDialogs.AlertAsync(Resources["PasswordsAreNotEqual"], Resources["Oops"], Resources["Thanks"]); break;
-            //    case ValidationStatus.Success:
-            //        await _userDialogs.AlertAsync(Resources["RedirectingToSignIn"], Resources["Success"], Resources["Finally"]);
-            //        ValidationSuccess();
-            //        break;
-            //    default:
-            //        await _userDialogs.AlertAsync(Resources["Unknown"], Resources["Oops"], Resources["Damn"]); break;
-            //}
         }
+
         private async void ValidationSuccess()
         {
             await _registrationService.RegisterAsync(Name, Email, Password);
@@ -113,9 +91,7 @@ namespace MapNotepad.ViewModels
             {
                 { $"{nameof(Email)}", Email }
             };
-            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}", navParams);
+            await NavigationService.GoBackAsync(navParams);
         }
-
-
     }
 }

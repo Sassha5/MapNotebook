@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
 using MapNotepad.Models;
 using MapNotepad.Services.AuthorizationService.Twitter;
+using UIKit;
 using Xamarin.Auth;
 
-namespace MapNotepad.Droid.Services
+namespace MapNotepad.iOS.Services
 {
     public class TwitterAuthorizationService : ITwitterAuthorizationService
     {
-        private static TwitterAuthorizationService _instance;
-        public static TwitterAuthorizationService Instance => _instance ??= new TwitterAuthorizationService();
-
         private IAuthDelegate _authDelegate;
+
+        public TwitterAuthorizationService()
+        {
+        }
 
         public Task Login()
         {
@@ -26,9 +26,14 @@ namespace MapNotepad.Droid.Services
 
             auth.Completed += twitter_auth_Completed;
 
-            var ui = auth.GetUI(Application.Context);
-            ui.AddFlags(ActivityFlags.NewTask);
-            Application.Context.StartActivity(ui);
+            var window = UIApplication.SharedApplication.KeyWindow;
+            var vc = window.RootViewController;
+            while (vc.PresentedViewController != null)
+            {
+                vc = vc.PresentedViewController;
+            }
+
+            vc.PresentViewController(auth.GetUI(), true, null);
 
             return Task.FromResult(true);
         }
@@ -51,13 +56,13 @@ namespace MapNotepad.Droid.Services
                         Id = int.Parse(id),
                         Username = username
                     };
-                    
+
                     _authDelegate?.AuthSuccess(result);
                 }
             }
             else
             {
-                _authDelegate?.AuthFailure();
+                _authDelegate.AuthFailure();
             }
         }
     }

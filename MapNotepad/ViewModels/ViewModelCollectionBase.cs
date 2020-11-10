@@ -11,7 +11,7 @@ namespace MapNotepad.ViewModels
 {
     public class ViewModelCollectionBase : ViewModelBase
     {
-        private readonly IPinsManagerService _pinsManagerService;
+        protected readonly IPinsManagerService _pinsManagerService;
 
         public ViewModelCollectionBase(INavigationService navigationService,
                                        IPinsManagerService pinsManagerService)

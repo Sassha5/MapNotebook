@@ -16,10 +16,15 @@ namespace MapNotepad.Services.AuthorizationService
             _usersManagerService = usersManagerService;
         }
 
-        public async void AuthorizeAsync(string email, string password)
+        public async Task AuthorizeAsync(string email, string password) //TODO return Task
         {
             var userId = await _usersManagerService.GetUserIdAsync(email, password);
-            _settingsManagerService.AuthorizedUserID = userId;
+            AuthorizeAsync(userId);
+        }
+
+        public void AuthorizeAsync(int id)
+        {
+            _settingsManagerService.AuthorizedUserID = id;
         }
 
         public bool IsAuthorized()
