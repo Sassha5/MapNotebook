@@ -23,10 +23,9 @@
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps.Clustering" Version="1.1.0" />
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.466" />
-    <PackageReference Include="Xam.Plugins.Notifier" Version="3.0.1" />
-    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.6" />
     <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="AiForms.Layouts" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

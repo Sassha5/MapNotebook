@@ -1,19 +1,15 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs;
-using MapNotepad.Controls;
 using MapNotepad.Models;
 using MapNotepad.Models.Weather;
 using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeService;
 using MapNotepad.Services.WeatherService;
-using Plugin.LocalNotifications;
 using Prism.Navigation;
-using Rg.Plugins.Popup.Services;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
@@ -45,7 +41,6 @@ namespace MapNotepad.ViewModels
             set
             {
                 SetProperty(ref _selectedCustomPin, value);
-                SetWeatherData(value);
             }
         }
 
@@ -69,8 +64,19 @@ namespace MapNotepad.ViewModels
 
             if (parameters.TryGetValue(nameof(CustomPin), out CustomPin pin))
             {
+                await Task.Delay(500);
                 SelectedCustomPin = pin;
                 CameraPosition = new Position(pin.Latitude, pin.Longitude);
+            }
+        }
+
+        protected override async void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+
+            if (args.PropertyName == nameof(SelectedCustomPin))
+            {
+                await SetWeatherData(_selectedCustomPin);
             }
         }
 
@@ -84,7 +90,7 @@ namespace MapNotepad.ViewModels
             }
         }
 
-        private async void SetWeatherData(CustomPin pin)
+        private async Task SetWeatherData(CustomPin pin)
         {
             if (pin != null)
             {

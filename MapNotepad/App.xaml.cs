@@ -11,7 +11,6 @@ using MapNotepad.Services.UsersManagerService;
 using MapNotepad.Services.WeatherService;
 using MapNotepad.ViewModels;
 using MapNotepad.Views;
-using Plugin.LocalNotifications;
 using Plugin.Settings;
 using Prism;
 using Prism.Ioc;

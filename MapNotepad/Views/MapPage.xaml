@@ -4,7 +4,8 @@
                        xmlns:prism="http://prismlibrary.com"
                        prism:ViewModelLocator.AutowireViewModel="True"
                        xmlns:views="clr-namespace:MapNotepad.Views"
-                       xmlns:controls="clr-namespace:MapNotepad.Controls" xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+                       xmlns:controls="clr-namespace:MapNotepad.Controls"
+                       xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps" xmlns:al="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
                        x:Class="MapNotepad.Views.MapPage"
                        x:Name="mapPage"
                        Title="{Binding Resources[Map]}">
@@ -90,28 +91,51 @@
                     </Label.FormattedText>
                 </Label>
 
-                <!--WEATHER LIST-->
-                <CarouselView ItemsSource="{Binding WeatherForecast.List}"
-                              PeekAreaInsets="150"
-                              HeightRequest="300">
+                <!--WEATHER CAROUSEL-->
+                <ScrollView Orientation="Horizontal"
+                            HeightRequest="150"
+                            HorizontalScrollBarVisibility="Never">
 
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout Padding="10,0,0,0"
-                                         VerticalOptions="FillAndExpand">
+                    <al:RepeatableStack Orientation="Horizontal"
+                                        ItemsSource="{Binding WeatherForecast.List}"
+                                        HeightRequest="150">
 
-                                <Image HeightRequest="44" 
-                                       WidthRequest="44" 
-                                       Source="{Binding DisplayIcon}"/>
+                        <al:RepeatableStack.ItemTemplate>
 
-                                <Label Text="{Binding DisplayTemp}"
-                                       TextColor="#3498db"/>
+                            <DataTemplate>
 
-                            </StackLayout>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
+                                <Frame Style="{StaticResource CustomEntryFrameStyle}"
+                                       Margin="0">
 
-                </CarouselView>
+                                    <StackLayout Margin="0"
+                                                 Padding="0">
+
+                                        <!--ICON-->
+                                        <Image HeightRequest="44" 
+                                               WidthRequest="44" 
+                                               Source="{Binding DisplayIcon}"/>
+
+                                        <!--DATE-->
+                                        <Label Text="{Binding DisplayDate}"
+                                               Margin="5,5"
+                                               Style="{StaticResource SmallLabelStyle}"/>
+
+                                        <!--TEMPERATURE-->
+                                        <Label Text="{Binding DisplayTemp}"
+                                               Margin="5,5"
+                                               Style="{StaticResource SmallLabelStyle}"/>
+
+                                    </StackLayout>
+
+                                </Frame>
+
+                            </DataTemplate>
+
+                        </al:RepeatableStack.ItemTemplate>
+
+                    </al:RepeatableStack>
+
+                </ScrollView>
 
             </StackLayout>
 

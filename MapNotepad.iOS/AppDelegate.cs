@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using MapNotepad.iOS.Services;
-using MapNotepad.Services.AuthorizationService;
 using MapNotepad.Services.AuthorizationService.Twitter;
 using Prism;
 using Prism.Ioc;
@@ -32,7 +27,6 @@ namespace MapNotepad.iOS
             UIApplication.SharedApplication.RegisterUserNotificationSettings(notificationSettings);
 
             global::Xamarin.Forms.Forms.Init();
-            Rg.Plugins.Popup.Popup.Init();
             LoadApplication(new App(new iOSInitializer()));
             Xamarin.FormsGoogleMaps.Init("AIzaSyBOj66llhOkfTyNFH1XhpjOeyS1zJy85T4");
 

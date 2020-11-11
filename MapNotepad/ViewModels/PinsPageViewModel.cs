@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Views;
+using Prism.Common;
 using Prism.Navigation;
+using Prism.Navigation.TabbedPages;
 using Xamarin.Forms;
 
 namespace MapNotepad.ViewModels
@@ -56,11 +59,29 @@ namespace MapNotepad.ViewModels
         {
             pin.IsFavorite = true;
             await SavePinAsync(pin);
+
             NavigationParameters navParams = new NavigationParameters
             {
                 { nameof(CustomPin), pin }
             };
-            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}?selectedTab={nameof(MapPage)}", navParams);
+
+            #region -- Secret MAGIC --
+
+            var currentPage = (NavigationService as IPageAware).Page;
+
+            if (currentPage is TabbedPage tp)
+            {
+                var page = tp.Children.First(x => x.BindingContext.Equals(this));
+
+                page.Parent = currentPage;
+                (NavigationService as IPageAware).Page = page;
+            }
+
+            #endregion
+
+            await NavigationService.SelectTabAsync($"{nameof(MapPage)}", navParams);
+            
+            //await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}?selectedTab={nameof(MapPage)}", navParams);
         }
 
         private async void OnToAddPinPageCommandAsync(object obj)

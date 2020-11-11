@@ -29,8 +29,8 @@ namespace MapNotepad.Models.Weather
         [JsonProperty("clouds")]
         public Clouds Clouds { get; set; }
 
-        [JsonProperty("dt")]
-        public long Dt { get; set; }
+        [JsonProperty("dt_txt")]
+        public string Dt { get; set; }
 
         [JsonProperty("sys")]
         public Sys Sys { get; set; }
@@ -41,8 +41,8 @@ namespace MapNotepad.Models.Weather
         [JsonProperty("cod")]
         public long Cod { get; set; }
 
-        //[JsonIgnore]
-        //public string DisplayDate => DateTime.Parse(Dt).ToLocalTime().ToString("g");
+        [JsonIgnore]
+        public string DisplayDate => DateTime.Parse(Dt).ToLocalTime().ToString("g");
         [JsonIgnore]
         public string DisplayTemp => $"Temp: {Main?.Temperature ?? 0}° {Weather?[0]?.Visibility ?? string.Empty}";
         [JsonIgnore]

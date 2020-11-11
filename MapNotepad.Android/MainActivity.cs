@@ -7,11 +7,9 @@ using Android.OS;
 using Prism;
 using Prism.Ioc;
 using Acr.UserDialogs;
-using Xamarin.Auth;
 using Xamarin.Forms;
 using MapNotepad.Services.AuthorizationService.Twitter;
 using MapNotepad.Droid.Services;
-using Android.Content;
 
 namespace MapNotepad.Droid
 {
@@ -31,36 +29,11 @@ namespace MapNotepad.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+            Forms.Init(this, savedInstanceState);
             Xamarin.FormsGoogleMaps.Init(this, savedInstanceState); //Initialize GoogleMaps here
             UserDialogs.Init(this);
 
-
-            //var auth = new OAuth1Authenticator(consumerKey: "j04wQhygfyVovpbJDVL5bhMJ4",
-            //                                    consumerSecret: "I0MD4YLSXG3WIQR5uJah6UZBvVk5a2dohdTlwy8NZO7h43k6mF",
-            //                                    requestTokenUrl: new Uri("https://api.twitter.com/oauth/request_token"),
-            //                                    authorizeUrl: new Uri("https://api.twitter.com/oauth/authorize"),
-            //                                    accessTokenUrl: new Uri("https://api.twitter.com/oauth/access_token"),
-            //                                    callbackUrl: new Uri("http://mobile.twitter.com"));
-
-            //auth.Completed += twitter_auth_Completed;
-
-            //StartActivity(auth.GetUI(this));
-
-            //var intent = new Intent(this, typeof(TwitterAuthorizationService));
-            //StartService(intent);
-
             LoadApplication(new App(new AndroidInitializer()));
-        }
-
-
-        private void twitter_auth_Completed(object sender, AuthenticatorCompletedEventArgs eventArgs)
-        {
-            if (eventArgs.IsAuthenticated)
-            {
-                Console.WriteLine();
-            }
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
