@@ -8,5 +8,6 @@ namespace MapNotepad
         public const string DatabaseName = "database.db";
         public const int NoAuthorizedUser = -1;
         public const string DefaultLanguage = "en";
+        public const string WeatherAPIkey = "efd534b105a70fef638868b3b0372122";
     }
 }

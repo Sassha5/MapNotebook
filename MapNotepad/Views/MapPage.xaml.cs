@@ -5,17 +5,19 @@ namespace MapNotepad.Views
 {
     public partial class MapPage : BaseContentPage
     {
+        private int moveDistance = 500;
+
         public MapPage()
         {
             InitializeComponent();
-            pinInfo.TranslationY = 300;
+            pinInfo.TranslationY = moveDistance;
         }
 
         public void MapClicked(object sender, MapClickedEventArgs args)
         {
             if (pinInfo.TranslationY <= 0)
             {
-                pinInfo.TranslateTo(0, pinInfo.TranslationY + 300, 500);
+                pinInfo.TranslateTo(0, pinInfo.TranslationY + moveDistance, 500);
             }
         }
 
@@ -23,7 +25,7 @@ namespace MapNotepad.Views
         {
             if (pinInfo.TranslationY > 0)
             {
-                pinInfo.TranslateTo(0, pinInfo.TranslationY - 300, 500);
+                pinInfo.TranslateTo(0, pinInfo.TranslationY - moveDistance, 500);
             }
         }
     }

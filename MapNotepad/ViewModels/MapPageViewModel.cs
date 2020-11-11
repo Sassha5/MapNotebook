@@ -5,10 +5,11 @@ using System.Windows.Input;
 using Acr.UserDialogs;
 using MapNotepad.Controls;
 using MapNotepad.Models;
-using MapNotepad.Services.NotificationService;
+using MapNotepad.Models.Weather;
 using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeService;
+using MapNotepad.Services.WeatherService;
 using Plugin.LocalNotifications;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Services;
@@ -20,19 +21,19 @@ namespace MapNotepad.ViewModels
 {
     public class MapPageViewModel : ViewModelMapBase
     {
-        private INotificationService _notificationService;
+        private IWeatherService _weatherService;
 
         public MapPageViewModel(INavigationService navigationService,
                                IPinsManagerService pinsManagerService,
                                IThemeService themeManagerService,
-                               INotificationService notificationService,
+                               IWeatherService weatherService,
                                IPermissionService permissionService)
                                : base(navigationService,
                                      pinsManagerService,
                                      themeManagerService,
                                      permissionService)
         {
-            _notificationService = notificationService;
+            _weatherService = weatherService;
         }
 
         #region Properties
@@ -41,13 +42,21 @@ namespace MapNotepad.ViewModels
         public CustomPin SelectedCustomPin
         {
             get => _selectedCustomPin;
-            set => SetProperty(ref _selectedCustomPin, value);
+            set
+            {
+                SetProperty(ref _selectedCustomPin, value);
+                SetWeatherData(value);
+            }
+        }
+
+        private WeatherForecast _weatherForecast;
+        public WeatherForecast WeatherForecast
+        {
+            get => _weatherForecast;
+            set => SetProperty(ref _weatherForecast, value);
         }
 
         #endregion
-
-        private ICommand _addReminderCommand;
-        public ICommand AddReminderCommand => _addReminderCommand ??= new Command(OnAddReminderCommandAsync);
 
         private ICommand _selectedPinChangedCommand;
         public ICommand SelectedPinChangedCommand => _selectedPinChangedCommand ??= new Command<object>(OnSelectedPinChangedCommand);
@@ -63,31 +72,23 @@ namespace MapNotepad.ViewModels
                 SelectedCustomPin = pin;
                 CameraPosition = new Position(pin.Latitude, pin.Longitude);
             }
-
-            //await _notificationService.SendPush("Hui", "v rotebal;");
         }
 
         #endregion
-
-        private async void OnAddReminderCommandAsync()
-        {
-            if (_selectedCustomPin != null)
-            {
-                await PopupNavigation.Instance.PushAsync(new AddReminderPopup());
-                //var result = await UserDialogs.Instance.PromptAsync("Enter reminder:");
-                //var customPin = CustomPinCollection.FirstOrDefault(x => x.Label == _selectedPin.Label);//TODO rework
-                //customPin.Reminder = result.Text;
-                //await SavePinAsync(customPin);
-                //CrossLocalNotifications.Current.Show(customPin.Label, customPin.Reminder, 1, DateTime.Now.AddSeconds(5));
-            }
-        }
-
 
         private void OnSelectedPinChangedCommand(object pinObj)
         {
             if (pinObj is Pin pin)
             {
                 SelectedCustomPin = CustomPinCollection.FirstOrDefault(x => x.Label == pin.Label);
+            }
+        }
+
+        private async void SetWeatherData(CustomPin pin)
+        {
+            if (pin != null)
+            {
+                WeatherForecast = await _weatherService.GetWeatherForecast(pin.Latitude, pin.Longitude);
             }
         }
     }

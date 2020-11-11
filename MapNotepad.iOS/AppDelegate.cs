@@ -6,7 +6,6 @@ using Foundation;
 using MapNotepad.iOS.Services;
 using MapNotepad.Services.AuthorizationService;
 using MapNotepad.Services.AuthorizationService.Twitter;
-using MapNotepad.Services.NotificationService;
 using Prism;
 using Prism.Ioc;
 using UIKit;
@@ -29,7 +28,6 @@ namespace MapNotepad.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            UNUserNotificationCenter.Current.Delegate = new iOSBannerNotification();
             var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null);
             UIApplication.SharedApplication.RegisterUserNotificationSettings(notificationSettings);
 
@@ -75,20 +73,6 @@ namespace MapNotepad.iOS
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ITwitterAuthorizationService, TwitterAuthorizationService>();
-            containerRegistry.RegisterSingleton<INotificationService, PushNotificationService>();
-        }
-    }
-
-    internal class iOSBannerNotification : UNUserNotificationCenterDelegate
-    {
-        public iOSBannerNotification()
-        {
-
-        }
-
-        public override void WillPresentNotification(UNUserNotificationCenter center, UNNotification notification, Action<UNNotificationPresentationOptions> completionHandler)
-        {
-            completionHandler(UNNotificationPresentationOptions.Alert);
         }
     }
 }

@@ -11,7 +11,6 @@ using Xamarin.Auth;
 using Xamarin.Forms;
 using MapNotepad.Services.AuthorizationService.Twitter;
 using MapNotepad.Droid.Services;
-using MapNotepad.Services.NotificationService;
 using Android.Content;
 
 namespace MapNotepad.Droid
@@ -77,7 +76,6 @@ namespace MapNotepad.Droid
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ITwitterAuthorizationService, TwitterAuthorizationService>();
-            containerRegistry.RegisterSingleton<INotificationService, PushNotificationService>();
         }
     }
 }

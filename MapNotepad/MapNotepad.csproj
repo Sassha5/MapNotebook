@@ -26,6 +26,7 @@
     <PackageReference Include="Xam.Plugins.Notifier" Version="3.0.1" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.6" />
     <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -46,8 +47,9 @@
     <Folder Include="Validation\" />
     <Folder Include="Services\ThemeService\" />
     <Folder Include="Services\PermissionService\" />
-    <Folder Include="Services\NotificationService\" />
     <Folder Include="Services\AuthorizationService\Twitter\" />
+    <Folder Include="Services\WeatherService\" />
+    <Folder Include="Models\Weather\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\RegisterPage.xaml" />

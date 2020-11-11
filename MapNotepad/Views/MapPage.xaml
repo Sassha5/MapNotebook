@@ -10,13 +10,14 @@
                        Title="{Binding Resources[Map]}">
 
     <Grid HorizontalOptions="FillAndExpand"
-              VerticalOptions="FillAndExpand">
+          VerticalOptions="FillAndExpand">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!--CUSTOM MAP-->
         <controls:CustomMap x:Name="map"
                             Grid.Row="1"
                             VerticalOptions="FillAndExpand"
@@ -39,6 +40,7 @@
 
         </controls:CustomMap>
 
+        <!--INFO POPUP FRAME-->
         <Frame x:Name="pinInfo"
                Grid.Row="1"
                VerticalOptions="End"
@@ -47,6 +49,7 @@
 
             <StackLayout>
 
+                <!--"LABEL" LABEL-->
                 <Label Style="{StaticResource MediumLabelStyle}"
                                        VerticalOptions="Center">
                     <Label.FormattedText>
@@ -57,6 +60,7 @@
                     </Label.FormattedText>
                 </Label>
 
+                <!--LATITUDE LABEL-->
                 <Label Style="{StaticResource SmallLabelStyle}">
                     <Label.FormattedText>
                         <FormattedString>
@@ -66,6 +70,7 @@
                     </Label.FormattedText>
                 </Label>
 
+                <!--LONGITUDE LABEL-->
                 <Label Style="{StaticResource SmallLabelStyle}">
                     <Label.FormattedText>
                         <FormattedString>
@@ -75,6 +80,7 @@
                     </Label.FormattedText>
                 </Label>
 
+                <!--DESCRIPTION LABEL-->
                 <Label Style="{StaticResource SmallLabelStyle}">
                     <Label.FormattedText>
                         <FormattedString>
@@ -84,22 +90,34 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Label Style="{StaticResource SmallLabelStyle}">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="Reminder: "/>
-                            <Span Text="{Binding SelectedCustomPin.Reminder}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                <!--WEATHER LIST-->
+                <CarouselView ItemsSource="{Binding WeatherForecast.List}"
+                              PeekAreaInsets="150"
+                              HeightRequest="300">
 
-                <Button Text="Add reminder"
-                        Command="{Binding AddReminderCommand}"/>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10,0,0,0"
+                                         VerticalOptions="FillAndExpand">
+
+                                <Image HeightRequest="44" 
+                                       WidthRequest="44" 
+                                       Source="{Binding DisplayIcon}"/>
+
+                                <Label Text="{Binding DisplayTemp}"
+                                       TextColor="#3498db"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+
+                </CarouselView>
 
             </StackLayout>
 
         </Frame>
 
+        <!--PIN SEARCH BAR-->
         <SearchBar VerticalOptions="StartAndExpand"
                    Grid.Row="0"
                    Placeholder="{Binding Resources[Search]}"

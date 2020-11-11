@@ -98,7 +98,7 @@
                                 <StackLayout Grid.Column="1"
                                              VerticalOptions="Center">
                                     <Label Style="{StaticResource MediumLabelStyle}"
-                                       VerticalOptions="Center">
+                                           VerticalOptions="Center">
 
                                         <Label.FormattedText>
 
@@ -155,6 +155,7 @@
 
             </ListView>
 
+            <!--CIRCLE ADD BUTTON-->
             <Frame Grid.Row="0"
                    VerticalOptions="End"
                    HorizontalOptions="End"

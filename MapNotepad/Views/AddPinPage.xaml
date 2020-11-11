@@ -8,13 +8,16 @@
                         x:Name="addPinPage">
 
     <views:BaseContentPage.ToolbarItems>
+
         <ToolbarItem Order="Primary"
-                 Priority="0"
-                 Command="{Binding SavePinCommand}"
-                 IconImageSource="ic_save.png"/>
+                     Priority="0"
+                     Command="{Binding SavePinCommand}"
+                     IconImageSource="ic_save.png"/>
+
     </views:BaseContentPage.ToolbarItems>
 
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -26,46 +29,53 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!--LABEL ENTRY-->
         <controls:CustomEntry Grid.Row="0"
                               Text="{Binding BindingContext.CustomPin.Label,
                                      Source={x:Reference addPinPage}}"
                               Placeholder="{Binding BindingContext.Resources[Label],
                                             Source={x:Reference addPinPage}}"/>
 
+        <!--DESCRIPTION ENTRY-->
         <controls:CustomEntry Grid.Row="1"
                               Text="{Binding BindingContext.CustomPin.Description,
                                      Source={x:Reference addPinPage}}"
                               Placeholder="{Binding BindingContext.Resources[Description],
                                             Source={x:Reference addPinPage}}"/>
 
-        <StackLayout Orientation="Horizontal" Grid.Row="2">
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="2">
 
+            <!--LATITUDE ENTRY-->
             <controls:CustomEntry HorizontalOptions="FillAndExpand"
-                                    Text="{Binding BindingContext.CustomPin.Latitude,
-                                     Source={x:Reference addPinPage}}"
+                                  Text="{Binding BindingContext.CustomPin.Latitude,
+                                         Source={x:Reference addPinPage}}"
                                   Placeholder="{Binding BindingContext.Resources[Latitude],
                                             Source={x:Reference addPinPage}}"/>
 
+            <!--LONGITUDE ENTRY-->
             <controls:CustomEntry HorizontalOptions="FillAndExpand"
-                                    Text="{Binding BindingContext.CustomPin.Longitude,
-                                     Source={x:Reference addPinPage}}"
+                                  Text="{Binding BindingContext.CustomPin.Longitude,
+                                         Source={x:Reference addPinPage}}"
                                   Placeholder="{Binding BindingContext.Resources[Longitude],
                                             Source={x:Reference addPinPage}}"/>
 
         </StackLayout>
 
-        <controls:CustomMap x:Name="map"
-                            VerticalOptions="FillAndExpand"
+        <!--CUSTOM MAP-->
+        <controls:CustomMap VerticalOptions="FillAndExpand"
                             Grid.Row="3"
                             Grid.RowSpan="4"
                             CustomPinCollection="{Binding CustomPinCollection}"
                             MapStyle="{Binding MapStyle}">
 
             <controls:CustomMap.Behaviors>
+
                 <prism:EventToCommandBehavior                         
                             EventName="MapClicked"
                             Command="{Binding MapClickedCommand}"
                             EventArgsParameterPath="Point"/>
+
             </controls:CustomMap.Behaviors>
 
         </controls:CustomMap>

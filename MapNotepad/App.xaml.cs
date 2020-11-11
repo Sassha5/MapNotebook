@@ -8,6 +8,7 @@ using MapNotepad.Services.RepositoryService;
 using MapNotepad.Services.SettingsService;
 using MapNotepad.Services.ThemeService;
 using MapNotepad.Services.UsersManagerService;
+using MapNotepad.Services.WeatherService;
 using MapNotepad.ViewModels;
 using MapNotepad.Views;
 using Plugin.LocalNotifications;
@@ -70,8 +71,6 @@ namespace MapNotepad
             
             containerRegistry.RegisterInstance(CrossSettings.Current);
             containerRegistry.RegisterInstance(UserDialogs.Instance);
-            //containerRegistry.RegisterInstance(CrossLocalNotifications.Current);
-            //containerRegistry.RegisterInstance<ITwitterAuthorizationService>(TwitterAuthorizationService.Instance);
 
             containerRegistry.RegisterInstance<ISettingsService>(Container.Resolve<SettingsService>());
             containerRegistry.RegisterInstance<IRepositoryService>(Container.Resolve<RepositoryService>());
@@ -81,6 +80,7 @@ namespace MapNotepad
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
             containerRegistry.RegisterInstance<IThemeService>(Container.Resolve<ThemeService>());
             containerRegistry.RegisterInstance<IPermissionService>(Container.Resolve<PermissionService>());
+            containerRegistry.RegisterInstance<IWeatherService>(Container.Resolve<WeatherService>());
         }
     }
 }

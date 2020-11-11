@@ -12,7 +12,6 @@
             Title="{Binding Resources[MainPage]}"
             Style="{StaticResource TabbedPageStyle}">
 
-    <!--Pages can be added as references or inline-->
     <TabbedPage.Behaviors>
 
         <behaviors:TabbedPageNavigationBehavior />
