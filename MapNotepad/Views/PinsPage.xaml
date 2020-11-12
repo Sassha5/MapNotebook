@@ -164,8 +164,9 @@
                    HeightRequest="70"
                    WidthRequest="70"
                    CornerRadius="35"
+                   HasShadow="False"
                    BackgroundColor="{AppThemeBinding Light={StaticResource LightNavigationBarColor}, 
-                                            Dark={StaticResource DarkNavigationBarColor}}">
+                                                     Dark={StaticResource DarkNavigationBarColor}}">
 
                 <Image HeightRequest="55"
                        WidthRequest="55"

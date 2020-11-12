@@ -1,6 +1,7 @@
 ﻿using Foundation;
 using MapNotepad.iOS.Services;
 using MapNotepad.Services.AuthorizationService.Twitter;
+using Plugin.FacebookClient;
 using Prism;
 using Prism.Ioc;
 using UIKit;
@@ -47,6 +48,8 @@ namespace MapNotepad.iOS
                 UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
             }
 
+            FacebookClientManager.Initialize(app, options);
+
             return base.FinishedLaunching(app, options);
         }
 
@@ -58,7 +61,19 @@ namespace MapNotepad.iOS
 
             uiApplication.RegisterForRemoteNotifications();
 
+            FacebookClientManager.OnActivated();
+
             base.OnActivated(uiApplication);
+        }
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            return FacebookClientManager.OpenUrl(app, url, options);
+        }
+
+        public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+        {
+            return FacebookClientManager.OpenUrl(application, url, sourceApplication, annotation);
         }
     }
 

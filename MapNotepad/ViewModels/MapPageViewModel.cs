@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace MapNotepad.ViewModels
             _weatherService = weatherService;
         }
 
-        #region Properties
+        #region -- Public Properties --
 
         private CustomPin _selectedCustomPin;
         public CustomPin SelectedCustomPin
@@ -64,7 +65,6 @@ namespace MapNotepad.ViewModels
 
             if (parameters.TryGetValue(nameof(CustomPin), out CustomPin pin))
             {
-                await Task.Delay(500);
                 SelectedCustomPin = pin;
                 CameraPosition = new Position(pin.Latitude, pin.Longitude);
             }
@@ -94,7 +94,17 @@ namespace MapNotepad.ViewModels
         {
             if (pin != null)
             {
-                WeatherForecast = await _weatherService.GetWeatherForecast(pin.Latitude, pin.Longitude);
+                var forecast = await _weatherService.GetWeatherForecast(pin.Latitude, pin.Longitude);
+                List<WeatherData> list = new List<WeatherData>();
+                foreach (WeatherData data in forecast.List)
+                {
+                    if (data.DisplayDate.Contains("2:00 PM")) //TODO delete this
+                    {
+                        list.Add(data);
+                    }
+                }
+                forecast.List = list;
+                WeatherForecast = forecast;
             }
         }
     }

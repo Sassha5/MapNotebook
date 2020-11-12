@@ -7,20 +7,6 @@ namespace MapNotepad.Views
         public SignInPage()
         {
             InitializeComponent();
-            //signInButton.IsEnabled = false;
-        }
-
-        void TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //if (string.IsNullOrEmpty(emailInput.Text) ||
-            //    string.IsNullOrEmpty(passwordInput.Text))
-            //{
-            //    signInButton.IsEnabled = false;
-            //}
-            //else
-            //{
-            //    signInButton.IsEnabled = true;
-            //}
         }
     }
 }

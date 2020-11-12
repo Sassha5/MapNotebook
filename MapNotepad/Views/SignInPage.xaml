@@ -24,10 +24,10 @@
         </Grid.RowDefinitions>
 
          <controls:CustomEntry Grid.Row="0"
-                              Text="{Binding BindingContext.Email,
-                                     Source={x:Reference signInPage}}"
-                              Placeholder="{Binding BindingContext.Resources[Email],
-                                            Source={x:Reference signInPage}}"/>
+                               Text="{Binding BindingContext.Email,
+                                      Source={x:Reference signInPage}}"
+                               Placeholder="{Binding BindingContext.Resources[Email],
+                                             Source={x:Reference signInPage}}"/>
 
         <controls:CustomEntry Grid.Row="1"
                               Text="{Binding BindingContext.Password,
@@ -36,20 +36,25 @@
                               Placeholder="{Binding BindingContext.Resources[Password],
                                             Source={x:Reference signInPage}}"/>
 
+        <Button Text="Sign up with Facebook" 
+                Grid.Row="4"
+                Command="{Binding FacebookSignUpCommand}"
+                Style="{StaticResource ButtonStyle}"
+                BackgroundColor="Blue"/>
+
         <Button Text="Sign in with Twitter" 
                 Grid.Row="5"
                 Command="{Binding TwitterSignInCommand}"
                 Style="{StaticResource ButtonStyle}"
                 BackgroundColor="#55ACEE"/>
 
-        <Button x:Name="signInButton"
-                Text="{Binding Resources[SignIn]}" 
+        <Button Text="{Binding Resources[SignIn]}" 
                 Grid.Row="6"
                 Command="{Binding AuthorizeCommand}"
                 Style="{StaticResource ButtonStyle}"/>
 
         <Label HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand" Grid.Row="7"
+               VerticalOptions="CenterAndExpand" Grid.Row="7"
                Style="{StaticResource LargeLabelStyle}">
 
             <Label.FormattedText>
@@ -57,7 +62,7 @@
                 <FormattedString>
 
                     <Span Text="{Binding Resources[SignUp]}"
-                            TextDecorations="Underline">
+                          TextDecorations="Underline">
 
                         <Span.GestureRecognizers>
 

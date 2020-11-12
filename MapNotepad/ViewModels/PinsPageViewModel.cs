@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Input;
+using Acr.UserDialogs;
 using MapNotepad.Models;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Views;
@@ -13,14 +14,18 @@ namespace MapNotepad.ViewModels
 {
     public class PinsPageViewModel : ViewModelCollectionBase
     {
+        private IUserDialogs _userDialogs;
+
         public PinsPageViewModel(INavigationService navigationService,
-                                 IPinsManagerService pinsManagerService)
+                                 IPinsManagerService pinsManagerService,
+                                 IUserDialogs userDialogs)
                                  : base(navigationService,
                                         pinsManagerService)
         {
+            _userDialogs = userDialogs;
         }
 
-        #region Commands
+        #region -- Commands --
 
         private ICommand _toAddPinPageCommand;
         public ICommand ToAddPinPageCommand => _toAddPinPageCommand ??= new Command(OnToAddPinPageCommandAsync);
@@ -39,12 +44,7 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-        }
-
-        #region Command execution methods
+        #region -- Command Methods --
 
         private async void OnFavouriteChangeCommandAsync(CustomPin pin)
         {
@@ -65,7 +65,7 @@ namespace MapNotepad.ViewModels
                 { nameof(CustomPin), pin }
             };
 
-            #region -- Secret MAGIC --
+            #region -- Navigaiton Hack --
 
             var currentPage = (NavigationService as IPageAware).Page;
 
@@ -80,21 +80,20 @@ namespace MapNotepad.ViewModels
             #endregion
 
             await NavigationService.SelectTabAsync($"{nameof(MapPage)}", navParams);
-            
-            //await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}?selectedTab={nameof(MapPage)}", navParams);
         }
 
-        private async void OnToAddPinPageCommandAsync(object obj)
+        private async void OnToAddPinPageCommandAsync()
         {
             await NavigationService.NavigateAsync($"{nameof(AddPinPage)}");
         }
 
         private async void OnDeleteCommandAsync(CustomPin pin)
         {
-            //bool result = await Confirm(); //TODO
-            //if (result)
-            await DeletePinAsync(pin);
-            //}
+            bool result = await _userDialogs.ConfirmAsync("Are you sure?");
+            if (result)
+            {
+                await DeletePinAsync(pin);
+            }
         }
 
         private async void OnEditCommandAsync(CustomPin pin)

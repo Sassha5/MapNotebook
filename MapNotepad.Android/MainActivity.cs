@@ -10,6 +10,8 @@ using Acr.UserDialogs;
 using Xamarin.Forms;
 using MapNotepad.Services.AuthorizationService.Twitter;
 using MapNotepad.Droid.Services;
+using Plugin.FacebookClient;
+using Android.Content;
 
 namespace MapNotepad.Droid
 {
@@ -32,8 +34,15 @@ namespace MapNotepad.Droid
             Forms.Init(this, savedInstanceState);
             Xamarin.FormsGoogleMaps.Init(this, savedInstanceState); //Initialize GoogleMaps here
             UserDialogs.Init(this);
+            FacebookClientManager.Initialize(this);
 
             LoadApplication(new App(new AndroidInitializer()));
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
+        {
+            base.OnActivityResult(requestCode, resultCode, intent);
+            FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

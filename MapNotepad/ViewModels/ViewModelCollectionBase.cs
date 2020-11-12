@@ -21,7 +21,7 @@ namespace MapNotepad.ViewModels
         }
 
 
-        #region Properties
+        #region-- Public Properties --
 
         private string _searchBarText;
         public string SearchBarText
@@ -57,18 +57,16 @@ namespace MapNotepad.ViewModels
             CustomPinCollection = new ObservableCollection<CustomPin>(pins);
         }
 
-        protected async Task<int> SavePinAsync(CustomPin pin)
+        protected async Task SavePinAsync(CustomPin pin)
         {
-            int id = await _pinsManagerService.SavePinAsync(pin);
+            await _pinsManagerService.SavePinAsync(pin);
             await UpdateCollectionAsync();
-            return id;
         }
 
-        protected async Task<int> DeletePinAsync(CustomPin pin)
+        protected async Task DeletePinAsync(CustomPin pin)
         {
-            int id = await _pinsManagerService.DeletePinAsync(pin);
+            await _pinsManagerService.DeletePinAsync(pin);
             await UpdateCollectionAsync();
-            return id;
         }
 
         protected async virtual Task SearchAsync()

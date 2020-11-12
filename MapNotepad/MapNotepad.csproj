@@ -26,6 +26,7 @@
     <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="AiForms.Layouts" Version="1.1.0" />
+    <PackageReference Include="Plugin.FacebookClient" Version="2.2.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -49,6 +50,7 @@
     <Folder Include="Services\AuthorizationService\Twitter\" />
     <Folder Include="Services\WeatherService\" />
     <Folder Include="Models\Weather\" />
+    <Folder Include="Services\RegistrationService\Facebook\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\RegisterPage.xaml" />

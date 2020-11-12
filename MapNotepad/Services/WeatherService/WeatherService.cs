@@ -21,6 +21,7 @@ namespace MapNotepad.Services.WeatherService
         {
             string requestUri = "https://api.openweathermap.org/data/2.5/forecast";
             requestUri += $"?lat={latitude}&lon={longitude}";
+            //requestUri += "&exclude=hourly";
             requestUri += "&units=metric";
             requestUri += "&APPID=" + Constants.WeatherAPIkey;
 

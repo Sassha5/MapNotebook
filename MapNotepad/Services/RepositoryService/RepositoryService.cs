@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using MapNotepad.Models;
 using SQLite;
+using static MapNotepad.Constants;
 
 namespace MapNotepad.Services.RepositoryService
 {
@@ -13,7 +14,7 @@ namespace MapNotepad.Services.RepositoryService
 
         public RepositoryService()
         {
-            database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.db"));
+            database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DatabaseName));
         }
 
         public void CreateTableAsync<T>() where T : IModelBase, new()
@@ -30,11 +31,6 @@ namespace MapNotepad.Services.RepositoryService
         {
             return database.GetAsync<T>(id);
         }
-
-        //public Task<T> GetItemAsync<T>(Func<T, bool> pred) where T : IModelBase, new()
-        //{
-        //    return database.GetAsync<T>(pred);
-        //}
 
         public Task<int> DeleteItemAsync<T>(int id) where T : IModelBase, new()
         {

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using Acr.UserDialogs;
 using MapNotepad.Services.AuthorizationService;
 using MapNotepad.Views;
 using Prism.Navigation;
@@ -10,15 +10,18 @@ namespace MapNotepad.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         private readonly IAuthorizationService _authorizationService;
+        private readonly IUserDialogs _userDialogs;
 
         public MainPageViewModel(INavigationService navigationService,
-                                IAuthorizationService authorizationService)
+                                IAuthorizationService authorizationService,
+                                IUserDialogs userDialogs)
                                 : base(navigationService)
         {
             _authorizationService = authorizationService;
+            _userDialogs = userDialogs;
         }
 
-        #region Commands
+        #region -- Commands --
 
         private ICommand _logoutCommand;
         public ICommand LogoutCommand => _logoutCommand ??= new Command(OnLogoutCommandAsync);
@@ -28,17 +31,21 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        #region Command execution methods
+        #region -- Command Methods --
 
-        private async void OnSettingsCommandAsync(object obj)
+        private async void OnSettingsCommandAsync()
         {
             await NavigationService.NavigateAsync($"{nameof(SettingsPage)}");
         }
 
-        private async void OnLogoutCommandAsync(object obj)
+        private async void OnLogoutCommandAsync()
         {
-            _authorizationService.Logout();
-            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
+            bool result = await _userDialogs.ConfirmAsync("Are you sure?");
+            if (result)
+            {
+                _authorizationService.Logout();
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
+            }
         }
 
         #endregion

@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Acr.UserDialogs;
 using MapNotepad.Models;
 using MapNotepad.Services.AuthorizationService;
 using MapNotepad.Services.AuthorizationService.Twitter;
+using MapNotepad.Services.RegistrationService.Facebook;
 using MapNotepad.Views;
 using Prism.Navigation;
-using Xamarin.Auth;
 using Xamarin.Forms;
 
 namespace MapNotepad.ViewModels
@@ -14,18 +17,25 @@ namespace MapNotepad.ViewModels
     {
         private readonly IAuthorizationService _authorizationService;
         private readonly ITwitterAuthorizationService _twitterAuthorizationService;
+        private readonly IUserDialogs _userDialogs;
+        private readonly IFacebookService _facebookService;
 
         public SignInPageViewModel(INavigationService navigationService,
                                    ITwitterAuthorizationService twitterAuthorizationService,
-                                   IAuthorizationService authorizationService)
+                                   IAuthorizationService authorizationService,
+                                   IUserDialogs userDialogs,
+                                   IFacebookService facebookService)
                                    : base(navigationService)
         {
             _authorizationService = authorizationService;
             _twitterAuthorizationService = twitterAuthorizationService;
             _twitterAuthorizationService.RegisterAuthDelegate(this);
+            _userDialogs = userDialogs;
+            _facebookService = facebookService;
+            _facebookService.RegisterAuthDelegate(this);
         }
 
-        #region Properties
+        #region-- Public Properties --
 
         private string _email;
         public string Email
@@ -55,7 +65,7 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        #region Commands
+        #region -- Commands --
 
         private ICommand _signUpCommand;
         public ICommand SignUpCommand => _signUpCommand ??= new Command(OnSignUpCommandAsync);
@@ -63,12 +73,15 @@ namespace MapNotepad.ViewModels
         private ICommand _authorizeCommand;
         public ICommand AuthorizeCommand => _authorizeCommand ??= new Command(OnAuthorizeCommandAsync);
 
+        private ICommand _facebookSignUpCommand;
+        public ICommand FacebookSignUpCommand => _facebookSignUpCommand ??= new Command(OnFacebookSignUpCommand);
+
         private ICommand _twitterSignInCommand;
-        public ICommand TwitterSignInCommand => _twitterSignInCommand ??= new Command(OnTwitterSignInCommandAsync);
+        public ICommand TwitterSignInCommand => _twitterSignInCommand ??= new Command(OnTwitterSignInCommand);
 
         #endregion
 
-        #region Command execution methods
+        #region -- Command Methods --
 
         private async void OnSignUpCommandAsync()
         {
@@ -80,19 +93,24 @@ namespace MapNotepad.ViewModels
             var canAuthorize = await _authorizationService.CanAuthorizeAsync(Email, Password);
             if (canAuthorize)
             {
-                _authorizationService.AuthorizeAsync(Email, Password);
+                await _authorizationService.AuthorizeAsync(Email, Password);
                 await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert(Resources["Oops"], Resources["WrongCredentials"], Resources["Ok"]);
+                await _userDialogs.AlertAsync(Resources["WrongCredentials"], Resources["Oops"], Resources["Ok"]);
                 Password = string.Empty;
             }
         }
 
-        private void OnTwitterSignInCommandAsync()
+        private void OnTwitterSignInCommand()
         {
             _twitterAuthorizationService.Login();
+        }
+
+        private void OnFacebookSignUpCommand()
+        {
+            _facebookService.TryGetUserInfoAsync();
         }
 
         #endregion
@@ -101,13 +119,31 @@ namespace MapNotepad.ViewModels
 
         public async void AuthSuccess(AuthResult result)
         {
-            _authorizationService.AuthorizeAsync(result.Id);
-            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
+            if (string.IsNullOrEmpty(result.Email)) //true if called from twitter, TODO enum or other check
+            {
+                _authorizationService.AuthorizeAsync(result.Id);
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
+            }
+            else
+            {
+                User user = new User()
+                {
+                    Email = result.Email,
+                    Name = result.Username
+                };
+
+                NavigationParameters navParams = new NavigationParameters()
+                {
+                    { nameof(User), user }
+                };
+
+                await NavigationService.NavigateAsync($"{nameof(SignUpPage)}", navParams);
+            }
         }
 
         public void AuthFailure()
         {
-            Application.Current.MainPage.DisplayAlert("Nope", "Authorization unsuccessful", "ok");
+            _userDialogs.AlertAsync("Authorization unsuccessful", "Nope", "ok");
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using MapNotepad.Services.ThemeService;
+﻿using System.ComponentModel;
+using MapNotepad.Services.ThemeService;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -15,18 +16,13 @@ namespace MapNotepad.ViewModels
             _themeManagerService = themeManagerService;
         }
 
-        #region Properties
+        #region-- Public Properties --
 
         private bool _darkThemeIsChecked;
         public bool DarkThemeIsChecked
         {
             get => _darkThemeIsChecked; 
-            set
-            {
-                SetProperty(ref _darkThemeIsChecked, value);
-                if (value) { _themeManagerService.SetApplicationTheme(OSAppTheme.Dark); }
-                else { _themeManagerService.SetApplicationTheme(OSAppTheme.Light); }
-            }
+            set => SetProperty(ref _darkThemeIsChecked, value);
         }
 
         #endregion
@@ -36,6 +32,23 @@ namespace MapNotepad.ViewModels
             if (Application.Current.RequestedTheme == OSAppTheme.Dark)
             {
                 DarkThemeIsChecked = true;
+            }
+        }
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+
+            if (args.PropertyName == nameof(DarkThemeIsChecked))
+            {
+                if (_darkThemeIsChecked)
+                {
+                    _themeManagerService.SetApplicationTheme(OSAppTheme.Dark);
+                }
+                else
+                {
+                    _themeManagerService.SetApplicationTheme(OSAppTheme.Light);
+                }
             }
         }
     }

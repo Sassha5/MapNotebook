@@ -1,7 +1,10 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using Acr.UserDialogs;
+using MapNotepad.Models;
 using MapNotepad.Services.RegistrationService;
 using MapNotepad.Validation;
+using Prism.Common;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -22,7 +25,7 @@ namespace MapNotepad.ViewModels
             _registrationService = registrationService;
         }
 
-        #region Properties
+        #region-- Public Properties --
 
         private string _email;
         public string Email
@@ -53,6 +56,15 @@ namespace MapNotepad.ViewModels
         }
 
         #endregion
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.TryGetValue(nameof(User), out User user))
+            {
+                Name = user.Name;
+                Email = user.Email;
+            }
+        }
 
         private ICommand _RegisterCommand;
         public ICommand RegisterCommand => _RegisterCommand ??= new Command(OnRegisterCommandAsync);

@@ -28,7 +28,7 @@ namespace MapNotepad.ViewModels
             _userDialogs = userDialogs;
         }
 
-        #region Properties
+        #region -- Public Properties --
 
         private CustomPin _customPin;
         public CustomPin CustomPin
@@ -39,7 +39,7 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        #region Commands
+        #region -- Commands --
 
         private ICommand _savePinCommand;
         public ICommand SavePinCommand => _savePinCommand ??= new Command(OnSavePinCommandAsync);
@@ -70,7 +70,7 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        #region Command execution methods
+        #region -- Command Methods --
 
         private async void OnMapClickedCommandAsync(Position args)
         {

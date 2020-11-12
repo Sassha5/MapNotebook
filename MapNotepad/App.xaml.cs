@@ -4,6 +4,7 @@ using MapNotepad.Services.AuthorizationService;
 using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.RegistrationService;
+using MapNotepad.Services.RegistrationService.Facebook;
 using MapNotepad.Services.RepositoryService;
 using MapNotepad.Services.SettingsService;
 using MapNotepad.Services.ThemeService;
@@ -11,6 +12,7 @@ using MapNotepad.Services.UsersManagerService;
 using MapNotepad.Services.WeatherService;
 using MapNotepad.ViewModels;
 using MapNotepad.Views;
+using Plugin.FacebookClient;
 using Plugin.Settings;
 using Prism;
 using Prism.Ioc;
@@ -70,6 +72,7 @@ namespace MapNotepad
             
             containerRegistry.RegisterInstance(CrossSettings.Current);
             containerRegistry.RegisterInstance(UserDialogs.Instance);
+            containerRegistry.RegisterInstance(CrossFacebookClient.Current);
 
             containerRegistry.RegisterInstance<ISettingsService>(Container.Resolve<SettingsService>());
             containerRegistry.RegisterInstance<IRepositoryService>(Container.Resolve<RepositoryService>());
@@ -80,6 +83,7 @@ namespace MapNotepad
             containerRegistry.RegisterInstance<IThemeService>(Container.Resolve<ThemeService>());
             containerRegistry.RegisterInstance<IPermissionService>(Container.Resolve<PermissionService>());
             containerRegistry.RegisterInstance<IWeatherService>(Container.Resolve<WeatherService>());
+            containerRegistry.RegisterInstance<IFacebookService>(Container.Resolve<FacebookService>());
         }
     }
 }

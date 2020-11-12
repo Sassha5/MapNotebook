@@ -13,10 +13,10 @@ namespace MapNotepad.ViewModels
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
-            Resources = new LocalizedResources(typeof(AppResource), "en"); //TODO take language from settings, not hardcoded "en"
+            Resources = new LocalizedResources(typeof(AppResource), "en");
         }
 
-        #region Properties
+        #region -- Public Properties --
 
         public LocalizedResources Resources { get; private set; }
 

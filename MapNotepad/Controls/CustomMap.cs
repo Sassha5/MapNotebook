@@ -15,7 +15,7 @@ namespace MapNotepad.Controls
             UiSettings.MyLocationButtonEnabled = true;
         }
 
-        #region Properties
+        #region-- Public Properties --
 
         public static readonly BindableProperty CustomPinCollectionProperty =
             BindableProperty.Create(

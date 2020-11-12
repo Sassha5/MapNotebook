@@ -15,7 +15,7 @@ namespace MapNotepad.Services.SettingsService
             _appSettings = appSettings;
         }
 
-        #region Properties
+        #region-- Public Properties --
 
         public int AuthorizedUserID
         {

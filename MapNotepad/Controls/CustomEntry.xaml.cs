@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace MapNotepad.Controls
 {
-    public partial class CustomEntry : ContentView
+    public partial class CustomEntry : Frame
     {
         public CustomEntry()
         {

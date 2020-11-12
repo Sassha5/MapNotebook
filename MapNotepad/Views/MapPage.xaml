@@ -151,8 +151,10 @@
                    Style="{StaticResource SearchBarStyle}">
 
             <SearchBar.Behaviors>
+
                 <prism:EventToCommandBehavior EventName="TextChanged"
                                               Command="{Binding SearchCommand}"/>
+
             </SearchBar.Behaviors>
 
         </SearchBar>

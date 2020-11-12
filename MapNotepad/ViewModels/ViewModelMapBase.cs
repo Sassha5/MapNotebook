@@ -28,7 +28,7 @@ namespace MapNotepad.ViewModels
             _permissionService = permissionService;
         }
 
-        #region Properties
+        #region -- Public Properties --
 
         private Position _cameraPosition;
         public Position CameraPosition
