@@ -28,7 +28,7 @@ namespace MapNotepad.Services.PinsManagerService
             set => _settingsManagerService.LastMapPosition = value;
         }
 
-        #region Methods
+        #region -- IPinsManagerService Implementation --
 
         public async Task<int> SavePinAsync(CustomPin pin)
         {
@@ -54,17 +54,18 @@ namespace MapNotepad.Services.PinsManagerService
             return _repositoryService.DeleteItemAsync<CustomPin>(pin.Id);
         }
 
-        public async Task<IEnumerable<CustomPin>> GetCurrentUserPinsAsync()
-        {
-            var pins = await _repositoryService.GetItemsAsync<CustomPin>();
-            return pins.Where(x => x.UserId == _settingsManagerService.AuthorizedUserID);
-        }
-
         public async Task<IEnumerable<CustomPin>> GetCurrentUserPinsAsync(string searchValue)
         {
-            var pins = await GetCurrentUserPinsAsync();
-            return pins.Where(x => x.Label.ToLower().Contains(searchValue.ToLower())
+            var pins = await _repositoryService.GetItemsAsync<CustomPin>();
+            var currentPins = pins.Where(x => x.UserId == _settingsManagerService.AuthorizedUserID);
+
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                currentPins = currentPins.Where(x => x.Label.ToLower().Contains(searchValue.ToLower())
                           || x.Description.ToLower().Contains(searchValue.ToLower()));
+            }
+
+            return currentPins;
         }
 
         #endregion

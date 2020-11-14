@@ -47,5 +47,31 @@ namespace MapNotepad.Controls
             get => (bool)GetValue(IsPasswordProperty);
             set => SetValue(IsPasswordProperty, value);
         }
+
+        public static readonly BindableProperty IsReadOnlyProperty =
+            BindableProperty.Create(
+                propertyName: nameof(IsReadOnly),
+                returnType: typeof(bool),
+                declaringType: typeof(CustomEntry),
+                defaultBindingMode: BindingMode.TwoWay);
+
+        public bool IsReadOnly
+        {
+            get => (bool)GetValue(IsReadOnlyProperty);
+            set => SetValue(IsReadOnlyProperty, value);
+        }
+
+        public static readonly BindableProperty KeyboardProperty =
+            BindableProperty.Create(
+                propertyName: nameof(Keyboard),
+                returnType: typeof(Keyboard),
+                declaringType: typeof(CustomEntry),
+                defaultBindingMode: BindingMode.TwoWay);
+
+        public Keyboard Keyboard
+        {
+            get => (Keyboard)GetValue(KeyboardProperty);
+            set => SetValue(KeyboardProperty, value);
+        }
     }
 }

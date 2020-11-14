@@ -16,7 +16,7 @@ namespace MapNotepad.ViewModels
             _themeManagerService = themeManagerService;
         }
 
-        #region-- Public Properties --
+        #region -- Public Properties --
 
         private bool _darkThemeIsChecked;
         public bool DarkThemeIsChecked
@@ -26,6 +26,8 @@ namespace MapNotepad.ViewModels
         }
 
         #endregion
+
+        #region -- Overrides --
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -51,5 +53,7 @@ namespace MapNotepad.ViewModels
                 }
             }
         }
+
+        #endregion
     }
 }

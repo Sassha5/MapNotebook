@@ -35,7 +35,7 @@ namespace MapNotepad.ViewModels
             _facebookService.RegisterAuthDelegate(this);
         }
 
-        #region-- Public Properties --
+        #region -- Public Properties --
 
         private string _email;
         public string Email
@@ -53,7 +53,7 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        #region INavigatedAware override
+        #region -- Overrides --
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -90,7 +90,7 @@ namespace MapNotepad.ViewModels
 
         private async void OnAuthorizeCommandAsync()
         {
-            var canAuthorize = await _authorizationService.CanAuthorizeAsync(Email, Password);
+            bool canAuthorize = await _authorizationService.CanAuthorizeAsync(Email, Password);
             if (canAuthorize)
             {
                 await _authorizationService.AuthorizeAsync(Email, Password);
@@ -115,7 +115,7 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        #region Private Helpers
+        #region -- Private Helpers --
 
         public async void AuthSuccess(AuthResult result)
         {

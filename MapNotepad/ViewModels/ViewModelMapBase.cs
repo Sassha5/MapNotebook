@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using MapNotepad.Extensions;
+﻿using System.Threading.Tasks;
 using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeService;
@@ -57,7 +53,7 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        #region Overrides
+        #region -- Overrides --
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {

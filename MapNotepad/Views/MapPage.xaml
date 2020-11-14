@@ -52,43 +52,73 @@
 
                 <!--"LABEL" LABEL-->
                 <Label Style="{StaticResource MediumLabelStyle}"
-                                       VerticalOptions="Center">
+                       VerticalOptions="Center">
+
                     <Label.FormattedText>
+
                         <FormattedString>
+
                             <Span Text="Label: "/>
+
                             <Span Text="{Binding SelectedCustomPin.Label}"/>
+
                         </FormattedString>
+
                     </Label.FormattedText>
                 </Label>
 
                 <!--LATITUDE LABEL-->
+
                 <Label Style="{StaticResource SmallLabelStyle}">
+
                     <Label.FormattedText>
+
                         <FormattedString>
+
                             <Span Text="Latitude: "/>
+
                             <Span Text="{Binding SelectedCustomPin.Latitude}"/>
+
                         </FormattedString>
+
                     </Label.FormattedText>
+
                 </Label>
 
                 <!--LONGITUDE LABEL-->
+
                 <Label Style="{StaticResource SmallLabelStyle}">
+
                     <Label.FormattedText>
+
                         <FormattedString>
+
                             <Span Text="Longitude: "/>
+
                             <Span Text="{Binding SelectedCustomPin.Longitude}"/>
+
                         </FormattedString>
+
                     </Label.FormattedText>
+
                 </Label>
 
                 <!--DESCRIPTION LABEL-->
+
                 <Label Style="{StaticResource SmallLabelStyle}">
+
                     <Label.FormattedText>
+
                         <FormattedString>
+
                             <Span Text="Description: "/>
+
                             <Span Text="{Binding SelectedCustomPin.Description}"/>
+
                         </FormattedString>
+
                     </Label.FormattedText>
+
                 </Label>
 
                 <!--WEATHER CAROUSEL-->

@@ -1,10 +1,8 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Acr.UserDialogs;
 using MapNotepad.Models;
 using MapNotepad.Services.RegistrationService;
 using MapNotepad.Validation;
-using Prism.Common;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -25,7 +23,7 @@ namespace MapNotepad.ViewModels
             _registrationService = registrationService;
         }
 
-        #region-- Public Properties --
+        #region -- Public Properties --
 
         private string _email;
         public string Email
@@ -57,6 +55,8 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
+        #region -- Overrides --
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters.TryGetValue(nameof(User), out User user))
@@ -64,37 +64,60 @@ namespace MapNotepad.ViewModels
                 Name = user.Name;
                 Email = user.Email;
             }
+            else
+            {
+                Name = string.Empty;
+            }
         }
+
+        #endregion
+
+        #region -- Commands --
 
         private ICommand _RegisterCommand;
         public ICommand RegisterCommand => _RegisterCommand ??= new Command(OnRegisterCommandAsync);
 
+        #endregion
+
+        #region -- Command Methods --
+
         private async void OnRegisterCommandAsync()
         {
-            if (Validator.CheckEmail(Email))
+            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
             {
-                if (Validator.CheckPassword(Password))
+                await _userDialogs.AlertAsync(Resources["FieldsEmpty"], Resources["Oops"], Resources["Damn"]);
+            }
+            else
+            {
+                if (Validator.CheckEmail(Email))
                 {
-                    if (Password.Equals(ConfirmPassword))
+                    if (Validator.CheckPassword(Password))
                     {
-                        await _userDialogs.AlertAsync(Resources["RedirectingToSignIn"], Resources["Success"], Resources["Finally"]);
-                        ValidationSuccess();
+                        if (Password.Equals(ConfirmPassword))
+                        {
+                            await _userDialogs.AlertAsync(Resources["RedirectingToSignIn"], Resources["Success"], Resources["Finally"]);
+                            ValidationSuccess();
+                        }
+                        else
+                        {
+                            await _userDialogs.AlertAsync(Resources["PasswordsAreNotEqual"], Resources["Oops"], Resources["Damn"]);
+                        }
                     }
                     else
                     {
-                        await _userDialogs.AlertAsync(Resources["PasswordsAreNotEqual"], Resources["Oops"], Resources["Damn"]);
+                        await _userDialogs.AlertAsync(Resources["BadPassword"], Resources["Oops"], Resources["Damn"]);
                     }
                 }
                 else
                 {
-                    await _userDialogs.AlertAsync(Resources["BadPassword"], Resources["Oops"], Resources["Damn"]);
+                    await _userDialogs.AlertAsync(Resources["BadEmail"], Resources["Oops"], Resources["Damn"]);
                 }
             }
-            else
-            {
-                await _userDialogs.AlertAsync(Resources["BadEmail"], Resources["Oops"], Resources["Damn"]);
-            }
         }
+
+        #endregion
+
+        #region -- Private Helpers --
 
         private async void ValidationSuccess()
         {
@@ -105,5 +128,7 @@ namespace MapNotepad.ViewModels
             };
             await NavigationService.GoBackAsync(navParams);
         }
+
+        #endregion
     }
 }

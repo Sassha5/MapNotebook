@@ -24,7 +24,7 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        #region Interfaces implementation
+        #region -- Interfaces Implementation --
 
         public virtual void Initialize(INavigationParameters parameters) { }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using MapNotepad.Extensions;
 using MapNotepad.Models;
 using Xamarin.Forms;
@@ -15,7 +14,7 @@ namespace MapNotepad.Controls
             UiSettings.MyLocationButtonEnabled = true;
         }
 
-        #region-- Public Properties --
+        #region -- Public Properties --
 
         public static readonly BindableProperty CustomPinCollectionProperty =
             BindableProperty.Create(
@@ -61,7 +60,7 @@ namespace MapNotepad.Controls
 
         #endregion
 
-        #region Helpers
+        #region -- Private Helpers --
 
         private static void CameraPositionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {

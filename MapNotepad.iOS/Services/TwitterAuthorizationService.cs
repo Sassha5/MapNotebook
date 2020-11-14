@@ -7,6 +7,7 @@ namespace MapNotepad.iOS.Services
     {
         public override void Login()
         {
+            base.Login();
             var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
             while (vc.PresentedViewController != null)
             {

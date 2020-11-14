@@ -9,6 +9,7 @@ namespace MapNotepad.Droid.Services
     {
         public override void Login()
         {
+            base.Login();
             var ui = _authenticator.GetUI(Application.Context);
             ui.AddFlags(ActivityFlags.NewTask);
             Application.Context.StartActivity(ui);

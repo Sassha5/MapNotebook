@@ -5,7 +5,6 @@ using Plugin.FacebookClient;
 using Prism;
 using Prism.Ioc;
 using UIKit;
-using UserNotifications;
 
 namespace MapNotepad.iOS
 {
@@ -24,29 +23,11 @@ namespace MapNotepad.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null);
-            UIApplication.SharedApplication.RegisterUserNotificationSettings(notificationSettings);
-
             global::Xamarin.Forms.Forms.Init();
+
             LoadApplication(new App(new iOSInitializer()));
+
             Xamarin.FormsGoogleMaps.Init("AIzaSyBOj66llhOkfTyNFH1XhpjOeyS1zJy85T4");
-
-            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
-            {
-                // Ask the user for permission to get notifications on iOS 10.0+
-                UNUserNotificationCenter.Current.RequestAuthorization(
-                        UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound,
-                        (approved, error) => { });
-            }
-            else if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
-            {
-                // Ask the user for permission to get notifications on iOS 8.0+
-                var settings = UIUserNotificationSettings.GetSettingsForTypes(
-                        UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
-                        new NSSet());
-
-                UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
-            }
 
             FacebookClientManager.Initialize(app, options);
 
@@ -55,12 +36,6 @@ namespace MapNotepad.iOS
 
         public override void OnActivated(UIApplication uiApplication)
         {
-            var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert | UIUserNotificationType.Sound | UIUserNotificationType.Badge, null);
-
-            uiApplication.RegisterUserNotificationSettings(notificationSettings);
-
-            uiApplication.RegisterForRemoteNotifications();
-
             FacebookClientManager.OnActivated();
 
             base.OnActivated(uiApplication);

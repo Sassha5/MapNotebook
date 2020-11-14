@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,10 +38,7 @@ namespace MapNotepad.ViewModels
         public CustomPin SelectedCustomPin
         {
             get => _selectedCustomPin;
-            set
-            {
-                SetProperty(ref _selectedCustomPin, value);
-            }
+            set => SetProperty(ref _selectedCustomPin, value);
         }
 
         private WeatherForecast _weatherForecast;
@@ -57,15 +53,16 @@ namespace MapNotepad.ViewModels
         private ICommand _selectedPinChangedCommand;
         public ICommand SelectedPinChangedCommand => _selectedPinChangedCommand ??= new Command<object>(OnSelectedPinChangedCommand);
 
-        #region INavigatedAware override
+        #region -- Overrides --
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
             await base.OnNavigatedToAsync(parameters);
 
+            CustomPinCollection = new ObservableCollection<CustomPin>(CustomPinCollection.Where(x => x.IsFavorite));
+
             if (parameters.TryGetValue(nameof(CustomPin), out CustomPin pin))
             {
-                SelectedCustomPin = pin;
                 CameraPosition = new Position(pin.Latitude, pin.Longitude);
             }
         }
@@ -82,6 +79,8 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
+        #region -- Private Helpers --
+
         private void OnSelectedPinChangedCommand(object pinObj)
         {
             if (pinObj is Pin pin)
@@ -94,18 +93,10 @@ namespace MapNotepad.ViewModels
         {
             if (pin != null)
             {
-                var forecast = await _weatherService.GetWeatherForecast(pin.Latitude, pin.Longitude);
-                List<WeatherData> list = new List<WeatherData>();
-                foreach (WeatherData data in forecast.List)
-                {
-                    if (data.DisplayDate.Contains("2:00 PM")) //TODO delete this
-                    {
-                        list.Add(data);
-                    }
-                }
-                forecast.List = list;
-                WeatherForecast = forecast;
+                WeatherForecast = await _weatherService.GetWeatherForecast(pin.Latitude, pin.Longitude);
             }
         }
+
+        #endregion
     }
 }

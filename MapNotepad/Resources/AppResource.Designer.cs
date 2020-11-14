@@ -358,5 +358,17 @@ namespace MapNotepad.Resources {
                 return ResourceManager.GetString("InvalidLabel", resourceCulture);
             }
         }
+        
+        internal static string InvalidPosition {
+            get {
+                return ResourceManager.GetString("InvalidPosition", resourceCulture);
+            }
+        }
+        
+        internal static string FieldsEmpty {
+            get {
+                return ResourceManager.GetString("FieldsEmpty", resourceCulture);
+            }
+        }
     }
 }

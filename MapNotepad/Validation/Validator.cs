@@ -12,14 +12,28 @@ namespace MapNotepad.Validation
         {
         }
 
+        #region -- Public Static Methods --
+
         public static bool CheckEmail(string email)
         {
-            return true;//_emailRegex.IsMatch(email);
+            return _emailRegex.IsMatch(email);
         }                                       
 
         public static bool CheckPassword(string password)
         {
-            return true;// _passwordRegex.IsMatch(password);
+            return _passwordRegex.IsMatch(password);
         }
+
+        public static bool CheckLatitude(double latitude)
+        {
+            return (latitude <= 90) && (latitude >= -90);
+        }
+
+        public static bool CheckLongitude(double longitude)
+        {
+            return (longitude <= 180) && (longitude >= -180);
+        }
+
+        #endregion
     }
 }

@@ -63,7 +63,7 @@
                                                  Source={x:Reference pinsPage}}"
                                           Command="{Binding Path=BindingContext.EditCommand, 
                                                     Source={x:Reference pinsPage}}" 
-                                      CommandParameter="{Binding .}"/>
+                                          CommandParameter="{Binding .}"/>
 
                                 <MenuItem Text="{Binding Path=BindingContext.Resources[Delete], 
                                                  Source={x:Reference pinsPage}}"

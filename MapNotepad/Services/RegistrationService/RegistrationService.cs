@@ -14,6 +14,8 @@ namespace MapNotepad.Services.RegistrationService
             _usersManagerService = usersManagerService;
         }
 
+        #region -- IRegistrationService Implementation --
+
         public Task<int> RegisterAsync(string name, string email, string password)
         {
             User newUser = new User()
@@ -23,7 +25,8 @@ namespace MapNotepad.Services.RegistrationService
                 Password = password
             };
             return _usersManagerService.AddUserAsync(newUser); ;
-            
         }
+
+        #endregion
     }
 }

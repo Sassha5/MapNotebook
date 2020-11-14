@@ -21,7 +21,7 @@ namespace MapNotepad.ViewModels
         }
 
 
-        #region-- Public Properties --
+        #region -- Public Properties --
 
         private string _searchBarText;
         public string SearchBarText
@@ -39,20 +39,37 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
+        #region -- Overrides --
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
+        {
+            SearchBarText = string.Empty;
+            await UpdateCollectionAsync();
+        }
+
+        #endregion
+
+        #region -- Commands --
+
+        private ICommand _SearchBarTextChangedCommand;
+        public ICommand SearchCommand => _SearchBarTextChangedCommand ??= new Command(OnSearchCommandAsync);
+
+        #endregion
+
+        #region -- Command Methods --
+
+        private async void OnSearchCommandAsync()
         {
             await UpdateCollectionAsync();
         }
 
-        private ICommand _SearchCommand;
-        public ICommand SearchCommand => _SearchCommand ??= new Command(OnSearchCommandAsync);
+        #endregion
 
-        #region Protected implementation
+        #region -- Protected Implementation --
 
         protected async Task UpdateCollectionAsync()
         {
-            var pins = await _pinsManagerService.GetCurrentUserPinsAsync();
+            var pins = await _pinsManagerService.GetCurrentUserPinsAsync(SearchBarText);
             
             CustomPinCollection = new ObservableCollection<CustomPin>(pins);
         }
@@ -60,7 +77,7 @@ namespace MapNotepad.ViewModels
         protected async Task SavePinAsync(CustomPin pin)
         {
             await _pinsManagerService.SavePinAsync(pin);
-            await UpdateCollectionAsync();
+            await UpdateCollectionAsync(); //only to change IsFavorite image
         }
 
         protected async Task DeletePinAsync(CustomPin pin)
@@ -69,24 +86,6 @@ namespace MapNotepad.ViewModels
             await UpdateCollectionAsync();
         }
 
-        protected async virtual Task SearchAsync()
-        {
-            if (!string.IsNullOrEmpty(SearchBarText))
-            {
-                var pins = await _pinsManagerService.GetCurrentUserPinsAsync(SearchBarText);
-                CustomPinCollection = new ObservableCollection<CustomPin>(pins);
-            }
-            else
-            {
-                await UpdateCollectionAsync();
-            }
-        }
-
         #endregion
-
-        private async void OnSearchCommandAsync()
-        {
-            await SearchAsync();
-        }
     }
 }

@@ -8,8 +8,8 @@ namespace MapNotepad.Services.ThemeService
 {
     public class ThemeService : IThemeService
     {
-        private ISettingsService _settingsManagerService;
-        private string _darkMapStyleFile;
+        private readonly ISettingsService _settingsManagerService;
+        private readonly string _darkMapStyleFile;
 
         public ThemeService(ISettingsService settingsManagerService)
         {
@@ -20,6 +20,8 @@ namespace MapNotepad.Services.ThemeService
             using var reader = new System.IO.StreamReader(stream);
             _darkMapStyleFile = reader.ReadToEnd();
         }
+
+        #region -- IThemeService Implementation --
 
         public void SetPreviousTheme()
         {
@@ -39,14 +41,9 @@ namespace MapNotepad.Services.ThemeService
 
         public MapStyle GetCurrentMapStyle()
         {
-            if (GetCurrentTheme() == OSAppTheme.Dark)
-            {
-                return MapStyle.FromJson(_darkMapStyleFile);
-            }
-            else
-            {
-                return null;
-            }
+            return GetCurrentTheme() == OSAppTheme.Dark ? MapStyle.FromJson(_darkMapStyleFile) : null;
         }
+
+        #endregion
     }
 }

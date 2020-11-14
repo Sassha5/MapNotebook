@@ -1,5 +1,4 @@
-﻿using System;
-using MapNotepad.Localization;
+﻿using MapNotepad.Localization;
 using Plugin.Settings.Abstractions;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
@@ -15,7 +14,7 @@ namespace MapNotepad.Services.SettingsService
             _appSettings = appSettings;
         }
 
-        #region-- Public Properties --
+        #region -- ISettingsService Implementation --
 
         public int AuthorizedUserID
         {
@@ -45,14 +44,14 @@ namespace MapNotepad.Services.SettingsService
             set => SavePosition(value);
         }
 
-        #endregion
-
         public void ClearData()
         {
             AuthorizedUserID = Constants.NoAuthorizedUser;
             Theme = (int)OSAppTheme.Light;
             Language = Constants.DefaultLanguage;
         }
+
+        #endregion
 
         #region -- Private Helpers --
 

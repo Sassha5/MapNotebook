@@ -169,6 +169,12 @@
     <value>Password should contain a number, upper and lower case letters and a special character</value>
   </data>
     <data name="InvalidLabel" xml:space="preserve">
-    <value>It's not a valid label name'</value>
+    <value>It's not a valid label name</value>
+  </data>
+    <data name="InvalidPosition" xml:space="preserve">
+    <value>It's not a valid pin position</value>
+  </data>
+    <data name="FieldsEmpty" xml:space="preserve">
+    <value>Email and password field should not be empty</value>
   </data>
 </root>

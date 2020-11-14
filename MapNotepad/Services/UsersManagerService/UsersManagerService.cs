@@ -16,7 +16,8 @@ namespace MapNotepad.Services.UsersManagerService
             _repositoryService.CreateTableAsync<User>();
         }
 
-        #region Methods
+        #region -- IUsersManagerService Implementation --
+
         public Task<int> AddUserAsync(User user)
         {
             return _repositoryService.InsertItemAsync(user);
@@ -24,18 +25,10 @@ namespace MapNotepad.Services.UsersManagerService
 
         public async Task<int> GetUserIdAsync(string email, string password)
         {
-            int id;
             var userEnumerable = await _repositoryService.GetItemsAsync<User>();
             var user = userEnumerable.FirstOrDefault(x => x.Email == email && x.Password == password);
-            if (user != null)
-            {
-                id = user.Id;
-            }
-            else
-            {
-                id = Constants.NoAuthorizedUser;
-            }
-            return id;
+
+            return user == null ? Constants.NoAuthorizedUser : user.Id;
         }
 
         public async Task<bool> EmailExistsAsync(string email)

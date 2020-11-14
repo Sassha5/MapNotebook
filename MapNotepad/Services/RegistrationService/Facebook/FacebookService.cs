@@ -17,6 +17,8 @@ namespace MapNotepad.Services.RegistrationService.Facebook
             _facebookClient = facebookClient;
         }
 
+        #region -- IFacebookService Implementation --
+
         public void RegisterAuthDelegate(IAuthDelegate authDelegate)
         {
             _authDelegate = authDelegate;
@@ -45,11 +47,14 @@ namespace MapNotepad.Services.RegistrationService.Facebook
             }
         }
 
+        #endregion
+
+        #region -- Private Helpers --
+
         private void FacebookAuthCompleted(object sender, FBEventArgs<string> args)
         {
             if (args != null)
             {
-
                 if (args.Status == FacebookActionStatus.Completed)
                 {
                     FacebookProfile facebookProfile = JsonConvert.DeserializeObject<FacebookProfile>(args.Data);
@@ -70,7 +75,7 @@ namespace MapNotepad.Services.RegistrationService.Facebook
             }
         }
 
-        public class FacebookProfile
+        private class FacebookProfile
         {
             public string Email { get; set; }
             public string Id { get; set; }
@@ -80,5 +85,7 @@ namespace MapNotepad.Services.RegistrationService.Facebook
             [JsonProperty("first_name")]
             public string FirstName { get; set; }
         }
+
+        #endregion
     }
 }

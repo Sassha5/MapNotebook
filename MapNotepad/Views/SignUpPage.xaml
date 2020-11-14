@@ -24,12 +24,14 @@
         <controls:CustomEntry Grid.Row="0"
                               Text="{Binding BindingContext.Email,
                                      Source={x:Reference signUpPage}}"
+                              Keyboard="Email"
                               Placeholder="{Binding BindingContext.Resources[Email],
                                             Source={x:Reference signUpPage}}"/>
 
         <controls:CustomEntry Grid.Row="1"
                               Text="{Binding BindingContext.Name,
                                      Source={x:Reference signUpPage}}"
+                              Keyboard="Text"
                               Placeholder="{Binding BindingContext.Resources[Name],
                                             Source={x:Reference signUpPage}}"/>
 

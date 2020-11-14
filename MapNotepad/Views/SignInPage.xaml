@@ -19,16 +19,19 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
 
-         <controls:CustomEntry Grid.Row="0"
-                               Text="{Binding BindingContext.Email,
-                                      Source={x:Reference signInPage}}"
-                               Placeholder="{Binding BindingContext.Resources[Email],
-                                             Source={x:Reference signInPage}}"/>
+        <!--EMAIL ENTRY-->
+        <controls:CustomEntry Grid.Row="0"
+                              Text="{Binding BindingContext.Email,
+                                     Source={x:Reference signInPage}}"
+                              Keyboard="Email"
+                              Placeholder="{Binding BindingContext.Resources[Email],
+                                            Source={x:Reference signInPage}}"/>
 
+        <!--PASSWORD ENTRY-->
         <controls:CustomEntry Grid.Row="1"
                               Text="{Binding BindingContext.Password,
                                      Source={x:Reference signInPage}}"
@@ -36,47 +39,59 @@
                               Placeholder="{Binding BindingContext.Resources[Password],
                                             Source={x:Reference signInPage}}"/>
 
-        <Button Text="Sign up with Facebook" 
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="5"
+                     HorizontalOptions="Center">
+
+            <!--TWITTER ICON-->
+            <Image Source="ic_twitter">
+
+                <Image.GestureRecognizers>
+
+                    <TapGestureRecognizer Command="{Binding TwitterSignInCommand}"/>
+
+                </Image.GestureRecognizers>
+
+            </Image>
+
+            <!--FACEBOOK ICON-->
+            <Image Source="ic_facebook">
+                
+                <Image.GestureRecognizers>
+
+                    <TapGestureRecognizer Command="{Binding FacebookSignUpCommand}"/>
+
+                </Image.GestureRecognizers>
+
+            </Image>
+
+        </StackLayout>
+
+        <!--FACEBOOK SING UP BUTTON-->
+        <!--<Button Text="Sign up with Facebook" 
                 Grid.Row="4"
                 Command="{Binding FacebookSignUpCommand}"
                 Style="{StaticResource ButtonStyle}"
-                BackgroundColor="Blue"/>
+                BackgroundColor="#3b5998"/>-->
 
-        <Button Text="Sign in with Twitter" 
+        <!--TWITTER SIGN IN BUTTON-->
+        <!--<Button Text="Sign in with Twitter" 
                 Grid.Row="5"
                 Command="{Binding TwitterSignInCommand}"
                 Style="{StaticResource ButtonStyle}"
-                BackgroundColor="#55ACEE"/>
+                BackgroundColor="#55ACEE"/>-->
 
+        <!--SIGN IN BUTTON-->
         <Button Text="{Binding Resources[SignIn]}" 
                 Grid.Row="6"
                 Command="{Binding AuthorizeCommand}"
                 Style="{StaticResource ButtonStyle}"/>
 
-        <Label HorizontalOptions="Center"
-               VerticalOptions="CenterAndExpand" Grid.Row="7"
-               Style="{StaticResource LargeLabelStyle}">
-
-            <Label.FormattedText>
-
-                <FormattedString>
-
-                    <Span Text="{Binding Resources[SignUp]}"
-                          TextDecorations="Underline">
-
-                        <Span.GestureRecognizers>
-
-                            <TapGestureRecognizer Command="{Binding SignUpCommand}"/>
-
-                        </Span.GestureRecognizers>
-
-                    </Span>
-
-                </FormattedString>
-
-            </Label.FormattedText>
-
-        </Label>
+        <!--SIGN UP BUTTON-->
+        <Button Text="{Binding Resources[SignUp]}" 
+                Grid.Row="7"
+                Command="{Binding SignUpCommand}"
+                Style="{StaticResource ButtonStyle}"/>
 
     </Grid>
 

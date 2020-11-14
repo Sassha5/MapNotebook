@@ -18,19 +18,23 @@ namespace MapNotepad.Services.AuthorizationService.Twitter
                                                 authorizeUrl: new Uri("https://api.twitter.com/oauth/authorize"),
                                                 accessTokenUrl: new Uri("https://api.twitter.com/oauth/access_token"),
                                                 callbackUrl: new Uri("https://mobile.twitter.com"));
-
-            _authenticator.Completed += twitter_auth_Completed;
         }
+
+        #region -- ITwitterAuthorizationService Implementation --
 
         public virtual void Login()
         {
-            Debug.Print("Override login metod");
+            _authenticator.Completed += twitter_auth_Completed;
         }
 
         public void RegisterAuthDelegate(IAuthDelegate authDelegate)
         {
             _authDelegate = authDelegate;
         }
+
+        #endregion
+
+        #region -- Private Helpers --
 
         private void twitter_auth_Completed(object sender, AuthenticatorCompletedEventArgs eventArgs)
         {
@@ -54,5 +58,7 @@ namespace MapNotepad.Services.AuthorizationService.Twitter
                 _authDelegate?.AuthFailure();
             }
         }
+
+        #endregion
     }
 }

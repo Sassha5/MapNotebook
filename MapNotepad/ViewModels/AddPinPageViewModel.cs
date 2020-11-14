@@ -5,6 +5,7 @@ using MapNotepad.Models;
 using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeService;
+using MapNotepad.Validation;
 using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
@@ -49,12 +50,13 @@ namespace MapNotepad.ViewModels
 
         #endregion
 
-        #region INavigatedAware override
+        #region -- Overrides --
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
             CustomPin = new CustomPin();
+
             if (parameters.TryGetValue(nameof(CustomPin), out CustomPin customPin))
             {
                 CustomPin = new CustomPin()
@@ -79,9 +81,8 @@ namespace MapNotepad.ViewModels
             CustomPin = new CustomPin()
             {
                 Id = CustomPin.Id,
-                Label = string.IsNullOrEmpty(CustomPin.Label) ? string.Empty : CustomPin.Label,
-                Description = CustomPin.Description,
-                IsFavorite = true,
+                Label = CustomPin.Label == null ? string.Empty : CustomPin.Label,
+                Description = CustomPin.Description == null ? string.Empty : CustomPin.Description,
                 Latitude = args.Latitude,
                 Longitude = args.Longitude
             };
@@ -94,8 +95,15 @@ namespace MapNotepad.ViewModels
         {
             if (!string.IsNullOrEmpty(_customPin.Label))
             {
-                await SavePinAsync(_customPin);
-                await NavigationService.GoBackAsync();
+                if (Validator.CheckLatitude(_customPin.Latitude) && Validator.CheckLongitude(_customPin.Longitude))
+                {
+                    await SavePinAsync(_customPin);
+                    await NavigationService.GoBackAsync();
+                }
+                else
+                {
+                    await _userDialogs.AlertAsync(Resources["InvalidPosition"]);
+                }
             }
             else
             {

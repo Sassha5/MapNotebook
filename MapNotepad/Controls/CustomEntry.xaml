@@ -1,16 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Frame HorizontalOptions="FillAndExpand"
-           Style="{StaticResource CustomEntryFrameStyle}"
-           xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MapNotepad.Controls.CustomEntry"
-             x:Name="customEntry"
-             BindingContext="{x:Reference customEntry}">
+       Style="{StaticResource CustomEntryFrameStyle}"
+       xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="MapNotepad.Controls.CustomEntry"
+       x:Name="customEntry"
+       BindingContext="{x:Reference customEntry}">
 
     <Entry x:Name="entry"
-               Style="{StaticResource EntryStyle}"
-               Text="{Binding Text}"
-               IsPassword="{Binding IsPassword}"
-               Placeholder="{Binding Placeholder}"/>
+           Style="{StaticResource EntryStyle}"
+           Text="{Binding Text}"
+           IsReadOnly="{Binding IsReadOnly}"
+           IsPassword="{Binding IsPassword}"
+           Placeholder="{Binding Placeholder}"
+           Keyboard="{Binding Keyboard}"/>
 
 </Frame>

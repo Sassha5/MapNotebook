@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
 using MapNotepad.Models;
@@ -48,17 +49,15 @@ namespace MapNotepad.ViewModels
 
         private async void OnFavouriteChangeCommandAsync(CustomPin pin)
         {
-            if (pin != null)
-            {
-                pin.IsFavorite = !pin.IsFavorite;
-                await SavePinAsync(pin);
-            }
+            await ChangePinIsFavoriteAsync(pin);
         }
 
         private async void OnPinTappedCommandAsync(CustomPin pin)
         {
-            pin.IsFavorite = true;
-            await SavePinAsync(pin);
+            if (!pin.IsFavorite)
+            {
+                await ChangePinIsFavoriteAsync(pin);
+            }
 
             NavigationParameters navParams = new NavigationParameters
             {
@@ -103,6 +102,20 @@ namespace MapNotepad.ViewModels
                 { nameof(CustomPin), pin }
             };                                              //TODO fix map to not show old pin location
             await NavigationService.NavigateAsync(nameof(AddPinPage), navParams);
+        }
+
+        #endregion
+
+        #region -- Private Helpers --
+
+        private async Task ChangePinIsFavoriteAsync(CustomPin pin)
+        {
+            if (pin != null)
+            {
+                pin.IsFavorite = !pin.IsFavorite;
+                await SavePinAsync(pin);
+                //RaisePropertyChanged("IsFavoriteImagePath");
+            }
         }
 
         #endregion

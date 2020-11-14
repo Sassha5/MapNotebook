@@ -14,8 +14,11 @@ namespace MapNotepad.Services.RepositoryService
 
         public RepositoryService()
         {
-            database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DatabaseName));
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            database = new SQLiteAsyncConnection(Path.Combine(folderPath, DatabaseName));
         }
+
+        #region -- IRepositoryService Implementation --
 
         public void CreateTableAsync<T>() where T : IModelBase, new()
         {
@@ -46,5 +49,7 @@ namespace MapNotepad.Services.RepositoryService
         {
             return database.UpdateAsync(item);
         }
+
+        #endregion
     }
 }

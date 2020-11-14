@@ -1,14 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace MapNotepad.Services.PermissionService
 {
     public class PermissionService : IPermissionService
     {
-        public PermissionService()
-        {
-        }
+        #region -- IPermisstionService Implementation --
 
         public Task<PermissionStatus> CheckPermissionAsync<T>() where T : Permissions.BasePermission, new()
         {
@@ -24,5 +21,7 @@ namespace MapNotepad.Services.PermissionService
             }
             return status;
         }
+
+        #endregion
     }
 }

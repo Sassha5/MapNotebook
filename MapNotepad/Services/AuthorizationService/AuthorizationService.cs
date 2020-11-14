@@ -16,7 +16,9 @@ namespace MapNotepad.Services.AuthorizationService
             _usersManagerService = usersManagerService;
         }
 
-        public async Task AuthorizeAsync(string email, string password) //TODO return Task
+        #region -- IAuthorizationService Implementation --
+
+        public async Task AuthorizeAsync(string email, string password)
         {
             var userId = await _usersManagerService.GetUserIdAsync(email, password);
             AuthorizeAsync(userId);
@@ -42,5 +44,7 @@ namespace MapNotepad.Services.AuthorizationService
             var userId = await _usersManagerService.GetUserIdAsync(email, password);
             return userId != Constants.NoAuthorizedUser;
         }
+
+        #endregion
     }
 }

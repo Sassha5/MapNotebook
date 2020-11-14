@@ -17,11 +17,12 @@ namespace MapNotepad.Services.WeatherService
             _client = new HttpClient();
         }
 
+        #region -- IWeatherService Implementation --
+
         public async Task<WeatherForecast> GetWeatherForecast(double latitude, double longitude)
         {
             string requestUri = "https://api.openweathermap.org/data/2.5/forecast";
             requestUri += $"?lat={latitude}&lon={longitude}";
-            //requestUri += "&exclude=hourly";
             requestUri += "&units=metric";
             requestUri += "&APPID=" + Constants.WeatherAPIkey;
 
@@ -42,5 +43,7 @@ namespace MapNotepad.Services.WeatherService
 
             return weatherForecast;
         }
+
+        #endregion
     }
 }
