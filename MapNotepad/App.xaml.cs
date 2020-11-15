@@ -41,7 +41,6 @@ namespace MapNotepad
 
             InitializeComponent();
 
-            //ThemeManagerService.SetPreviousTheme();
             ThemeManagerService.SetApplicationTheme(OSAppTheme.Dark);
 
             string path = nameof(SignInPage);
@@ -49,6 +48,7 @@ namespace MapNotepad
             {
                 path = nameof(Views.MainPage);
             }
+
             await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{path}");
         }
 

@@ -10,17 +10,17 @@
 
     <StackLayout>
 
-        <SearchBar HorizontalOptions="CenterAndExpand"
+        <!--PIN SEARCH BAR-->
+        <SearchBar HorizontalOptions="StartAndExpand"
                    Text="{Binding SearchBarText}"
                    SearchCommand="{Binding SearchCommand}"
                    Placeholder="{Binding Resources[Search]}"
-                   x:Name="searchBar"
                    Style="{StaticResource SearchBarStyle}">
 
             <SearchBar.Behaviors>
 
                 <prism:EventToCommandBehavior EventName="TextChanged"
-                                              Command="{Binding SearchCommand}"/>
+                                              Command="{Binding SearchBarTextChangedCommand}"/>
 
             </SearchBar.Behaviors>
 
@@ -35,6 +35,7 @@
 
             </Grid.RowDefinitions>
 
+            <!--PINS LIST-->
             <ListView Grid.Row="0"
                       ItemsSource="{Binding CustomPinCollection}" 
                       RowHeight="100" 
@@ -59,12 +60,14 @@
 
                             <ViewCell.ContextActions>
 
+                                <!--EDIT BUTTON-->
                                 <MenuItem Text="{Binding Path=BindingContext.Resources[Edit], 
                                                  Source={x:Reference pinsPage}}"
                                           Command="{Binding Path=BindingContext.EditCommand, 
                                                     Source={x:Reference pinsPage}}" 
                                           CommandParameter="{Binding .}"/>
 
+                                <!--DELETE BUTTON-->
                                 <MenuItem Text="{Binding Path=BindingContext.Resources[Delete], 
                                                  Source={x:Reference pinsPage}}"
                                           Command="{Binding Path=BindingContext.DeleteCommand, 
@@ -88,6 +91,7 @@
 
                                 </Grid.ColumnDefinitions>
 
+                                <!--FAVORITE IMAGE BUTTON-->
                                 <ImageButton Grid.Column="0"
                                              Source="{Binding IsFavoriteImagePath}"
                                              Command="{Binding Path=BindingContext.FavouriteChangeCommand, 
@@ -97,6 +101,8 @@
 
                                 <StackLayout Grid.Column="1"
                                              VerticalOptions="Center">
+
+                                    <!--PIN LABEL-->
                                     <Label Style="{StaticResource MediumLabelStyle}"
                                            VerticalOptions="Center">
 
@@ -113,6 +119,7 @@
 
                                     </Label>
 
+                                    <!--PIN LATITUDE-->
                                     <Label Style="{StaticResource SmallLabelStyle}">
 
                                         <Label.FormattedText>
@@ -128,6 +135,7 @@
 
                                     </Label>
 
+                                    <!--PIN LONGITUDE-->
                                     <Label Style="{StaticResource SmallLabelStyle}">
 
                                         <Label.FormattedText>

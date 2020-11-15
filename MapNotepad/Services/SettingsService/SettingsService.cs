@@ -1,7 +1,6 @@
 ﻿using MapNotepad.Localization;
 using Plugin.Settings.Abstractions;
 using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.Services.SettingsService
 {
@@ -38,38 +37,11 @@ namespace MapNotepad.Services.SettingsService
             }
         }
 
-        public Position LastMapPosition
-        {
-            get => GetPosition();
-            set => SavePosition(value);
-        }
-
         public void ClearData()
         {
             AuthorizedUserID = Constants.NoAuthorizedUser;
             Theme = (int)OSAppTheme.Light;
             Language = Constants.DefaultLanguage;
-        }
-
-        #endregion
-
-        #region -- Private Helpers --
-
-        private double positionLatitude;
-        private double positionLongitude;
-
-        private void SavePosition(Position position)
-        {
-            _appSettings.AddOrUpdateValue(nameof(positionLatitude), position.Latitude);
-            _appSettings.AddOrUpdateValue(nameof(positionLongitude), position.Longitude);
-        }
-
-        private Position GetPosition()
-        {
-            positionLatitude = _appSettings.GetValueOrDefault(nameof(positionLatitude), 0);
-            positionLongitude = _appSettings.GetValueOrDefault(nameof(positionLatitude), 0);
-
-            return new Position(positionLatitude, positionLatitude);
         }
 
         #endregion

@@ -13,10 +13,7 @@ namespace MapNotepad.Localization
 
         public string this[string key]
         {
-            get
-            {
-                return ResourceManager.GetString(key, CurrentCultureInfo);
-            }
+            get => ResourceManager.GetString(key, CurrentCultureInfo);
         }
 
         public LocalizedResources(Type resource, string language = null)

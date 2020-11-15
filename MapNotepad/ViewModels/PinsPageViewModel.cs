@@ -100,7 +100,7 @@ namespace MapNotepad.ViewModels
             NavigationParameters navParams = new NavigationParameters
             {
                 { nameof(CustomPin), pin }
-            };                                              //TODO fix map to not show old pin location
+            };                                             
             await NavigationService.NavigateAsync(nameof(AddPinPage), navParams);
         }
 
@@ -114,7 +114,6 @@ namespace MapNotepad.ViewModels
             {
                 pin.IsFavorite = !pin.IsFavorite;
                 await SavePinAsync(pin);
-                //RaisePropertyChanged("IsFavoriteImagePath");
             }
         }
 

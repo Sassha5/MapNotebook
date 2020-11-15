@@ -7,12 +7,15 @@
 
 
     <StackLayout Orientation="Horizontal"
-                 VerticalOptions="Start">
+                 VerticalOptions="Center"
+                 HorizontalOptions="Center">
 
+        <!--DARK THEME LABEL-->
         <Label Style="{StaticResource MediumLabelStyle}"
                Text="{Binding Resources[DarkTheme]}"
                VerticalOptions="Center"/>
 
+        <!--DARK THEME CHECKBOX-->
         <CheckBox IsChecked="{Binding Path=DarkThemeIsChecked, Mode=TwoWay}"/>
 
     </StackLayout>

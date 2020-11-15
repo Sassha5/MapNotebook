@@ -10,7 +10,7 @@ namespace MapNotepad.Services.WeatherService
 {
     public class WeatherService : IWeatherService
     {
-        private HttpClient _client;
+        private readonly HttpClient _client;
 
         public WeatherService()
         {

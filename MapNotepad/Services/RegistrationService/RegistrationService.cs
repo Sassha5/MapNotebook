@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MapNotepad.Models;
 using MapNotepad.Services.UsersManagerService;
 
@@ -25,6 +24,11 @@ namespace MapNotepad.Services.RegistrationService
                 Password = password
             };
             return _usersManagerService.AddUserAsync(newUser); ;
+        }
+
+        public Task<bool> CheckEmailTakenAsync(string email)
+        {
+            return _usersManagerService.EmailExistsAsync(email);
         }
 
         #endregion

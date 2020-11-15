@@ -38,12 +38,10 @@ namespace MapNotepad.Services.RegistrationService.Facebook
                 string[] fbRequestFields = { "email", "first_name", "gender", "last_name" };
                 string[] fbPermisions = { "email" };
                 var result = await _facebookClient.RequestUserDataAsync(fbRequestFields, fbPermisions);
-
-                var a = result;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
+                Debug.WriteLine(ex.Message);
             }
         }
 

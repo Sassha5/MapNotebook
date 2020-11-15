@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using Acr.UserDialogs;
 using MapNotepad.Models;
 using MapNotepad.Services.RegistrationService;
@@ -83,41 +84,54 @@ namespace MapNotepad.ViewModels
 
         private async void OnRegisterCommandAsync()
         {
-            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            switch (await ValidateAsync())
             {
-                await _userDialogs.AlertAsync(Resources["FieldsEmpty"], Resources["Oops"], Resources["Damn"]);
-            }
-            else
-            {
-                if (Validator.CheckEmail(Email))
-                {
-                    if (Validator.CheckPassword(Password))
-                    {
-                        if (Password.Equals(ConfirmPassword))
-                        {
-                            await _userDialogs.AlertAsync(Resources["RedirectingToSignIn"], Resources["Success"], Resources["Finally"]);
-                            ValidationSuccess();
-                        }
-                        else
-                        {
-                            await _userDialogs.AlertAsync(Resources["PasswordsAreNotEqual"], Resources["Oops"], Resources["Damn"]);
-                        }
-                    }
-                    else
-                    {
-                        await _userDialogs.AlertAsync(Resources["BadPassword"], Resources["Oops"], Resources["Damn"]);
-                    }
-                }
-                else
-                {
-                    await _userDialogs.AlertAsync(Resources["BadEmail"], Resources["Oops"], Resources["Damn"]);
-                }
+                case (int)Status.FieldsEmpty:
+                    await _userDialogs.AlertAsync(Resources["FieldsEmpty"], Resources["Oops"], Resources["Damn"]); break;
+                case (int)Status.EmailIsTaken:
+                    await _userDialogs.AlertAsync(Resources["EmailIsTaken"], Resources["Oops"], Resources["Damn"]); break;
+                case (int)Status.BadEmail:
+                    await _userDialogs.AlertAsync(Resources["BadEmail"], Resources["Oops"], Resources["Damn"]); break;
+                case (int)Status.BadPassword:
+                    await _userDialogs.AlertAsync(Resources["BadPassword"], Resources["Oops"], Resources["Damn"]); break;
+                case (int)Status.PasswordsNotEqual:
+                    await _userDialogs.AlertAsync(Resources["PasswordsAreNotEqual"], Resources["Oops"], Resources["Damn"]); break;
+                case (int)Status.Success:
+                    await _userDialogs.AlertAsync(Resources["RedirectingToSignIn"], Resources["Success"], Resources["Finally"]);
+                    ValidationSuccess();
+                    break;
+                default:
+                    await _userDialogs.AlertAsync(Resources["Unknown"], Resources["Oops"], Resources["Damn"]); break;
             }
         }
 
         #endregion
 
         #region -- Private Helpers --
+
+        private enum Status
+        {
+            FieldsEmpty,
+            EmailIsTaken,
+            BadEmail,
+            BadPassword,
+            PasswordsNotEqual,
+            Success
+        }
+
+        private async Task<int> ValidateAsync()
+        {
+            Status status;
+
+            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password)) { status = Status.FieldsEmpty; }
+            else if (!Validator.CheckEmail(Email)) { status = Status.BadEmail; }
+            else if (await _registrationService.CheckEmailTakenAsync(Email)) { status = Status.EmailIsTaken; }
+            else if (!Validator.CheckPassword(Password)) { status = Status.BadPassword; }
+            else if (!Password.Equals(ConfirmPassword)) { status = Status.PasswordsNotEqual; }
+            else { status = Status.Success; }
+
+            return (int)status;
+        }
 
         private async void ValidationSuccess()
         {

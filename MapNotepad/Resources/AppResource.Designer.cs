@@ -53,12 +53,6 @@ namespace MapNotepad.Resources {
             }
         }
         
-        internal static string CreateProfile {
-            get {
-                return ResourceManager.GetString("CreateProfile", resourceCulture);
-            }
-        }
-        
         internal static string Damn {
             get {
                 return ResourceManager.GetString("Damn", resourceCulture);
@@ -119,9 +113,9 @@ namespace MapNotepad.Resources {
             }
         }
         
-        internal static string LoginIsTaken {
+        internal static string EmailIsTaken {
             get {
-                return ResourceManager.GetString("LoginIsTaken", resourceCulture);
+                return ResourceManager.GetString("EmailIsTaken", resourceCulture);
             }
         }
         
@@ -236,12 +230,6 @@ namespace MapNotepad.Resources {
         internal static string Sorting {
             get {
                 return ResourceManager.GetString("Sorting", resourceCulture);
-            }
-        }
-        
-        internal static string StartAdding {
-            get {
-                return ResourceManager.GetString("StartAdding", resourceCulture);
             }
         }
         

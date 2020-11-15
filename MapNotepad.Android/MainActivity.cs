@@ -32,7 +32,7 @@ namespace MapNotepad.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
-            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState); //Initialize GoogleMaps here
+            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
             UserDialogs.Init(this);
             FacebookClientManager.Initialize(this);
 
@@ -45,7 +45,7 @@ namespace MapNotepad.Droid
             FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 

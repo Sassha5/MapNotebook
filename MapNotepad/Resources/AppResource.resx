@@ -15,9 +15,6 @@
     <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
-    <data name="CreateProfile" xml:space="preserve">
-    <value>Create Profile</value>
-  </data>
     <data name="Damn" xml:space="preserve">
     <value>Damn...</value>
   </data>
@@ -48,8 +45,8 @@
     <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
-    <data name="LoginIsTaken" xml:space="preserve">
-    <value>Looks like someone already took this login</value>
+    <data name="EmailIsTaken" xml:space="preserve">
+    <value>Looks like someone already took this email</value>
   </data>
     <data name="LoginIsTooLong" xml:space="preserve">
     <value>Sorry, I can't take such a long login...</value>
@@ -107,9 +104,6 @@
   </data>
     <data name="Sorting" xml:space="preserve">
     <value>Sorting</value>
-  </data>
-    <data name="StartAdding" xml:space="preserve">
-    <value>Start adding --&gt;</value>
   </data>
     <data name="Success" xml:space="preserve">
     <value>Congratulations!</value>

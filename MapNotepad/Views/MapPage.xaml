@@ -5,7 +5,8 @@
                        prism:ViewModelLocator.AutowireViewModel="True"
                        xmlns:views="clr-namespace:MapNotepad.Views"
                        xmlns:controls="clr-namespace:MapNotepad.Controls"
-                       xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps" xmlns:al="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
+                       xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+                       xmlns:al="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
                        x:Class="MapNotepad.Views.MapPage"
                        x:Name="mapPage"
                        Title="{Binding Resources[Map]}">
@@ -19,8 +20,7 @@
         </Grid.RowDefinitions>
 
         <!--CUSTOM MAP-->
-        <controls:CustomMap x:Name="map"
-                            Grid.Row="1"
+        <controls:CustomMap Grid.Row="1"
                             VerticalOptions="FillAndExpand"
                             MyLocationEnabled="{Binding LocationGranted}"
                             SelectedCustomPin="{Binding SelectedCustomPin, Mode=TwoWay}"
@@ -68,7 +68,6 @@
                 </Label>
 
                 <!--LATITUDE LABEL-->
-
                 <Label Style="{StaticResource SmallLabelStyle}">
 
                     <Label.FormattedText>
@@ -86,7 +85,6 @@
                 </Label>
 
                 <!--LONGITUDE LABEL-->
-
                 <Label Style="{StaticResource SmallLabelStyle}">
 
                     <Label.FormattedText>
@@ -104,7 +102,6 @@
                 </Label>
 
                 <!--DESCRIPTION LABEL-->
-
                 <Label Style="{StaticResource SmallLabelStyle}">
 
                     <Label.FormattedText>
@@ -177,13 +174,12 @@
                    Placeholder="{Binding Resources[Search]}"
                    Text="{Binding SearchBarText}"
                    SearchCommand="{Binding SearchCommand}"
-                   x:Name="searchBar"
                    Style="{StaticResource SearchBarStyle}">
 
             <SearchBar.Behaviors>
 
                 <prism:EventToCommandBehavior EventName="TextChanged"
-                                              Command="{Binding SearchCommand}"/>
+                                              Command="{Binding SearchBarTextChangedCommand}"/>
 
             </SearchBar.Behaviors>
 

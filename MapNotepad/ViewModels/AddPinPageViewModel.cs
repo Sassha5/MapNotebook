@@ -76,7 +76,7 @@ namespace MapNotepad.ViewModels
 
         private async void OnMapClickedCommandAsync(Position args)
         {
-            await UpdateCollectionAsync();   //clear temporary pins
+            await UpdateCollectionAsync();
 
             CustomPin = new CustomPin()
             {
@@ -87,8 +87,8 @@ namespace MapNotepad.ViewModels
                 Longitude = args.Longitude
             };
 
-            CustomPinCollection.Add(_customPin);                                 //add pin only in collection to show, not in repo
-            CustomPinCollection = new ObservableCollection<CustomPin>(CustomPinCollection);//trigger property changed to show new pin
+            CustomPinCollection.Add(_customPin);                              
+            CustomPinCollection = new ObservableCollection<CustomPin>(CustomPinCollection);
         }
 
         private async void OnSavePinCommandAsync()

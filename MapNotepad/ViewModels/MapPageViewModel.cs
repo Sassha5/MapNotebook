@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -59,10 +60,9 @@ namespace MapNotepad.ViewModels
         {
             await base.OnNavigatedToAsync(parameters);
 
-            CustomPinCollection = new ObservableCollection<CustomPin>(CustomPinCollection.Where(x => x.IsFavorite));
-
             if (parameters.TryGetValue(nameof(CustomPin), out CustomPin pin))
             {
+                SearchBarText = string.Empty;
                 CameraPosition = new Position(pin.Latitude, pin.Longitude);
             }
         }
@@ -75,6 +75,12 @@ namespace MapNotepad.ViewModels
             {
                 await SetWeatherData(_selectedCustomPin);
             }
+        }
+
+        protected override async Task<IEnumerable<CustomPin>> GetPinsAsync()
+        {
+            var pins = await base.GetPinsAsync();
+            return pins.Where(x => x.IsFavorite);
         }
 
         #endregion

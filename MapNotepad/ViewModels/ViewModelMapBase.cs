@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeService;
 using Prism.Navigation;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.ViewModels
@@ -30,11 +32,7 @@ namespace MapNotepad.ViewModels
         public Position CameraPosition
         {
             get => _cameraPosition;
-            set
-            {
-                SetProperty(ref _cameraPosition, value);
-                //_pinsManagerService.LastMapPosition = CameraPosition;
-            }
+            set => SetProperty(ref _cameraPosition, value);
         }
 
         private MapStyle _mapStyle;
@@ -57,15 +55,14 @@ namespace MapNotepad.ViewModels
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
+            await base.OnNavigatedToAsync(parameters);
+
+            MapStyle = _themeManagerService.GetCurrentMapStyle();
+
             if (!LocationGranted)
             {
                 LocationGranted = await _permissionService.RequestPermissionAsync<Permissions.LocationWhenInUse>() == PermissionStatus.Granted;
             }
-
-            await base.OnNavigatedToAsync(parameters);
-
-            MapStyle = _themeManagerService.GetCurrentMapStyle();
-            //CameraPosition = _pinsManagerService.LastMapPosition;
         }
 
         #endregion

@@ -10,9 +10,23 @@ namespace MapNotepad.Behaviors
     {
         private Page CurrentPage;
 
-        public TabbedPageNavigationBehavior()
+        #region -- Protected Implementation --
+
+        protected override void OnAttachedTo(TabbedPage bindable)
         {
+            bindable.CurrentPageChanged += OnCurrentPageChanged;
+            base.OnAttachedTo(bindable);
         }
+
+        protected override void OnDetachingFrom(TabbedPage bindable)
+        {
+            bindable.CurrentPageChanged -= OnCurrentPageChanged;
+            base.OnDetachingFrom(bindable);
+        }
+
+        #endregion
+
+        #region -- Private Helpers --
 
         private void OnCurrentPageChanged(object sender, EventArgs e)
         {
@@ -28,16 +42,6 @@ namespace MapNotepad.Behaviors
             CurrentPage = newPage;
         }
 
-        protected override void OnAttachedTo(TabbedPage bindable)
-        {
-            bindable.CurrentPageChanged += OnCurrentPageChanged;
-            base.OnAttachedTo(bindable);
-        }
-
-        protected override void OnDetachingFrom(TabbedPage bindable)
-        {
-            bindable.CurrentPageChanged -= OnCurrentPageChanged;
-            base.OnDetachingFrom(bindable);
-        }
+        #endregion
     }
 }

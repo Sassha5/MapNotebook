@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -43,7 +43,6 @@ namespace MapNotepad.ViewModels
 
         public override async Task OnNavigatedToAsync(INavigationParameters parameters)
         {
-            SearchBarText = string.Empty;
             await UpdateCollectionAsync();
         }
 
@@ -52,13 +51,13 @@ namespace MapNotepad.ViewModels
         #region -- Commands --
 
         private ICommand _SearchBarTextChangedCommand;
-        public ICommand SearchCommand => _SearchBarTextChangedCommand ??= new Command(OnSearchCommandAsync);
+        public ICommand SearchBarTextChangedCommand => _SearchBarTextChangedCommand ??= new Command(OnSearchBarTextChangedCommandAsync);
 
         #endregion
 
         #region -- Command Methods --
 
-        private async void OnSearchCommandAsync()
+        private async void OnSearchBarTextChangedCommandAsync()
         {
             await UpdateCollectionAsync();
         }
@@ -69,21 +68,26 @@ namespace MapNotepad.ViewModels
 
         protected async Task UpdateCollectionAsync()
         {
-            var pins = await _pinsManagerService.GetCurrentUserPinsAsync(SearchBarText);
-            
+            var pins = await GetPinsAsync();
+
             CustomPinCollection = new ObservableCollection<CustomPin>(pins);
         }
 
         protected async Task SavePinAsync(CustomPin pin)
         {
             await _pinsManagerService.SavePinAsync(pin);
-            await UpdateCollectionAsync(); //only to change IsFavorite image
+            await UpdateCollectionAsync();
         }
 
         protected async Task DeletePinAsync(CustomPin pin)
         {
             await _pinsManagerService.DeletePinAsync(pin);
             await UpdateCollectionAsync();
+        }
+
+        protected virtual Task<IEnumerable<CustomPin>> GetPinsAsync()
+        {
+            return _pinsManagerService.GetCurrentUserPinsAsync(SearchBarText);
         }
 
         #endregion

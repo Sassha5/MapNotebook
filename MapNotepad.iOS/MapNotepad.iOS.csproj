@@ -179,6 +179,8 @@
     <BundleResource Include="Resources\ic_add.png" />
     <BundleResource Include="Resources\ic_map.png" />
     <BundleResource Include="Resources\ic_pin.png" />
+    <BundleResource Include="Resources\ic_facebook.png" />
+    <BundleResource Include="Resources\ic_twitter.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Renderers\" />

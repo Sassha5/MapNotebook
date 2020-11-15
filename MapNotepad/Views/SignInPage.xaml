@@ -67,20 +67,6 @@
 
         </StackLayout>
 
-        <!--FACEBOOK SING UP BUTTON-->
-        <!--<Button Text="Sign up with Facebook" 
-                Grid.Row="4"
-                Command="{Binding FacebookSignUpCommand}"
-                Style="{StaticResource ButtonStyle}"
-                BackgroundColor="#3b5998"/>-->
-
-        <!--TWITTER SIGN IN BUTTON-->
-        <!--<Button Text="Sign in with Twitter" 
-                Grid.Row="5"
-                Command="{Binding TwitterSignInCommand}"
-                Style="{StaticResource ButtonStyle}"
-                BackgroundColor="#55ACEE"/>-->
-
         <!--SIGN IN BUTTON-->
         <Button Text="{Binding Resources[SignIn]}" 
                 Grid.Row="6"

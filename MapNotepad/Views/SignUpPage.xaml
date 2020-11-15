@@ -21,6 +21,7 @@
 
         </Grid.RowDefinitions>
 
+        <!--EMAIL ENTRY-->
         <controls:CustomEntry Grid.Row="0"
                               Text="{Binding BindingContext.Email,
                                      Source={x:Reference signUpPage}}"
@@ -28,6 +29,7 @@
                               Placeholder="{Binding BindingContext.Resources[Email],
                                             Source={x:Reference signUpPage}}"/>
 
+        <!--NAME ENTRY-->
         <controls:CustomEntry Grid.Row="1"
                               Text="{Binding BindingContext.Name,
                                      Source={x:Reference signUpPage}}"
@@ -35,6 +37,7 @@
                               Placeholder="{Binding BindingContext.Resources[Name],
                                             Source={x:Reference signUpPage}}"/>
 
+        <!--PASSWORD ENTRY-->
         <controls:CustomEntry Grid.Row="2"
                               Text="{Binding BindingContext.Password,
                                      Source={x:Reference signUpPage}}"
@@ -42,6 +45,7 @@
                               Placeholder="{Binding BindingContext.Resources[Password],
                                             Source={x:Reference signUpPage}}"/>
 
+        <!--CONFIRM PASSWORD ENTRY-->
         <controls:CustomEntry Grid.Row="3"
                               Text="{Binding BindingContext.ConfirmPassword,
                                      Source={x:Reference signUpPage}}"
@@ -49,6 +53,7 @@
                               Placeholder="{Binding BindingContext.Resources[ConfirmPassword],
                                             Source={x:Reference signUpPage}}"/>
 
+        <!--SIGN UP BUTTON-->
         <Button Text="{Binding Resources[SignUp]}" 
                 Grid.Row="7"
                 Command="{Binding RegisterCommand}"

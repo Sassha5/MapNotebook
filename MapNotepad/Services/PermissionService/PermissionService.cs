@@ -15,7 +15,7 @@ namespace MapNotepad.Services.PermissionService
         public async Task<PermissionStatus> RequestPermissionAsync<T>() where T : Permissions.BasePermission, new()
         {
             var status = await CheckPermissionAsync<T>();
-            if (status != PermissionStatus.Granted)
+            if (status != PermissionStatus.Granted && status != PermissionStatus.Denied)
             {
                 status = await Permissions.RequestAsync<T>();
             }

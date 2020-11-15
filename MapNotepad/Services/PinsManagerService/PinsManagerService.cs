@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using MapNotepad.Models;
 using MapNotepad.Services.RepositoryService;
 using MapNotepad.Services.SettingsService;
-using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.Services.PinsManagerService
 {
@@ -20,12 +19,6 @@ namespace MapNotepad.Services.PinsManagerService
             _settingsManagerService = settingsManagerService;
             _repositoryService = repositoryService;
             _repositoryService.CreateTableAsync<CustomPin>();
-        }
-
-        public Position LastMapPosition
-        {
-            get => _settingsManagerService.LastMapPosition;
-            set => _settingsManagerService.LastMapPosition = value;
         }
 
         #region -- IPinsManagerService Implementation --

@@ -119,7 +119,7 @@ namespace MapNotepad.ViewModels
 
         public async void AuthSuccess(AuthResult result)
         {
-            if (string.IsNullOrEmpty(result.Email)) //true if called from twitter, TODO enum or other check
+            if (string.IsNullOrEmpty(result.Email)) //true if called from twitter
             {
                 _authorizationService.AuthorizeAsync(result.Id);
                 await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");

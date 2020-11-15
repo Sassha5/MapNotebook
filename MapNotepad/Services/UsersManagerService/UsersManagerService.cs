@@ -33,8 +33,7 @@ namespace MapNotepad.Services.UsersManagerService
 
         public async Task<bool> EmailExistsAsync(string email)
         {
-            var userEnumerable = await _repositoryService.GetItemsAsync<User>();
-            var user = userEnumerable.Where(x => x.Email == email);
+            User user = (await _repositoryService.GetItemsAsync<User>()).Where(x => x.Email == email).FirstOrDefault();
             return user != null;
         }
 
