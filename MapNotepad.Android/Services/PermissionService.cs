@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
+using MapNotepad.Services.PermissionService;
 using Xamarin.Essentials;
 
-namespace MapNotepad.Services.PermissionService
+namespace MapNotepad.Droid.Services
 {
     public class PermissionService : IPermissionService
     {
@@ -15,7 +16,7 @@ namespace MapNotepad.Services.PermissionService
         public async Task<PermissionStatus> RequestPermissionAsync<T>() where T : Permissions.BasePermission, new()
         {
             var status = await CheckPermissionAsync<T>();
-            if (status != PermissionStatus.Granted && status != PermissionStatus.Denied)
+            if (status != PermissionStatus.Granted)
             {
                 status = await Permissions.RequestAsync<T>();
             }

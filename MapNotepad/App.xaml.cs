@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using MapNotepad.Services.AuthorizationService;
-using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.RegistrationService;
 using MapNotepad.Services.RegistrationService.Facebook;
@@ -74,7 +73,6 @@ namespace MapNotepad
             containerRegistry.RegisterInstance<IRegistrationService>(Container.Resolve<RegistrationService>());
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
             containerRegistry.RegisterInstance<IThemeService>(Container.Resolve<ThemeService>());
-            containerRegistry.RegisterInstance<IPermissionService>(Container.Resolve<PermissionService>());
             containerRegistry.RegisterInstance<IWeatherService>(Container.Resolve<WeatherService>());
             containerRegistry.RegisterInstance<IFacebookService>(Container.Resolve<FacebookService>());
         }

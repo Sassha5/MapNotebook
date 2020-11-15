@@ -13,7 +13,6 @@
         <!--PIN SEARCH BAR-->
         <SearchBar HorizontalOptions="StartAndExpand"
                    Text="{Binding SearchBarText}"
-                   SearchCommand="{Binding SearchCommand}"
                    Placeholder="{Binding Resources[Search]}"
                    Style="{StaticResource SearchBarStyle}">
 

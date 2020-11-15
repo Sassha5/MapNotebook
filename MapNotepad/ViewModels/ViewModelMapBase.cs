@@ -1,11 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MapNotepad.Services.PermissionService;
 using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeService;
 using Prism.Navigation;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.ViewModels

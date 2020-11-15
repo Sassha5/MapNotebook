@@ -12,6 +12,7 @@ using MapNotepad.Services.AuthorizationService.Twitter;
 using MapNotepad.Droid.Services;
 using Plugin.FacebookClient;
 using Android.Content;
+using MapNotepad.Services.PermissionService;
 
 namespace MapNotepad.Droid
 {
@@ -58,6 +59,7 @@ namespace MapNotepad.Droid
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ITwitterAuthorizationService, TwitterAuthorizationService>();
+            containerRegistry.RegisterSingleton<IPermissionService, PermissionService>();
         }
     }
 }

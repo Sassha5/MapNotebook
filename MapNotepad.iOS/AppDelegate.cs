@@ -1,6 +1,7 @@
 ﻿using Foundation;
 using MapNotepad.iOS.Services;
 using MapNotepad.Services.AuthorizationService.Twitter;
+using MapNotepad.Services.PermissionService;
 using Plugin.FacebookClient;
 using Prism;
 using Prism.Ioc;
@@ -57,6 +58,7 @@ namespace MapNotepad.iOS
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ITwitterAuthorizationService, TwitterAuthorizationService>();
+            containerRegistry.RegisterSingleton<IPermissionService, PermissionService>();
         }
     }
 }

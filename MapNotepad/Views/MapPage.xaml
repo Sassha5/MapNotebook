@@ -173,7 +173,6 @@
                    Grid.Row="0"
                    Placeholder="{Binding Resources[Search]}"
                    Text="{Binding SearchBarText}"
-                   SearchCommand="{Binding SearchCommand}"
                    Style="{StaticResource SearchBarStyle}">
 
             <SearchBar.Behaviors>
