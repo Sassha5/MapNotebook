@@ -161,12 +161,6 @@ namespace MapNotepad.Resources {
             }
         }
         
-        internal static string Settings {
-            get {
-                return ResourceManager.GetString("Settings", resourceCulture);
-            }
-        }
-        
         internal static string SignIn {
             get {
                 return ResourceManager.GetString("SignIn", resourceCulture);
@@ -350,6 +344,18 @@ namespace MapNotepad.Resources {
         internal static string LightThemeIconPath {
             get {
                 return ResourceManager.GetString("LightThemeIconPath", resourceCulture);
+            }
+        }
+        
+        internal static string AuthorizationUnsuccessful {
+            get {
+                return ResourceManager.GetString("AuthorizationUnsuccessful", resourceCulture);
+            }
+        }
+        
+        internal static string AddPin {
+            get {
+                return ResourceManager.GetString("AddPin", resourceCulture);
             }
         }
     }

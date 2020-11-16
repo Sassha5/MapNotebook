@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Acr.UserDialogs;
 using MapNotepad.Models;
 using MapNotepad.Services.AuthorizationService;
@@ -121,7 +118,7 @@ namespace MapNotepad.ViewModels
         {
             if (string.IsNullOrEmpty(result.Email)) //true if called from twitter
             {
-                _authorizationService.AuthorizeAsync(result.Id);
+                _authorizationService.AuthorizeAsync(result.UserID);
                 await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
             }
             else
@@ -143,7 +140,7 @@ namespace MapNotepad.ViewModels
 
         public void AuthFailure()
         {
-            _userDialogs.AlertAsync("Authorization unsuccessful", "Nope", "ok");
+            _userDialogs.AlertAsync(Resources["AuthorizationUnsuccessful"], Resources["Nope"], Resources["Ok"]);
         }
 
         #endregion

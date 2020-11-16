@@ -24,7 +24,7 @@ namespace MapNotepad.Services.AuthorizationService
             AuthorizeAsync(userId);
         }
 
-        public void AuthorizeAsync(int id)
+        public void AuthorizeAsync(string id)
         {
             _settingsManagerService.AuthorizedUserID = id;
         }

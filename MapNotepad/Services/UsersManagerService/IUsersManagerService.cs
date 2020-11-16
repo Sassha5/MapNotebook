@@ -8,6 +8,6 @@ namespace MapNotepad.Services.UsersManagerService
     {
         Task<int> AddUserAsync(User user);
         Task<bool> EmailExistsAsync(string email);
-        Task<int> GetUserIdAsync(string email, string password);
+        Task<string> GetUserIdAsync(string email, string password);
     }
 }

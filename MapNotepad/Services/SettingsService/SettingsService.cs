@@ -15,7 +15,7 @@ namespace MapNotepad.Services.SettingsService
 
         #region -- ISettingsService Implementation --
 
-        public int AuthorizedUserID
+        public string AuthorizedUserID
         {
             get => _appSettings.GetValueOrDefault(nameof(AuthorizedUserID), Constants.NoAuthorizedUser);
             set => _appSettings.AddOrUpdateValue(nameof(AuthorizedUserID), value);

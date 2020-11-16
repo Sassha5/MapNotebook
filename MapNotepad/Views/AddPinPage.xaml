@@ -5,7 +5,8 @@
                         xmlns:controls="clr-namespace:MapNotepad.Controls"
                         xmlns:prism="http://prismlibrary.com"
                         x:Class="MapNotepad.Views.AddPinPage"
-                        x:Name="addPinPage">
+                        x:Name="addPinPage"
+                        Title="{Binding Resources[AddPin]}">
 
     <views:BaseContentPage.ToolbarItems>
 

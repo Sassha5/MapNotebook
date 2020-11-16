@@ -69,9 +69,6 @@
     <data name="RedirectingToSignIn" xml:space="preserve">
     <value>Redirecting to the sign in page...</value>
   </data>
-    <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
     <data name="SignIn" xml:space="preserve">
     <value>Sign In</value>
   </data>
@@ -167,5 +164,11 @@
   </data>
     <data name="LightThemeIconPath" xml:space="preserve">
     <value>ic_light_theme</value>
+  </data>
+    <data name="AuthorizationUnsuccessful" xml:space="preserve">
+    <value>Authorization unsuccessful</value>
+  </data>
+    <data name="AddPin" xml:space="preserve">
+    <value>Add pin</value>
   </data>
 </root>

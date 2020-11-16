@@ -88,7 +88,7 @@ namespace MapNotepad.ViewModels
 
         private async void OnDeleteCommandAsync(CustomPin pin)
         {
-            bool result = await _userDialogs.ConfirmAsync("Are you sure?");
+            bool result = await _userDialogs.ConfirmAsync(Resources["SureQuestion"]);
             if (result)
             {
                 await DeletePinAsync(pin);

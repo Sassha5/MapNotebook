@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using MapNotepad.Models;
 using Xamarin.Auth;
 
@@ -40,13 +39,12 @@ namespace MapNotepad.Services.AuthorizationService.Twitter
         {
             if (eventArgs.IsAuthenticated)
             {
-                if (eventArgs.Account.Properties.TryGetValue("user_id", out var id))
+                if (eventArgs.Account.Properties.TryGetValue("user_id", out var id) &&
+                    eventArgs.Account.Properties.TryGetValue("screen_name", out string username))
                 {
-                    string username;
-                    eventArgs.Account.Properties.TryGetValue("screen_name", out username);
                     AuthResult result = new AuthResult()
                     {
-                        Id = int.Parse(id),
+                        UserID = id,
                         Username = username
                     };
 

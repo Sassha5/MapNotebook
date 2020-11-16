@@ -62,7 +62,7 @@ namespace MapNotepad.ViewModels
 
         private async void OnLogoutCommandAsync()
         {
-            bool result = await _userDialogs.ConfirmAsync("Are you sure?");
+            bool result = await _userDialogs.ConfirmAsync(Resources["SureQuestion"]);
             if (result)
             {
                 _authorizationService.Logout();

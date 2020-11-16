@@ -6,7 +6,7 @@ namespace MapNotepad
         public const int MinPasswordLength = 8;
         public const int MinEmailLength = 6;
         public const string DatabaseName = "database.db";
-        public const int NoAuthorizedUser = -1;
+        public const string NoAuthorizedUser = "-1";
         public const string DefaultLanguage = "en";
 
         public const string ThemeChangedMessage = "ThemeChanged";

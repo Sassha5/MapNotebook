@@ -2,7 +2,7 @@
 {
     public interface ISettingsService
     {
-        int AuthorizedUserID { get; set; }
+        string AuthorizedUserID { get; set; }
         int Theme { get; set; }
         string Language { get; set; }
         void ClearData();

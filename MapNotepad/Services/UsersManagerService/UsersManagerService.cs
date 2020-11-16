@@ -23,12 +23,12 @@ namespace MapNotepad.Services.UsersManagerService
             return _repositoryService.InsertItemAsync(user);
         }
 
-        public async Task<int> GetUserIdAsync(string email, string password)
+        public async Task<string> GetUserIdAsync(string email, string password)
         {
             var userEnumerable = await _repositoryService.GetItemsAsync<User>();
             var user = userEnumerable.FirstOrDefault(x => x.Email == email && x.Password == password);
 
-            return user == null ? Constants.NoAuthorizedUser : user.Id;
+            return user == null ? Constants.NoAuthorizedUser : user.Id.ToString();
         }
 
         public async Task<bool> EmailExistsAsync(string email)
