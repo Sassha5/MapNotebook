@@ -340,5 +340,17 @@ namespace MapNotepad.Resources {
                 return ResourceManager.GetString("AddIconPath", resourceCulture);
             }
         }
+        
+        internal static string DarkThemeIconPath {
+            get {
+                return ResourceManager.GetString("DarkThemeIconPath", resourceCulture);
+            }
+        }
+        
+        internal static string LightThemeIconPath {
+            get {
+                return ResourceManager.GetString("LightThemeIconPath", resourceCulture);
+            }
+        }
     }
 }

@@ -26,8 +26,8 @@
 
         <ToolbarItem Order="Primary"
                      Priority="0"
-                     Command="{Binding SettingsCommand}"
-                     IconImageSource="{Binding Resources[SettingsIconPath]}"/>
+                     Command="{Binding ChangeThemeCommand}"
+                     IconImageSource="{Binding ThemeIconPath}"/>
 
     </TabbedPage.ToolbarItems>
 

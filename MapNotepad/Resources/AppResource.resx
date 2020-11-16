@@ -162,4 +162,10 @@
     <data name="AddIconPath" xml:space="preserve">
     <value>ic_add</value>
   </data>
+    <data name="DarkThemeIconPath" xml:space="preserve">
+    <value>ic_dark_theme</value>
+  </data>
+    <data name="LightThemeIconPath" xml:space="preserve">
+    <value>ic_light_theme</value>
+  </data>
 </root>

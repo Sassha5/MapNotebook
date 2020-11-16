@@ -4,6 +4,7 @@ using MapNotepad.Services.PinsManagerService;
 using MapNotepad.Services.ThemeService;
 using Prism.Navigation;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
 namespace MapNotepad.ViewModels
@@ -22,6 +23,8 @@ namespace MapNotepad.ViewModels
         {
             _themeManagerService = themeManagerService;
             _permissionService = permissionService;
+
+            MessagingCenter.Subscribe<object>(this, Constants.ThemeChangedMessage, (sender) => SetMapStyle());
         }
 
         #region -- Public Properties --
@@ -55,12 +58,21 @@ namespace MapNotepad.ViewModels
         {
             await base.OnNavigatedToAsync(parameters);
 
-            MapStyle = _themeManagerService.GetCurrentMapStyle();
+            SetMapStyle();
 
             if (!LocationGranted)
             {
                 LocationGranted = await _permissionService.RequestPermissionAsync<Permissions.LocationWhenInUse>() == PermissionStatus.Granted;
             }
+        }
+
+        #endregion
+
+        #region -- Private Helpers --
+
+        private void SetMapStyle()
+        {
+            MapStyle = _themeManagerService.GetCurrentMapStyle();
         }
 
         #endregion

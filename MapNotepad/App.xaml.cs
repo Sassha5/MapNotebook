@@ -40,7 +40,7 @@ namespace MapNotepad
 
             InitializeComponent();
 
-            ThemeManagerService.SetApplicationTheme(OSAppTheme.Dark);
+            ThemeManagerService.SetPreviousTheme();
 
             string path = nameof(SignInPage);
             if (AuthorizationService.IsAuthorized())
@@ -57,7 +57,6 @@ namespace MapNotepad
             containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
             containerRegistry.RegisterForNavigation<MapPage, MapPageViewModel>();
             containerRegistry.RegisterForNavigation<PinsPage, PinsPageViewModel>();
             containerRegistry.RegisterForNavigation<AddPinPage, AddPinPageViewModel>();
