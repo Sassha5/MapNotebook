@@ -102,21 +102,8 @@
                 </Label>
 
                 <!--DESCRIPTION LABEL-->
-                <Label Style="{StaticResource SmallLabelStyle}">
-
-                    <Label.FormattedText>
-
-                        <FormattedString>
-
-                            <Span Text="Description: "/>
-
-                            <Span Text="{Binding SelectedCustomPin.Description}"/>
-
-                        </FormattedString>
-
-                    </Label.FormattedText>
-
-                </Label>
+                <Label Style="{StaticResource SmallLabelStyle}"
+                       Text="{Binding SelectedCustomPin.Description}"/>
 
                 <!--WEATHER CAROUSEL-->
                 <ScrollView Orientation="Horizontal"

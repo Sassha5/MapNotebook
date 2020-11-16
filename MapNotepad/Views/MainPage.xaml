@@ -20,22 +20,22 @@
     <TabbedPage.ToolbarItems>
 
         <ToolbarItem Order="Primary"
-                 Priority="1"
-                 Command="{Binding LogoutCommand}"
-                 IconImageSource="ic_exit_to_app.png"/>
+                     Priority="1"
+                     Command="{Binding LogoutCommand}"
+                     IconImageSource="{Binding Resources[LogoutIconPath]}"/>
 
         <ToolbarItem Order="Primary"
-                 Priority="0"
-                 Command="{Binding SettingsCommand}"
-                 IconImageSource="ic_settings"/>
+                     Priority="0"
+                     Command="{Binding SettingsCommand}"
+                     IconImageSource="{Binding Resources[SettingsIconPath]}"/>
 
     </TabbedPage.ToolbarItems>
 
     <TabbedPage.Children>
 
-        <views:MapPage IconImageSource="ic_map.png"/>
+        <views:MapPage IconImageSource="{Binding Resources[MapIconPath]}"/>
 
-        <views:PinsPage IconImageSource="ic_pin.png"/>
+        <views:PinsPage IconImageSource="{Binding Resources[PinIconPath]}"/>
 
     </TabbedPage.Children>
 

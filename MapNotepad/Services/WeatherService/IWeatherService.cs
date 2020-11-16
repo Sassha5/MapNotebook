@@ -1,6 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using MapNotepad.Models.Weather;
+﻿using System.Threading.Tasks;
+using MapNotepad.Models;
 
 namespace MapNotepad.Services.WeatherService
 {

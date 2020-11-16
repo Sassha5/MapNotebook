@@ -177,7 +177,7 @@
 
                 <Image HeightRequest="55"
                        WidthRequest="55"
-                       Source="ic_add.png"
+                       Source="{Binding Resources[AddIconPath]}"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"/>
 

@@ -12,7 +12,7 @@
         <ToolbarItem Order="Primary"
                      Priority="0"
                      Command="{Binding SavePinCommand}"
-                     IconImageSource="ic_save.png"/>
+                     IconImageSource="{Binding Resources[SaveIconPath]}"/>
 
     </views:BaseContentPage.ToolbarItems>
 

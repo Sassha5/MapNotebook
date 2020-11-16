@@ -107,33 +107,9 @@ namespace MapNotepad.Resources {
             }
         }
         
-        internal static string Login {
-            get {
-                return ResourceManager.GetString("Login", resourceCulture);
-            }
-        }
-        
         internal static string EmailIsTaken {
             get {
                 return ResourceManager.GetString("EmailIsTaken", resourceCulture);
-            }
-        }
-        
-        internal static string LoginIsTooLong {
-            get {
-                return ResourceManager.GetString("LoginIsTooLong", resourceCulture);
-            }
-        }
-        
-        internal static string LoginIsTooShort {
-            get {
-                return ResourceManager.GetString("LoginIsTooShort", resourceCulture);
-            }
-        }
-        
-        internal static string LoginStartsWithNumber {
-            get {
-                return ResourceManager.GetString("LoginStartsWithNumber", resourceCulture);
             }
         }
         
@@ -146,12 +122,6 @@ namespace MapNotepad.Resources {
         internal static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        internal static string Nickname {
-            get {
-                return ResourceManager.GetString("Nickname", resourceCulture);
             }
         }
         
@@ -176,24 +146,6 @@ namespace MapNotepad.Resources {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
-            }
-        }
-        
-        internal static string PasswordIsTooLong {
-            get {
-                return ResourceManager.GetString("PasswordIsTooLong", resourceCulture);
-            }
-        }
-        
-        internal static string PasswordIsTooShort {
-            get {
-                return ResourceManager.GetString("PasswordIsTooShort", resourceCulture);
-            }
-        }
-        
-        internal static string PasswordIsWeak {
-            get {
-                return ResourceManager.GetString("PasswordIsWeak", resourceCulture);
             }
         }
         
@@ -224,12 +176,6 @@ namespace MapNotepad.Resources {
         internal static string SignUp {
             get {
                 return ResourceManager.GetString("SignUp", resourceCulture);
-            }
-        }
-        
-        internal static string Sorting {
-            get {
-                return ResourceManager.GetString("Sorting", resourceCulture);
             }
         }
         
@@ -356,6 +302,42 @@ namespace MapNotepad.Resources {
         internal static string FieldsEmpty {
             get {
                 return ResourceManager.GetString("FieldsEmpty", resourceCulture);
+            }
+        }
+        
+        internal static string SaveIconPath {
+            get {
+                return ResourceManager.GetString("SaveIconPath", resourceCulture);
+            }
+        }
+        
+        internal static string SettingsIconPath {
+            get {
+                return ResourceManager.GetString("SettingsIconPath", resourceCulture);
+            }
+        }
+        
+        internal static string LogoutIconPath {
+            get {
+                return ResourceManager.GetString("LogoutIconPath", resourceCulture);
+            }
+        }
+        
+        internal static string PinIconPath {
+            get {
+                return ResourceManager.GetString("PinIconPath", resourceCulture);
+            }
+        }
+        
+        internal static string MapIconPath {
+            get {
+                return ResourceManager.GetString("MapIconPath", resourceCulture);
+            }
+        }
+        
+        internal static string AddIconPath {
+            get {
+                return ResourceManager.GetString("AddIconPath", resourceCulture);
             }
         }
     }

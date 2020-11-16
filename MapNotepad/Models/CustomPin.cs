@@ -15,6 +15,7 @@ namespace MapNotepad.Models
         public bool IsFavorite { get; set; } = true;
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public string IsFavoriteImagePath { get => IsFavorite ? "ic_fav.png" : "ic_notfav.png"; }
+
+        public string IsFavoriteImagePath => IsFavorite ? "ic_fav.png" : "ic_notfav.png";
     }
 }

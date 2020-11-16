@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using MapNotepad.Models;
-using MapNotepad.Models.Weather;
 using Newtonsoft.Json;
 
 namespace MapNotepad.Services.WeatherService

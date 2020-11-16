@@ -42,29 +42,14 @@
     <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
-    <data name="Login" xml:space="preserve">
-    <value>Login</value>
-  </data>
     <data name="EmailIsTaken" xml:space="preserve">
     <value>Looks like someone already took this email</value>
-  </data>
-    <data name="LoginIsTooLong" xml:space="preserve">
-    <value>Sorry, I can't take such a long login...</value>
-  </data>
-    <data name="LoginIsTooShort" xml:space="preserve">
-    <value>Add few more letters, login is too short</value>
-  </data>
-    <data name="LoginStartsWithNumber" xml:space="preserve">
-    <value>Do not start login with a number. I dont like it.</value>
   </data>
     <data name="MainPage" xml:space="preserve">
     <value>Main Page</value>
   </data>
     <data name="Name" xml:space="preserve">
     <value>Name</value>
-  </data>
-    <data name="Nickname" xml:space="preserve">
-    <value>Nickname</value>
   </data>
     <data name="Nope" xml:space="preserve">
     <value>Nope</value>
@@ -77,15 +62,6 @@
   </data>
     <data name="Password" xml:space="preserve">
     <value>Password</value>
-  </data>
-    <data name="PasswordIsTooLong" xml:space="preserve">
-    <value>Why is there a limit on a pass length? Idk</value>
-  </data>
-    <data name="PasswordIsTooShort" xml:space="preserve">
-    <value>I know that size doesn't matter, but this is too short of a pass</value>
-  </data>
-    <data name="PasswordIsWeak" xml:space="preserve">
-    <value>Your pass is weak! Use numbers, upper and lower case.</value>
   </data>
     <data name="PasswordsAreNotEqual" xml:space="preserve">
     <value>You are supposed to enter the same pass in both fields</value>
@@ -101,9 +77,6 @@
   </data>
     <data name="SignUp" xml:space="preserve">
     <value>Sign Up</value>
-  </data>
-    <data name="Sorting" xml:space="preserve">
-    <value>Sorting</value>
   </data>
     <data name="Success" xml:space="preserve">
     <value>Congratulations!</value>
@@ -170,5 +143,23 @@
   </data>
     <data name="FieldsEmpty" xml:space="preserve">
     <value>Email and password field should not be empty</value>
+  </data>
+    <data name="SaveIconPath" xml:space="preserve">
+    <value>ic_save</value>
+  </data>
+    <data name="SettingsIconPath" xml:space="preserve">
+    <value>ic_settings</value>
+  </data>
+    <data name="LogoutIconPath" xml:space="preserve">
+    <value>ic_exit_to_app</value>
+  </data>
+    <data name="PinIconPath" xml:space="preserve">
+    <value>ic_pin</value>
+  </data>
+    <data name="MapIconPath" xml:space="preserve">
+    <value>ic_map</value>
+  </data>
+    <data name="AddIconPath" xml:space="preserve">
+    <value>ic_add</value>
   </data>
 </root>

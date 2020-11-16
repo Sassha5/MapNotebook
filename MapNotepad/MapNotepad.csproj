@@ -49,7 +49,6 @@
     <Folder Include="Services\PermissionService\" />
     <Folder Include="Services\AuthorizationService\Twitter\" />
     <Folder Include="Services\WeatherService\" />
-    <Folder Include="Models\Weather\" />
     <Folder Include="Services\RegistrationService\Facebook\" />
   </ItemGroup>
   <ItemGroup>
@@ -68,12 +67,12 @@
     <Compile Remove="Views\RegisterPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\MapDarkTheme.json" />
+    <None Remove="Resources\DarkMapStyle.json" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Resources\AppResource.Designer.cs">
       <DependentUpon>AppResource.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Resources\MapDarkTheme.json" />
-    <None Remove="Resources\DarkMapStyle.json" />
   </ItemGroup>
 </Project>
